@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFC400">
+  <title>Article Management Admin | Mr Tattoo Hanoi</title>
+  
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .admin-wrap {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .admin-card {
+      background: var(--k2);
+      border: 1px solid rgba(255, 196, 0, 0.3);
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .admin-card h3 {
+      color: var(--y);
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.25rem;
+      border-bottom: 1px solid rgba(255, 196, 0, 0.2);
+      padding-bottom: 10px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--y);
+      margin-bottom: 5px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      background: #111;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+    .form-control:focus {
+      border-color: var(--y);
+      outline: none;
+    }
+
+    /* ------------------------------------------------------------- */
+    /* CẤU TRÚC BỘ SOẠN THẢO TRỰC QUAN (WYSIWYG EDITOR)              */
+    /* ------------------------------------------------------------- */
+    .editor-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      background: #111;
+      padding: 8px;
+      border: 1px solid #333;
+      border-bottom: none;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      align-items: center;
+    }
+    .editor-btn {
+      background: #222;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 5px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .editor-btn:hover {
+      background: var(--y);
+      color: var(--k);
+      border-color: var(--y);
+    }
+    .editor-select {
+      background: #222;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 5px 8px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+    .editor-select:focus {
+      outline: none;
+      border-color: var(--y);
+    }
+
+    /* KHUNG NHẬP NỘI DUNG (EDITABLE) */
+    .editor-content {
+      min-height: 250px;
+      max-height: 500px;
+      overflow-y: auto;
+      background: #181818;
+      border: 1px solid #333;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      padding: 15px;
+      color: #ddd;
+      line-height: 1.8;
+    }
+    .editor-content:focus {
+      outline: none;
+      border-color: var(--y);
+    }
+    .editor-content h2 { color: var(--y); margin-top: 15px; margin-bottom: 10px; font-size: 1.4rem; }
+    .editor-content h3 { color: #fff; margin-top: 12px; margin-bottom: 8px; font-size: 1.2rem; }
+    .editor-content p { margin-bottom: 12px; font-size: 1rem; }
+    .editor-content a { color: var(--y); text-decoration: underline; }
+
+    /* Ô TEXTAREA HIỂN THỊ HTML THÔ KHI BẤM XEM CODE */
+    .html-source-view {
+      display: none;
+      width: 100%;
+      min-height: 250px;
+      background: #0d0d0d;
+      color: #00ff66;
+      font-family: monospace;
+      padding: 15px;
+      border: 1px solid #333;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      resize: vertical;
+    }
+
+    /* QUẢN LÝ DANH SÁCH BÀI VIẾT */
+    .actions-bar { display: flex; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+    .article-list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111;
+      padding: 12px 18px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      border-left: 4px solid var(--y);
+    }
+    .article-info h4 { margin: 0 0 5px 0; font-size: 1rem; color: #fff; }
+    .article-info span { font-size: 0.8rem; color: #888; }
+    .btn-danger { background: #d9534f; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    .btn-danger:hover { background: #c9302c; }
+    .btn-edit { background: #f0ad4e; color: #000; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-right: 8px; }
+    .btn-edit:hover { background: #ec971f; }
+  </style>
+</head>
+<body>
+
+  <div class="admin-wrap">
+    <h1 style="color: #fff; text-align: center; margin-bottom: 10px;">Blog Article <span class="y">Admin Studio Editor</span></h1>
+    <p style="text-align: center; color: #aaa; margin-bottom: 30px;">Trình soạn thảo bài viết trực quan & Tự động tạo file <code>articles.json</code> cho Mr Tattoo Hanoi.</p>
+
+    <!-- FORM THÊM / SỬA BÀI VIẾT -->
+    <div class="admin-card">
+      <h3 id="form-title">➕ Thêm Bài Viết Mới</h3>
+      <form id="articleForm">
+        <input type="hidden" id="editIndex" value="-1">
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+          <div class="form-group">
+            <label>Chuyên mục (Category):</label>
+            <select id="category" class="form-control" required>
+              <option value="tattoo-meanings">Tattoo Meanings</option>
+              <option value="hanoi-travel-corner">Hanoi Travel Corner</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tên file HTML (Filename):</label>
+            <input type="text" id="filename" class="form-control" placeholder="vd: lotus-tattoo-meaning.html" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Tiêu đề bài viết (Title):</label>
+          <input type="text" id="title" class="form-control" placeholder="Nhập tiêu đề bài viết..." required>
+        </div>
+
+        <div class="form-group">
+          <label>Đoạn mô tả ngắn (Description SEO):</label>
+          <textarea id="description" class="form-control" style="min-height: 70px;" placeholder="Mô tả ngắn hiển thị trên Google..." required></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px;">
+          <div class="form-group">
+            <label>Đường dẫn ảnh Thumbnail (Image):</label>
+            <input type="text" id="image" class="form-control" placeholder="vd: ../images/tac-pham-1.webp" required>
+          </div>
+          <div class="form-group">
+            <label>Ngày đăng (Date):</label>
+            <input type="text" id="date" class="form-control" placeholder="vd: October 22, 2026" required>
+          </div>
+        </div>
+
+        <!-- ------------------------------------------------------------- -->
+        /* BỘ SOẠN THẢO TRỰC QUAN CHO PHẦN HTML CONTENT                   */
+        <!-- ------------------------------------------------------------- -->
+        <div class="form-group">
+          <label>Nội dung chi tiết (HTML Content Editor):</label>
+          
+          <!-- THANH CÔNG CỤ -->
+          <div class="editor-toolbar">
+            <button type="button" class="editor-btn" onclick="formatDoc('formatBlock', 'h2')">H2</button>
+            <button type="button" class="editor-btn" onclick="formatDoc('formatBlock', 'h3')">H3</button>
+            <button type="button" class="editor-btn" onclick="formatDoc('formatBlock', 'p')">Đoạn văn (P)</button>
+            <span style="color: #444;">|</span>
+            <button type="button" class="editor-btn" onclick="formatDoc('bold')"><b>B</b> (Đậm)</button>
+            <button type="button" class="editor-btn" onclick="formatDoc('italic')"><i>I</i> (Nghiêng)</button>
+            <button type="button" class="editor-btn" onclick="formatDoc('insertUnorderedList')">• Danh sách</button>
+            <span style="color: #444;">|</span>
+            
+            <!-- BẢNG CHỌN LINK NỘI BỘ NHANH -->
+            <select id="quickLinkSelect" class="editor-select">
+              <option value="">-- Chọn Link Nội Bộ --</option>
+              <option value="../index.html">Trang Chủ (Home)</option>
+              <option value="../gallery.html">Bộ Sưu Tập (Portfolio)</option>
+              <option value="../blog.html">Trang Tổng Blog</option>
+              <option value="https://wa.me/84377616886">Đặt lịch WhatsApp</option>
+              <option value="https://instagram.com/[tai-khoan]">Message Instagram</option>
+            </select>
+            <button type="button" class="editor-btn" style="background: var(--y); color: #000;" onclick="insertInternalLink()">🔗 Chèn Link Cụm Đã Bôi Đen</button>
+            
+            <span style="color: #444; margin-left: auto;">|</span>
+            <button type="button" class="editor-btn" style="background: #333;" onclick="toggleSourceView()">⌨ Xem Code HTML</button>
+          </div>
+
+          <!-- KHUNG SOẠN THẢO (TỰ ĐỘNG BỌC <P> KHI ĐÃ NHẬP NỘI DUNG) -->
+          <div id="editor" class="editor-content" contenteditable="true" spellcheck="false"></div>
+          
+          <!-- TEXTAREA CODE THÔ -->
+          <textarea id="htmlSource" class="html-source-view" spellcheck="false"></textarea>
+        </div>
+
+        <button type="submit" class="btn" style="width: 100%; cursor: pointer; margin-top: 10px;">Lưu bài viết vào danh sách tạm</button>
+      </form>
+    </div>
+
+    <!-- DANH SÁCH BÀI VIẾT ĐÃ TẠO -->
+    <div class="admin-card">
+      <h3>📋 Danh sách bài viết hiện tại (<span id="totalCount">0</span>)</h3>
+      <div id="articlesList"></div>
+
+      <div class="actions-bar">
+        <button class="btn" onclick="downloadJSON()" style="background: #28a745; border-color: #28a745; color: #fff; flex: 1;">💾 Save & Download articles.json</button>
+        <button class="btn" onclick="loadSampleData()" style="background: #17a2b8; border-color: #17a2b8; color: #fff;">📥 Nạp dữ liệu mẫu</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let articles = JSON.parse(localStorage.getItem('mrtattoo_articles')) || [];
+    let isSourceMode = false;
+
+    const form = document.getElementById('articleForm');
+    const editor = document.getElementById('editor');
+    const htmlSource = document.getElementById('htmlSource');
+    const articlesList = document.getElementById('articlesList');
+    const totalCount = document.getElementById('totalCount');
+    const formTitle = document.getElementById('form-title');
+
+    // 1. TỰ ĐỘNG BỌC THẺ <P> KHI NGƯỜI DÙNG XUỐNG DÒNG (ENTER)
+    document.execCommand('defaultParagraphSeparator', false, 'p');
+
+    // 2. HÀM ĐỊNH DẠNG VĂN BẢN (H2, H3, Bold, List...)
+    function formatDoc(cmd, value = null) {
+      if (isSourceMode) return;
+      document.execCommand(cmd, false, value);
+      editor.focus();
+    }
+
+    // 3. HÀM CHÈN LINK NỘI BỘ VÀO CỤM TỪ ĐÃ BÔI ĐEN
+    function insertInternalLink() {
+      if (isSourceMode) return;
+
+      const select = document.getElementById('quickLinkSelect');
+      const url = select.value;
+
+      if (!url) {
+        alert("Vui lòng chọn một trang liên kết nội bộ trong bảng chọn trước!");
+        return;
+      }
+
+      const selectedText = window.getSelection().toString();
+      if (!selectedText) {
+        alert("Hãy bôi đen cụm từ bạn muốn chèn link trước!");
+        return;
+      }
+
+      document.execCommand('createLink', false, url);
+      editor.focus();
+    }
+
+    // 4. CHUYỂN ĐỔI QUA LẠI GIỮA XEM GIAO DIỆN VÀ CODE HTML THÔ
+    function toggleSourceView() {
+      if (!isSourceMode) {
+        htmlSource.value = editor.innerHTML;
+        editor.style.display = 'none';
+        htmlSource.style.display = 'block';
+        isSourceMode = true;
+      } else {
+        editor.innerHTML = htmlSource.value;
+        htmlSource.style.display = 'none';
+        editor.style.display = 'block';
+        isSourceMode = false;
+      }
+    }
+
+    // 5. HIỂN THỊ DANH SÁCH BÀI VIẾT
+    function renderList() {
+      articlesList.innerHTML = '';
+      totalCount.textContent = articles.length;
+
+      if (articles.length === 0) {
+        articlesList.innerHTML = '<p style="color: #666; text-align: center; margin: 10px 0;">Chưa có bài viết nào.</p>';
+        return;
+      }
+
+      articles.forEach((art, index) => {
+        const div = document.createElement('div');
+        div.className = 'article-list-item';
+        div.innerHTML = `
+          <div class="article-info">
+            <h4>${art.title}</h4>
+            <span>📁 ${art.category} &nbsp;|&nbsp; 📄 ${art.filename} &nbsp;|&nbsp; 📅 ${art.date}</span>
+          </div>
+          <div>
+            <button class="btn-edit" onclick="editArticle(${index})">Sửa</button>
+            <button class="btn-danger" onclick="deleteArticle(${index})">Xóa</button>
+          </div>
+        `;
+        articlesList.appendChild(div);
+      });
+
+      localStorage.setItem('mrtattoo_articles', JSON.stringify(articles));
+    }
+
+    // 6. XỬ LÝ LƯU BÀI VIẾT TỪ FORM
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const editIndex = document.getElementById('editIndex').value;
+
+      // Đảm bảo lấy đúng nội dung HTML dù đang ở chế độ xem code hay xem trực quan
+      const contentHTML = isSourceMode ? htmlSource.value : editor.innerHTML;
+
+      const newArticle = {
+        category: document.getElementById('category').value,
+        filename: document.getElementById('filename').value,
+        title: document.getElementById('title').value,
+        description: document.getElementById('description').value,
+        image: document.getElementById('image').value,
+        date: document.getElementById('date').value,
+        content: contentHTML
+      };
+
+      if (editIndex === "-1") {
+        articles.push(newArticle);
+      } else {
+        articles[editIndex] = newArticle;
+        document.getElementById('editIndex').value = "-1";
+        formTitle.textContent = "➕ Thêm Bài Viết Mới";
+      }
+
+      form.reset();
+      editor.innerHTML = '';
+      htmlSource.value = '';
+      if (isSourceMode) toggleSourceView();
+
+      renderList();
+      alert("Đã lưu bài viết thành công vào danh sách tạm!");
+    });
+
+    // 7. SỬA BÀI VIẾT
+    function editArticle(index) {
+      const art = articles[index];
+      document.getElementById('category').value = art.category;
+      document.getElementById('filename').value = art.filename;
+      document.getElementById('title').value = art.title;
+      document.getElementById('description').value = art.description;
+      document.getElementById('image').value = art.image;
+      document.getElementById('date').value = art.date;
+
+      if (isSourceMode) {
+        htmlSource.value = art.content;
+      } else {
+        editor.innerHTML = art.content;
+      }
+
+      document.getElementById('editIndex').value = index;
+      formTitle.textContent = `✏️ Đang sửa bài viết #${index + 1}`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 8. XÓA BÀI VIẾT
+    function deleteArticle(index) {
+      if (confirm("Bạn có chắc chắn muốn xóa bài viết này không?")) {
+        articles.splice(index, 1);
+        renderList();
+      }
+    }
+
+    // 9. XUẤT FILE ARTICLES.JSON
+    function downloadJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(articles, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "articles.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      alert("Đã tải xuống file articles.json! Hãy copy file này thay thế file cũ trong thư mục dự án của bạn.");
+    }
+
+    // 10. DỮ LIỆU MẪU
+    function loadSampleData() {
+      articles = [
+        {
+          "category": "tattoo-meanings",
+          "filename": "eastern-dragon-tattoo.html",
+          "title": "The Legend of Eastern Dragons in Custom Body Art",
+          "description": "Unpacking the mythology, power, and protective elements of traditional Asian dragon designs adapted for modern sleeves.",
+          "image": "../images/tac-pham-3.webp",
+          "date": "October 22, 2026",
+          "content": "<p>The dragon holds an ancient status in Asian cultures representing power and luck.</p><h2>The Symbolism of Eastern Dragons</h2><p>Unlike Western dragons, Asian dragons are benevolent protective beings. Check out our <a href=\"../gallery.html\">Portfolio</a> for custom ideas.</p>"
+        },
+        {
+          "category": "hanoi-travel-corner",
+          "filename": "old-quarter-walking-guide.html",
+          "title": "Old Quarter Walking Guide for First-Time Visitors",
+          "description": "Navigate the historic 36 streets safely, discover incredible street food, and find our studio conveniently nestled on the 2nd floor of 106 Hàng Buồm.",
+          "image": "../link-anh-khue-van-cac.jpg",
+          "date": "October 22, 2026",
+          "content": "<p>Exploring Hanoi Old Quarter is an unforgettable experience for visitors.</p><h2>Top Street Food Spots</h2><p>Located right near 106 Hang Buom, you can visit us or <a href=\"https://wa.me/84377616886\">Book on WhatsApp</a> easily.</p>"
+        }
+      ];
+      renderList();
+      alert("Đã nạp dữ liệu mẫu!");
+    }
+
+    renderList();
+  </script>
+</body>
+</html>

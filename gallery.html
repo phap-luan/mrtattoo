@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFC400">
+
+  <title>Tattoo Gallery | Mr Tattoo Hanoi Studio</title>
+  <meta name="description" content="Explore our portfolio of custom tattoos: Fine line, Blackwork, Vietnamese motifs, Mini tattoos. Located at 106 Hang Buom, Hanoi Old Quarter.">
+  <link rel="canonical" href="https://mrtattoo.vn/gallery.html">
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 30px 0 40px;
+    }
+    .filter-btn {
+      background: var(--k2);
+      color: var(--w);
+      border: 1px solid rgba(255, 196, 0, 0.3);
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.25s ease;
+      text-transform: capitalize;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--y);
+      color: var(--k);
+      border-color: var(--y);
+    }
+
+    .masonry-grid {
+      column-count: 4;
+      column-gap: 16px;
+    }
+    @media (max-width: 1024px) {
+      .masonry-grid { column-count: 3; }
+    }
+    @media (max-width: 768px) {
+      .masonry-grid { column-count: 2; }
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid rgba(255,196,0,0.15);
+      background: #111;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .gallery-item:hover {
+      transform: translateY(-4px);
+      border-color: var(--y);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .lightbox.active {
+      display: flex;
+    }
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 8px;
+      border: 2px solid var(--y);
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: var(--y);
+      font-size: 2.5rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+
+  <script src="gallery/list.js"></script>
+</head>
+<body>
+
+  <!-- HEADER TỰ ĐỘNG NHÚNG TỪ js/header.js -->
+
+  <main>
+    <section class="section dark">
+      <div class="wrap">
+        <h1 class="center" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 10px;">Our Tattoo <span class="y">Gallery</span></h1>
+        <p class="sub center">Explore real healed & fresh work done at our studio in Hanoi Old Quarter.</p>
+
+        <div class="filter-bar" id="filterBar">
+          <button class="filter-btn active" data-filter="all">All Tattoos</button>
+        </div>
+
+        <div class="masonry-grid" id="galleryGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img src="" alt="Enlarged Tattoo Preview" class="lightbox-img" id="lightboxImg">
+  </div>
+
+  <!-- FOOTER & NÚT NỔI TỰ ĐỘNG NHÚNG TỪ js/footer.js -->
+
+  <script src="js/header.js"></script>
+  <script src="js/footer.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof GALLERY_CONFIG === 'undefined') {
+        console.error("Không tìm thấy file list.js hoặc cấu hình GALLERY_CONFIG!");
+        return;
+      }
+
+      const filterBar = document.getElementById('filterBar');
+      const galleryGrid = document.getElementById('galleryGrid');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxClose = document.getElementById('lightboxClose');
+
+      let allImagesData = [];
+
+      GALLERY_CONFIG.forEach(group => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.setAttribute('data-filter', group.category);
+        btn.textContent = group.category;
+        filterBar.appendChild(btn);
+
+        for (let i = 1; i <= group.total; i++) {
+          let indexStr = String(i).padStart(3, '0');
+          let filename = `${group.prefix}${indexStr}.webp`;
+          let seoAlt = `${group.category} custom tattoo artwork #${i} by Mr Tattoo Hanoi Studio at 106 Hang Buom Old Quarter`;
+
+          allImagesData.push({
+            category: group.category,
+            folder: group.folder,
+            filename: filename,
+            alt: seoAlt
+          });
+        }
+      });
+
+      function renderGallery(filter = 'all') {
+        galleryGrid.innerHTML = '';
+        
+        allImagesData.forEach(item => {
+          if (filter === 'all' || item.category === filter) {
+            const div = document.createElement('div');
+            div.className = 'gallery-item';
+            
+            const thumbSrc = `gallery/${item.folder}/thumbs/${item.filename}`;
+            const fullSrc = `gallery/${item.folder}/full/${item.filename}`;
+
+            div.innerHTML = `<img src="${thumbSrc}" data-full="${fullSrc}" alt="${item.alt}" loading="lazy">`;
+
+            const imgElement = div.querySelector('img');
+            imgElement.onerror = function() {
+              div.style.display = 'none';
+            };
+
+            div.addEventListener('click', () => {
+              lightboxImg.src = fullSrc;
+              lightbox.classList.add('active');
+            });
+
+            galleryGrid.appendChild(div);
+          }
+        });
+      }
+
+      renderGallery('all');
+
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderGallery(btn.getAttribute('data-filter'));
+        });
+      });
+
+      lightboxClose.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+        lightboxImg.src = '';
+      });
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          lightbox.classList.remove('active');
+          lightboxImg.src = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

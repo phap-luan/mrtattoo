@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFC400">
+
+  <title>Blog & Studio Diary | Mr Tattoo Hanoi Studio</title>
+  <meta name="description" content="Explore tattoo meanings, Hanoi Old Quarter travel tips, and daily updates and stories from Mr Tattoo Hanoi Studio at 106 Hang Buom.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://mrtattoo.vn/blog.html">
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .blog-header {
+      background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('images/og-cover.jpg') no-repeat center center/cover;
+      padding: 60px 0;
+      text-align: center;
+      color: #fff;
+      border-bottom: 2px solid var(--y);
+    }
+    
+    .blog-nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+
+    .blog-tab-btn {
+      background: transparent;
+      border: 2px solid var(--y);
+      color: var(--y);
+      padding: 8px 20px;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .blog-tab-btn:hover, .blog-tab-btn.active {
+      background: var(--y);
+      color: var(--k);
+    }
+
+    .news-list-container {
+      max-width: 860px;
+      margin: 30px auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      min-height: 300px;
+    }
+
+    .news-item-horizontal {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding-bottom: 25px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .news-item-thumb {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 196, 0, 0.2);
+      background: #1a1a1a;
+      display: block;
+    }
+
+    .news-item-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-item-category {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #aaa;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .news-item-category span.time-ago {
+      font-weight: 400;
+      text-transform: none;
+      color: #777;
+      margin-left: 8px;
+    }
+
+    .news-item-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .news-item-title a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .news-item-title a:hover {
+      color: var(--y);
+    }
+
+    .news-item-desc {
+      color: #bbb;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .news-item-horizontal {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 40px;
+    }
+
+    .page-node {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 40px;
+      height: 40px;
+      padding: 0 12px;
+      border-radius: 6px;
+      background: #111;
+      border: 1px solid rgba(255, 196, 0, 0.3);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .page-node:hover, .page-node.active {
+      background: var(--y);
+      color: var(--k);
+    }
+
+    .timeline-feed {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .feed-card {
+      background: #161616;
+      border: 1px solid rgba(255, 196, 0, 0.25);
+      border-radius: 10px;
+      padding: 20px;
+      color: #f5f5f5;
+    }
+
+    .feed-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .feed-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--y);
+      object-fit: cover;
+    }
+
+    .feed-author-info h4 {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--y);
+    }
+
+    .feed-time {
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .feed-text {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 15px;
+      color: #ddd;
+    }
+
+    .feed-media {
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+
+    .feed-media img {
+      width: 100%;
+      max-height: 450px;
+      object-fit: cover;
+    }
+
+    .feed-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 12px;
+      color: #aaa;
+    }
+
+    .feed-actions-btn {
+      background: transparent;
+      border: none;
+      color: var(--y);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .blog-section {
+      display: none;
+    }
+    .blog-section.active-section {
+      display: block;
+    }
+  </style>
+
+  <!-- Nhúng 2 file dữ liệu riêng biệt do build.js tự động tạo -->
+  <script src="js/meanings-data.js"></script>
+  <script src="js/travel-data.js"></script>
+</head>
+<body>
+
+  <!-- HEADER TỰ ĐỘNG NHÚNG TỪ js/header.js -->
+
+  <main>
+    <section class="blog-header">
+      <div class="wrap">
+        <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 10px;">Studio Blog & <span class="y">Stories</span></h1>
+        <p style="color: #ccc; max-width: 600px; margin: 0 auto;">Insights on tattoo symbolism, traveling around Hanoi Old Quarter, and real-time daily journal entries.</p>
+        
+        <div class="blog-nav-tabs">
+          <button class="blog-tab-btn active" onclick="switchTab(event, 'meanings')">Tattoo Meanings</button>
+          <button class="blog-tab-btn" onclick="switchTab(event, 'travel')">Hanoi Travel Corner</button>
+          <button class="blog-tab-btn" onclick="switchTab(event, 'diary')">Daily Diary (Timeline)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MỤC 1: TATTOO MEANINGS -->
+    <section id="section-meanings" class="section dark blog-section active-section">
+      <div class="wrap">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <h2>Tattoo <span class="y">Meanings</span></h2>
+          <p class="sub">Discover the historical and cultural significance behind traditional styles.</p>
+        </div>
+        <div id="meanings-container" class="news-list-container"></div>
+        <div id="meanings-pagination" class="pagination"></div>
+      </div>
+    </section>
+
+    <!-- MỤC 2: HANOI TRAVEL CORNER -->
+    <section id="section-travel" class="section dark blog-section">
+      <div class="wrap">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <h2>Hanoi <span class="y">Travel Corner</span></h2>
+          <p class="sub">Local guides, hidden coffee spots, and attractions around Hanoi Old Quarter.</p>
+        </div>
+        <div id="travel-container" class="news-list-container"></div>
+        <div id="travel-pagination" class="pagination"></div>
+      </div>
+    </section>
+
+    <!-- MỤC 3: DAILY DIARY -->
+    <section id="section-diary" class="section dark blog-section">
+      <div class="wrap">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <h2>Daily <span class="y">Diary</span></h2>
+          <p class="sub">Real-time stories, flash sheet drops, and snapshots from our studio floor.</p>
+        </div>
+
+        <div class="timeline-feed">
+          <div class="feed-card">
+            <div class="feed-header">
+              <img src="images/nghe-si-1.webp" alt="Avatar" class="feed-avatar">
+              <div class="feed-author-info">
+                <h4>Mr Tattoo Hanoi Studio</h4>
+                <span class="feed-time">2 hours ago · 📍 106 Hang Buom, Hanoi</span>
+              </div>
+            </div>
+            <div class="feed-text">
+              Finished this delicate fine-line floral piece for a lovely traveler from Australia today! 🌿 Drop by our 2nd-floor studio if you're walking around Hoàn Kiếm!
+            </div>
+            <div class="feed-media">
+              <img src="images/tac-pham-2.webp" alt="Tattoo session" loading="lazy">
+            </div>
+            <div class="feed-footer">
+              <span>❤️ 48 likes · 3 comments</span>
+              <button class="feed-actions-btn" onclick="alert('Thanks for liking!')">👍 Like</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER & NÚT NỔI TỰ ĐỘNG NHÚNG TỪ js/footer.js -->
+
+  <script src="js/header.js"></script>
+  <script src="js/footer.js"></script>
+
+  <script>
+    const itemsPerPage = 10;
+
+    function renderBlogList(category, page = 1) {
+      // Lấy dữ liệu tương ứng từ 2 biến meaningsData hoặc travelData
+      const data = category === 'meanings' ? (typeof meaningsData !== 'undefined' ? meaningsData : []) : (typeof travelData !== 'undefined' ? travelData : []);
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const paginatedItems = data.slice(start, end);
+
+      const containerId = category === 'meanings' ? 'meanings-container' : 'travel-container';
+      const paginationId = category === 'meanings' ? 'meanings-pagination' : 'travel-pagination';
+      
+      const container = document.getElementById(containerId);
+      const paginationContainer = document.getElementById(paginationId);
+
+      if (!container) return;
+
+      let html = '';
+      if (paginatedItems.length === 0) {
+        html = '<p style="text-align: center; color: #888;">No articles found.</p>';
+      } else {
+        paginatedItems.forEach(item => {
+          html += `
+            <article class="news-item-horizontal">
+              <a href="${item.slug}"><img src="${item.thumb}" alt="${item.title}" class="news-item-thumb" loading="lazy"></a>
+              <div class="news-item-content">
+                <div class="news-item-category">${category === 'meanings' ? 'Tattoo Meanings' : 'Hanoi Travel Corner'} <span class="time-ago">· ${item.time}</span></div>
+                <h3 class="news-item-title"><a href="${item.slug}">${item.title}</a></h3>
+                <p class="news-item-desc">${item.desc}</p>
+              </div>
+            </article>
+          `;
+        });
+      }
+      container.innerHTML = html;
+
+      const totalPages = Math.ceil(data.length / itemsPerPage);
+      let pageHtml = '';
+      if (totalPages > 1) {
+        for (let i = 1; i <= totalPages; i++) {
+          pageHtml += `<button class="page-node ${i === page ? 'active' : ''}" onclick="renderBlogList('${category}', ${i})">${i}</button>`;
+        }
+      }
+      paginationContainer.innerHTML = pageHtml;
+    }
+
+    function switchTab(e, category) {
+      document.querySelectorAll('.blog-section').forEach(sec => sec.classList.remove('active-section'));
+      document.querySelectorAll('.blog-tab-btn').forEach(btn => btn.classList.remove('active'));
+
+      if (category === 'meanings') {
+        document.getElementById('section-meanings').classList.add('active-section');
+      } else if (category === 'travel') {
+        document.getElementById('section-travel').classList.add('active-section');
+      } else if (category === 'diary') {
+        document.getElementById('section-diary').classList.add('active-section');
+      }
+      
+      e.currentTarget.classList.add('active');
+      window.scrollTo({ top: 250, behavior: 'smooth' });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderBlogList('meanings', 1);
+      renderBlogList('travel', 1);
+    });
+  </script>
+</body>
+</html>
