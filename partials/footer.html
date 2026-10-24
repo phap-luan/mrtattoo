@@ -1,0 +1,80 @@
+<style>
+  /* All 3 footer headings share .footer-title so the columns line up */
+  .footer-grid-custom {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .footer-grid-custom .footer-title {
+    margin: 0 0 16px;
+    color: var(--y);
+    font-family: var(--font-head);
+    font-size: 1.05rem;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .footer-grid-custom p { margin: 0 0 10px; opacity: .85; line-height: 1.8; }
+  .footer-grid-custom address { margin: 0; font-style: normal; opacity: .85; line-height: 1.8; }
+  .footer-grid-custom .explore-list { list-style: none; padding: 0; margin: 0; }
+  .footer-grid-custom .explore-list li { margin-bottom: 8px; line-height: 1.5; }
+  .footer-grid-custom .explore-list li:first-child { line-height: 1.8; }
+  .footer-grid-custom .explore-list a { color: var(--w); opacity: .85; text-decoration: none; }
+  .footer-grid-custom .explore-list a:hover { color: var(--y); opacity: 1; }
+
+  /* Mobile: 3 stacked rows instead of 3 squeezed columns */
+  @media (max-width: 800px) {
+    .footer-grid-custom { grid-template-columns: 1fr; gap: 30px; }
+    .footer-grid-custom .footer-title { margin-bottom: 10px; }
+    .footer-grid-custom > div + div {
+      padding-top: 24px;
+      border-top: 1px dotted rgba(226, 169, 45, .35);
+    }
+  }
+</style>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid-custom">
+    <div>
+      <h4 class="footer-title">Mr Tattoo Hanoi Studio</h4>
+      <p>Small, affordable tattoos in the heart of Hanoi's Old Quarter. Since 2012.</p>
+      <p>
+        <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">Instagram</a> ·
+        <a href="https://facebook.com/[trang-cua-ban]" target="_blank" rel="noopener">Facebook</a> ·
+        <a href="https://wa.me/84377616886" target="_blank" rel="noopener">WhatsApp</a>
+      </p>
+    </div>
+    <div>
+      <h4 class="footer-title">Visit us</h4>
+      <!-- NAP (Name / Address / Phone): copy y hệt Google Business Profile & contact.html để chuẩn SEO local -->
+      <address>
+        <strong>Address:</strong> 106 P. Hàng Buồm, Phố cổ Hà Nội, Hoàn Kiếm, Hà Nội 100000<br>
+        <strong>Phone / WhatsApp:</strong> <a href="https://wa.me/84377616886" target="_blank" rel="noopener">0377 616 886</a><br>
+        <strong>Instagram:</strong> <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">@mrtattoo.hanoi</a><br>
+        <strong>Opening Hours:</strong> Open 24 hours, every day<br>
+        <a href="https://www.google.com/maps?cid=6222529882335831777" target="_blank" rel="noopener">Get directions</a>
+      </address>
+    </div>
+    <div>
+      <h4 class="footer-title">Explore</h4>
+      <ul class="explore-list">
+        <li><a href="{{root}}index.html">Home</a></li>
+        <li><a href="{{root}}about-us.html">About Us</a></li>
+        <li><a href="{{root}}gallery.html">Portfolio</a></li>
+        <li><a href="{{root}}design.html">Design</a></li>
+        <li><a href="{{root}}blog.html">Blog &amp; Stories</a></li>
+        <li><a href="{{root}}contact.html">Contact &amp; Map</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center;">
+    <p class="copy" style="margin: 0; opacity: 0.6; font-size: 0.85rem;">© 2026 Mr Tattoo Hanoi Studio · mrtattoo.vn · All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Floating buttons on mobile -->
+<div class="float-cta">
+  <a href="https://wa.me/84377616886" target="_blank" rel="noopener">WhatsApp</a>
+  <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">Instagram</a>
+</div>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Design and deposit: approve the sketch">
+  <rect width="400" height="300" fill="#331311"/>
+  <circle cx="200" cy="150" r="130" fill="none" stroke="#E2A92D" stroke-opacity=".18" stroke-width="2"/>
+  <!-- paper -->
+  <rect x="86" y="40" width="228" height="220" rx="4" fill="#F8EDD2" transform="rotate(-3 200 150)"/>
+  <rect x="86" y="40" width="228" height="220" rx="4" fill="none" stroke="#A3191E" stroke-width="3" transform="rotate(-3 200 150)"/>
+  <!-- lotus sketch -->
+  <g transform="translate(196 150) rotate(-3)" fill="none" stroke="#7E1015" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 52C-34 32-38-14 0-52 38-14 34 32 0 52z"/>
+    <path d="M-4 52C-60 48-80 6-68-22 -32-20-10 8-4 52zM4 52C60 48 80 6 68-22 32-20 10 8 4 52z"/>
+    <path d="M0 52v26" />
+  </g>
+  <!-- pencil -->
+  <g transform="translate(300 232) rotate(-38)">
+    <rect x="-10" y="-78" width="20" height="108" fill="#E2A92D"/>
+    <rect x="-10" y="-78" width="20" height="14" fill="#A3191E"/>
+    <path d="M-10 30h20l-10 26z" fill="#F8EDD2"/>
+    <path d="M-4 46h8l-4 10z" fill="#1f0c0a"/>
+  </g>
+  <!-- check badge -->
+  <circle cx="92" cy="226" r="26" fill="#E2A92D" stroke="#1f0c0a" stroke-width="3"/>
+  <path d="M80 226l9 9 16-18" fill="none" stroke="#7E1015" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

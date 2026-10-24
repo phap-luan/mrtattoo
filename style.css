@@ -1,212 +1,357 @@
+/* ==========================================================
+   MR TATTOO HANOI STUDIO — phong cách Hà Nội
+   Bảng màu lấy từ phố cổ:
+   - Vàng tường (ochre) của những ngôi nhà ống, Văn Miếu, Hoàng thành
+   - Đỏ son sơn mài của cửa gỗ đình, chùa, hoành phi câu đối
+   - Nâu đen gỗ lim, kem giấy dó, xanh ngọc rêu của ngói và Hồ Gươm
+   Họa tiết: hoa sen, mặt trống đồng Đông Sơn, gạch bông, viền thoi,
+   đường chân trời Cột Cờ – Khuê Văn Các – Tháp Rùa – Chùa Một Cột
+   ========================================================== */
 :root{
-  --y:#FFC400;      /* vàng chủ đạo */
-  --y2:#FFD84D;
-  --k:#0b0b0b;      /* đen */
-  --k2:#161616;
-  --w:#f5f5f5;
+  --y:#E2A92D;      /* vàng tường phố cổ */
+  --y2:#F2C85F;     /* vàng sáng */
+  --paper:#EDC45E;  /* nền vàng các khối sáng */
+  --k:#1f0c0a;      /* nâu đen gỗ lim */
+  --k2:#331311;     /* nâu đỏ đậm */
+  --w:#F8EDD2;      /* kem giấy dó */
+  --r:#A3191E;      /* đỏ son */
+  --r2:#7E1015;     /* đỏ sẫm */
+  --jade:#3F7D6B;   /* xanh ngọc rêu */
+  --font-head:"Playfair Display","Times New Roman",Georgia,serif;
+  --font-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--k);color:var(--w);line-height:1.65}
+body{margin:0;font-family:var(--font-body);background:var(--k);color:var(--w);line-height:1.7}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
+h1,h2,h3{font-family:var(--font-head)}
+::selection{background:var(--r);color:var(--w)}
 .wrap{max-width:1100px;margin:auto;padding:0 5%}
 .narrow{max-width:760px}
 .center{text-align:center}
 .y{color:var(--y)}
 
-/* Nút */
-.btn{display:inline-block;background:var(--y);color:var(--k);padding:13px 26px;border-radius:4px;font-weight:800;text-decoration:none;text-transform:uppercase;letter-spacing:.04em;font-size:.9rem;border:2px solid var(--y);margin:6px 8px 6px 0;transition:transform .15s,background .15s}
+/* ---------- Nút: viền kép kiểu bảng hiệu sơn mài ---------- */
+.btn{display:inline-block;background:var(--y);color:var(--k);padding:13px 26px;border-radius:2px;font-weight:800;text-decoration:none;text-transform:uppercase;letter-spacing:.06em;font-size:.9rem;border:2px solid var(--y);margin:6px 8px 6px 0;
+  box-shadow:inset 0 0 0 2px var(--k2),inset 0 0 0 3px rgba(248,237,210,.55);transition:transform .15s,background .15s,color .15s}
 .btn:hover{transform:translateY(-2px);background:var(--y2)}
 .btn-small{padding:8px 16px;font-size:.8rem;margin:0}
-.btn-outline{background:transparent;color:var(--y)}
+.btn-outline{background:transparent;color:var(--y);box-shadow:inset 0 0 0 2px var(--k),inset 0 0 0 3px rgba(226,169,45,.5)}
 .btn-outline:hover{background:var(--y);color:var(--k)}
-.btn-dark{background:var(--k);color:var(--y);border-color:var(--k)}
-.btn-dark:hover{background:var(--k2)}
-.btn-outline-dark{background:transparent;color:var(--k);border-color:var(--k)}
-.btn-outline-dark:hover{background:var(--k);color:var(--y)}
+.btn-dark{background:var(--r2);color:var(--y2);border-color:var(--r2);box-shadow:inset 0 0 0 2px var(--paper),inset 0 0 0 3px var(--r2)}
+.btn-dark:hover{background:var(--k);border-color:var(--k)}
+.btn-outline-dark{background:transparent;color:var(--r2);border-color:var(--r2)}
+.btn-outline-dark:hover{background:var(--r2);color:var(--y2)}
 
-/* Header */
-.site-header{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:12px 5%;background:rgba(11,11,11,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--y)}
-.logo{font-size:1.35rem;font-weight:900;letter-spacing:.06em;color:var(--y);text-decoration:none}
+/* ---------- Header ---------- */
+.site-header{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:12px 5% 18px;background:rgba(31,12,10,.94);backdrop-filter:blur(8px)}
+.site-header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:14px;background:url("patterns/band-gold.svg") repeat-x center bottom}
+.logo{font-family:var(--font-head);font-size:1.4rem;font-weight:900;letter-spacing:.06em;color:var(--y);text-decoration:none}
 .logo span{color:var(--w)}
 .site-header nav{display:flex;align-items:center;gap:22px}
 .site-header nav a:not(.btn){text-decoration:none;font-weight:600;font-size:.95rem}
 .site-header nav a:not(.btn):hover{color:var(--y)}
 
-/* Hero */
-.hero{position:relative;overflow:hidden;min-height:88vh;display:flex;align-items:center;padding:80px 5% calc(12vw + 40px);
-  background:linear-gradient(90deg,rgba(0,0,0,.92) 25%,rgba(0,0,0,.45)),url("images/hero.webp") center/cover no-repeat,var(--k2) url("patterns/tile-on-dark.svg")}
-.hero-inner{position:relative;z-index:2;max-width:1100px;margin:auto;width:100%}
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;min-height:88vh;display:flex;align-items:center;padding:80px 0 calc(12vw + 40px);color:var(--w);
+  background:linear-gradient(90deg,rgba(31,12,10,.93) 25%,rgba(60,14,12,.62)),url("link-anh-khue-van-cac.jpg") center/cover no-repeat,var(--k2) url("patterns/tile-on-dark.svg")}
+.hero-container{position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.hero-inner{position:relative;z-index:2;width:100%}
 /* Mặt trống đồng Đông Sơn xoay chậm phía sau */
 .hero::before{content:"";position:absolute;z-index:1;right:-12%;top:46%;width:min(72vw,760px);aspect-ratio:1;transform:translateY(-50%);
-  background:url("patterns/sun-yellow.svg") center/contain no-repeat;opacity:.16;animation:spin 140s linear infinite}
-/* Đường chân trời Hà Nội: Cột Cờ, Khuê Văn Các, Tháp Rùa, nhà ống phố cổ */
+  background:url("patterns/sun-yellow.svg") center/contain no-repeat;opacity:.2;animation:spin 140s linear infinite}
+/* Đường chân trời Hà Nội: Cột Cờ, Khuê Văn Các, Tháp Rùa, Chùa Một Cột, nhà ống phố cổ */
 .hero::after{content:"";position:absolute;z-index:1;left:0;right:0;bottom:-1px;height:12vw;
   background:url("patterns/skyline-yellow.svg") center bottom/100% 100% no-repeat}
 @keyframes spin{to{transform:translateY(-50%) rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){.hero::before{animation:none}}
+@media(prefers-reduced-motion:reduce){.hero::before{animation:none}.marquee-track{animation:none}}
 .eyebrow{color:var(--y);text-transform:uppercase;letter-spacing:.25em;font-weight:700;font-size:.85rem;margin:0 0 14px}
-.hero h1{font-size:clamp(2.2rem,7vw,4.8rem);line-height:1.05;margin:0 0 18px;font-weight:900;max-width:14ch}
+.hero .eyebrow{font-weight:600;margin-bottom:10px}
+.hero h1{font-size:clamp(2.2rem,4.5vw,3.5rem);line-height:1.2;margin:0 0 15px;font-weight:900;max-width:14ch}
 .hero h1 em{font-style:normal;color:var(--y)}
-.lead{max-width:560px;font-size:1.1rem;opacity:.9;margin:0 0 10px}
+.slogan{color:var(--y);font-style:italic;font-size:1.1rem;margin:0 0 15px;letter-spacing:.05em;font-family:var(--font-head)}
+.lead{max-width:560px;font-size:1.05rem;color:#ecdcb8;margin:0 0 30px}
 .lead-en{max-width:560px;font-size:1rem;color:var(--y);font-weight:600;margin:0 0 26px}
+.hero-actions{display:flex;gap:15px;flex-wrap:wrap}
+.hero-actions .btn{margin:0}
 
-/* Dải tin cậy */
-.trust{background:var(--y);color:var(--k)}
+/* Khung ảnh hình xăm: viền hoa văn Á Đông, nghiêng 3 độ */
+.hero-image-right{position:relative;aspect-ratio:3/4;transform:rotate(3deg);transition:transform .3s ease;
+  border:16px solid transparent;border-image:url("patterns/frame-gold.svg") 16 round;
+  background:url("link-anh-hinh-xam-tren-tay.jpg") center/cover no-repeat,var(--k2);
+  background-origin:padding-box;background-clip:padding-box;
+  filter:drop-shadow(0 12px 26px rgba(0,0,0,.55))}
+.hero-image-right:hover{transform:rotate(0deg)}
+
+/* ---------- Dải tin cậy ---------- */
+.trust{background:var(--y) url("patterns/tile-on-yellow.svg");color:var(--k);border-top:4px double var(--r2);border-bottom:4px double var(--r2)}
 .trust ul{list-style:none;margin:0 auto;padding:22px 5%;max-width:1100px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;text-align:center}
-.trust strong{display:block;font-size:1.8rem;font-weight:900;line-height:1.1}
-.trust span{font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.trust li+li{border-left:1px dotted rgba(126,16,21,.5)}
+.trust strong{display:block;font-family:var(--font-head);font-size:1.9rem;font-weight:900;line-height:1.1;color:var(--r2)}
+.trust span{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 
-/* Section chung */
-.section{padding:84px 0}
-.section h2{font-size:clamp(1.7rem,4vw,2.6rem);margin:0 0 10px;font-weight:900;text-transform:uppercase;letter-spacing:.02em}
-.sub{opacity:.8;margin:0 0 34px}
-.dark{background:var(--k) url("patterns/tile-on-dark.svg")}              /* gạch bông vàng mờ trên nền đen */
-.yellow{background:var(--y) url("patterns/tile-on-yellow.svg");color:var(--k)} /* gạch bông đen mờ trên nền vàng */
-.yellow h2,.yellow .y{color:var(--k)}
+/* ---------- Section chung ---------- */
+.section{position:relative;padding:92px 0 84px}
+/* Dải viền thoi ở đầu mỗi khối */
+.section::before{content:"";position:absolute;left:0;right:0;top:0;height:14px;background:url("patterns/band-gold.svg") repeat-x center}
+.section h2{font-size:clamp(1.7rem,4vw,2.6rem);margin:0 0 10px;font-weight:900;text-transform:uppercase;letter-spacing:.02em;line-height:1.2}
+.sub{opacity:.85;margin:0 0 34px}
+.dark{background:var(--k) url("patterns/tile-on-dark.svg")}                      /* gạch hoa sen vàng mờ trên nền nâu đen */
+.yellow{background:var(--paper) url("patterns/tile-on-yellow-red.svg");color:var(--k)} /* gạch hoa sen đỏ mờ trên nền vàng tường */
+.yellow::before{background-image:url("patterns/band-red.svg")}
+.yellow h2{color:var(--r2)}
+.yellow .y{color:var(--r)}
+.yellow .sub{color:#4a2410;opacity:1}
 
 /* Họa tiết sen dưới mỗi tiêu đề */
-.section h2::after{content:"";display:block;width:230px;height:54px;margin-top:6px;
+.section h2::after{content:"";display:block;width:230px;height:54px;margin-top:8px;
   background:url("patterns/lotus-yellow.svg") left center/contain no-repeat}
-.yellow h2::after{background-image:url("patterns/lotus-black.svg")}
+.yellow h2::after{background-image:url("patterns/lotus-red.svg")}
 .center h2::after{margin-left:auto;margin-right:auto;background-position:center}
 
-/* Gallery */
+/* ---------- Gallery ---------- */
 .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:34px}
-.gallery figure{margin:0;position:relative;overflow:hidden;background:var(--k2);aspect-ratio:1/1;border:2px solid transparent;transition:border-color .2s}
+.gallery figure{margin:0;position:relative;overflow:hidden;background:var(--k2);aspect-ratio:1/1;border:2px solid rgba(226,169,45,.35);transition:border-color .2s}
 .gallery figure:hover{border-color:var(--y)}
 .gallery img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .gallery figure:hover img{transform:scale(1.06)}
-.gallery figcaption{position:absolute;inset:auto 0 0 0;padding:34px 14px 12px;background:linear-gradient(transparent,rgba(0,0,0,.9));display:flex;flex-direction:column;opacity:0;transition:opacity .25s}
+.gallery figcaption{position:absolute;inset:auto 0 0 0;padding:34px 14px 12px;background:linear-gradient(transparent,rgba(31,12,10,.92));display:flex;flex-direction:column;opacity:0;transition:opacity .25s}
 .gallery figure:hover figcaption{opacity:1}
 .gallery figcaption b{color:var(--y)}
 .gallery figcaption span{font-size:.85rem;opacity:.85}
 
-/* Cards dịch vụ / đánh giá */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:30px}
-.cards.three{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-.cards article,.cards blockquote{background:var(--k);color:var(--w);padding:28px 24px;margin:0;border-radius:4px}
-.cards .num{color:var(--y);font-size:2.4rem;font-weight:900;line-height:1}
-.cards h3{margin:10px 0 8px;color:var(--y);text-transform:uppercase;font-size:1.1rem}
-.cards p{margin:0}
-.cards blockquote p{font-style:italic;margin-bottom:12px}
+/* ---------- Cards dịch vụ / đánh giá / blog: khung hoa văn ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px;margin-top:30px}
+.cards.three{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:2rem}
+.cards article,.cards blockquote{position:relative;background:var(--k) url("patterns/tile-on-dark.svg");color:var(--w);padding:20px 16px;margin:0;border-radius:0;
+  border:16px solid transparent;border-image:url("patterns/frame-gold.svg") 16 round;background-origin:padding-box;background-clip:padding-box;
+  box-shadow:0 8px 22px rgba(60,14,12,.28)}
+.cards .num{display:inline-block;font-family:var(--font-head);color:var(--y);font-size:2.4rem;font-weight:900;line-height:1}
+.cards h3{margin:10px 0 8px;color:var(--y);text-transform:uppercase;font-size:1.1rem;line-height:1.35}
+.cards h3 a{color:inherit;text-decoration:none}
+.cards h3 a:hover{text-decoration:underline}
+.cards p{margin:0;color:#ecdcb8}
+.cards blockquote p{font-style:italic;margin-bottom:12px;color:var(--w)}
 .cards cite{color:var(--y);font-style:normal;font-weight:700;font-size:.9rem}
+.tag{display:inline-block;font-size:.8rem;font-weight:700;color:var(--y);text-transform:uppercase;letter-spacing:.08em}
+.more{display:inline-block;margin-top:1rem;font-weight:700;color:var(--y);text-decoration:none}
+.more:hover{text-decoration:underline}
+.cards.three article h3{font-size:1.2rem;margin:.5rem 0}
+.cards.three article p{font-size:.95rem}
 
-/* Nghệ sĩ */
+/* ---------- Nghệ sĩ ---------- */
+.artist-slider-wrap{position:relative}
+.artist-slide{display:none}
+.artist-slide.active{display:grid;grid-template-columns:.8fr 1.4fr;gap:50px;align-items:center;animation:fadeIn .5s ease-in-out}
+.artist-slide img{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--k2);
+  border:16px solid transparent;border-image:url("patterns/frame-gold.svg") 16 round;border-radius:0}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.artist-controls{display:flex;gap:10px;margin-top:20px}
+.artist-btn{background:var(--y);color:var(--k);border:2px solid var(--y);width:42px;height:42px;font-weight:900;font-size:1.1rem;border-radius:50%;cursor:pointer;
+  box-shadow:inset 0 0 0 2px var(--k2);transition:background .2s}
+.artist-btn:hover{background:var(--y2)}
 .split{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center}
-.split img{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--k2);border:3px solid var(--y)}
+.split img{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--k2);border:16px solid transparent;border-image:url("patterns/frame-gold.svg") 16 round}
+/* dấu tick hình cánh sen */
 .ticks{list-style:none;padding:0;margin:20px 0 0}
-.ticks li{padding-left:28px;position:relative;margin-bottom:8px}
-.ticks li::before{content:"";position:absolute;left:0;top:.5em;width:14px;height:14px;background:var(--y);clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0,43% 62%)}
+.ticks li{padding-left:30px;position:relative;margin-bottom:8px}
+.ticks li::before{content:"";position:absolute;left:0;top:.35em;width:18px;height:18px;background:var(--y);
+  clip-path:path("M9 18C2 13 1 6 9 0C17 6 16 13 9 18Z")}
+.yellow .ticks li::before{background:var(--r)}
 
-/* Quy trình */
-.steps{list-style:none;counter-reset:s;padding:0;margin:34px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
-.steps li{counter-increment:s;border-top:4px solid var(--k);padding-top:16px}
-.steps li::before{content:"0" counter(s);display:block;font-size:2.6rem;font-weight:900;line-height:1}
-.steps b{display:block;font-size:1.15rem;text-transform:uppercase;margin:6px 0 4px}
+/* ---------- Quy trình ---------- */
+.steps{list-style:none;counter-reset:s;padding:0;margin:34px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px}
+.steps li{counter-increment:s;padding-top:28px;background:url("patterns/band-red.svg") repeat-x left top}
+.steps li::before{content:"0" counter(s);display:block;font-family:var(--font-head);font-size:2.8rem;font-weight:900;line-height:1;color:var(--r)}
+.steps b{display:block;font-size:1.15rem;text-transform:uppercase;margin:6px 0 4px;color:var(--r2)}
 
-/* Bảng giá */
-table{width:100%;border-collapse:collapse;margin-top:20px}
-th,td{text-align:left;padding:14px 10px;border-bottom:1px solid #333}
-th{color:var(--y);text-transform:uppercase;font-size:.85rem;letter-spacing:.08em}
-td:last-child,th:last-child{text-align:right;font-weight:700}
-.note{opacity:.7;font-size:.9rem}
+/* ---------- Bảng giá ---------- */
+table{width:100%;border-collapse:collapse;margin-top:20px;background:rgba(31,12,10,.55);border:2px solid var(--y);outline:1px solid rgba(226,169,45,.5);outline-offset:4px}
+th,td{text-align:left;padding:14px 14px;border-bottom:1px dotted rgba(226,169,45,.5)}
+thead tr{background:var(--r2)}
+th{color:var(--y2);text-transform:uppercase;font-size:.85rem;letter-spacing:.08em}
+td:last-child,th:last-child{text-align:right;font-weight:700;color:var(--y)}
+tbody tr:last-child td{border-bottom:0}
+.note{opacity:.8;font-size:.9rem;margin-top:22px}
 
-/* FAQ */
-details{background:var(--k2);border-left:4px solid var(--y);padding:16px 20px;margin-bottom:10px}
+/* ---------- Khối khuyến mãi ---------- */
+.promo-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center}
+.promo-img-left{transform:rotate(-3deg);transition:transform .3s ease;
+  border:16px solid transparent;border-image:url("patterns/frame-dark.svg") 16 round;background:var(--paper);filter:drop-shadow(0 10px 22px rgba(60,14,12,.35))}
+.promo-img-left:hover{transform:rotate(0deg)}
+.promo-img-left img{width:100%;height:auto;display:block}
+.promo h2{margin:.8rem 0 1rem}
+.promo h2 em{font-style:normal;color:var(--r)}
+.promo p{font-size:1.15rem;font-weight:500}
+.yellow .eyebrow{color:var(--r2);font-weight:700}
+.tiers{margin-top:1.5rem;display:grid;gap:1rem}
+.tier{position:relative;padding:1rem 1rem 1rem 1.4rem;background:rgba(126,16,21,.09);border:1px solid rgba(126,16,21,.55);border-left:6px solid var(--r2)}
+.tier b{color:var(--r2)}
+.promo p.fine{margin-top:1rem;font-size:.9rem;font-weight:400}
+
+/* ---------- FAQ ---------- */
+details{background:var(--k2) url("patterns/tile-on-dark.svg");border:12px solid transparent;border-image:url("patterns/frame-gold.svg") 16 round;background-origin:padding-box;background-clip:padding-box;padding:8px 14px;margin-bottom:14px}
 summary{cursor:pointer;font-weight:700;list-style:none}
 summary::-webkit-details-marker{display:none}
 summary::after{content:"+";float:right;color:var(--y);font-size:1.3rem;line-height:1}
 details[open] summary::after{content:"–"}
-details p{margin:12px 0 0;opacity:.85}
+details p{margin:12px 0 4px;color:#ecdcb8}
 
-/* CTA */
-.cta{position:relative;overflow:hidden;padding:96px 0}
-.cta::before{content:"";position:absolute;left:50%;top:50%;width:min(110vw,820px);aspect-ratio:1;transform:translate(-50%,-50%);
-  background:url("patterns/sun-black.svg") center/contain no-repeat;opacity:.12;pointer-events:none}
+/* ---------- CTA ---------- */
+.cta{position:relative;overflow:hidden;padding:104px 0 96px}
+.cta::after{content:"";position:absolute;left:50%;top:50%;width:min(110vw,820px);aspect-ratio:1;transform:translate(-50%,-50%);
+  background:url("patterns/sun-red.svg") center/contain no-repeat;opacity:.16;pointer-events:none}
 .cta .wrap{position:relative;z-index:1}
-.cta .sub{color:var(--k);opacity:.85}
+.cta .sub{color:#4a2410;opacity:1}
 
-/* Footer */
-.site-footer{position:relative;background:#000;padding:62px 0 90px}
-/* Viền răng cưa kiểu trống đồng */
+/* ---------- Footer ---------- */
+.site-footer{position:relative;background:#120605 url("patterns/tile-on-dark.svg");padding:70px 0 90px}
 .site-footer::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;background:url("patterns/zigzag-yellow.svg") repeat-x}
 .footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
 address{font-style:normal;line-height:1.9}
-address strong{color:var(--y);font-size:1.2rem}
+address strong{font-family:var(--font-head);color:var(--y);font-size:1.2rem}
 .site-footer a{color:var(--y)}
-.copy{text-align:center;opacity:.6;font-size:.85rem;margin:36px 0 0}
+.copy{text-align:center;opacity:.65;font-size:.85rem;margin:36px 0 0}
 
-/* Nút nổi mobile */
+/* ---------- Dải ảnh chạy ngang ---------- */
+.marquee-container{overflow:hidden;width:100%;position:relative;background:var(--k2);margin-top:20px;
+  border:14px solid transparent;border-image:url("patterns/frame-gold.svg") 16 round;background-origin:padding-box;background-clip:padding-box;padding:8px 0}
+.marquee-track{display:flex;gap:16px;width:max-content;animation:scrollMarquee 40s linear infinite}
+.marquee-container:hover .marquee-track{animation-play-state:paused}
+.marquee-item{height:280px;flex-shrink:0;border-radius:0;overflow:hidden;border:2px solid rgba(226,169,45,.45);outline:1px solid rgba(226,169,45,.3);outline-offset:-6px;transition:border-color .2s,transform .2s}
+.marquee-item:hover{border-color:var(--y);transform:scale(1.02)}
+.marquee-item img{height:100%;width:auto;object-fit:contain;display:block}
+@keyframes scrollMarquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* #tac-pham gọn hơn các khối khác */
+#tac-pham{padding-bottom:20px}
+#tac-pham .center{margin-top:30px}
+
+/* ---------- Nút nổi mobile ---------- */
 .float-cta{display:none}
 
+@media(max-width:900px){
+  .hero-container{grid-template-columns:1fr}
+  .hero-image-right{max-width:320px;margin:20px auto 0;width:100%;transform:rotate(0deg)}
+}
 @media(max-width:800px){
   .site-header nav a:not(.btn){display:none}
-  .split,.footer-grid{grid-template-columns:1fr}
-  .hero{min-height:80vh;padding-bottom:calc(20vw + 30px);background:linear-gradient(rgba(0,0,0,.8),rgba(0,0,0,.7)),url("images/hero.webp") center/cover no-repeat,var(--k2) url("patterns/tile-on-dark.svg")}
-  .hero::before{right:-40%;width:110vw;opacity:.12}
+  .split,.footer-grid,.promo-grid{grid-template-columns:1fr}
+  .artist-slide.active{grid-template-columns:1fr}
+  .promo-img-left{max-width:320px;margin:0 auto 20px}
+  .hero{min-height:80vh;padding-bottom:calc(20vw + 30px);background:linear-gradient(rgba(31,12,10,.82),rgba(31,12,10,.74)),url("link-anh-khue-van-cac.jpg") center/cover no-repeat,var(--k2) url("patterns/tile-on-dark.svg")}
+  .hero::before{right:-40%;width:110vw;opacity:.14}
   .hero::after{height:20vw}
   .section h2::after{width:180px;height:42px}
-  .section{padding:60px 0}
+  .section{padding:68px 0 60px}
+  #tac-pham{padding-bottom:20px}
+  .marquee-item{height:220px}
   .gallery figcaption{opacity:1}
+  .trust li+li{border-left:0}
   .float-cta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60}
   .float-cta a{flex:1;text-align:center;padding:14px;font-weight:800;text-decoration:none;text-transform:uppercase;background:var(--y);color:var(--k);border-top:2px solid var(--y)}
-  .float-cta a+a{background:var(--k);color:var(--y)}
+  .float-cta a+a{background:var(--r2);color:var(--y2);border-top-color:var(--r2)}
+}
+/* ---------- CSS cho Menu Mobile (Cập nhật) ---------- */
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 22px;
+  padding: 0;
+  z-index: 101;
 }
 
-/* ==========================================================
-   CSS CHO DẢI SLIDE ẢNH CHẠY NGANG (INFINITE CAROUSEL)
-   ========================================================== */
-.marquee-container {
-  overflow: hidden;
-  width: 100%;
-  position: relative;
-  background: var(--k2);
-  border-top: 2px solid var(--y);
-  border-bottom: 2px solid var(--y);
-  padding: 20px 0;
-  margin-top: 20px;
-}
-
-.marquee-track {
-  display: flex;
-  gap: 16px;
-  width: max-content;
-  animation: scrollMarquee 40s linear infinite;
-}
-
-/* Dừng chạy slide khi rê chuột vào để khách xem kỹ ảnh */
-.marquee-container:hover .marquee-track {
-  animation-play-state: paused;
-}
-
-.marquee-item {
-  height: 280px; /* Chiều cao cố định của mỗi ảnh trong slide */
-  flex-shrink: 0;
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 196, 0, 0.3);
-  transition: border-color 0.2s, transform 0.2s;
-}
-
-.marquee-item:hover {
-  border-color: var(--y);
-  transform: scale(1.02);
-}
-
-.marquee-item img {
-  height: 100%;
-  width: auto; /* Chiều ngang tự động co giãn theo tỉ lệ gốc của ảnh */
-  object-fit: contain;
+.mobile-menu-btn span {
   display: block;
+  width: 100%;
+  height: 3px;
+  background: var(--y);
+  border-radius: 2px;
+  pointer-events: none; /* Tránh việc click nhầm vào thẻ span con gây lỗi nháy */
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-@keyframes scrollMarquee {
-  0% {
-    transform: translateX(0);
+/* Biểu tượng nút X bên trong bảng menu mobile */
+.mobile-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: var(--y);
+  font-size: 2.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  z-index: 102;
+}
+
+.mobile-close-btn:hover {
+  color: var(--w);
+}
+
+/* Bảng menu xổ xuống */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  max-width: 320px;
+  height: 100vh;
+  background: var(--k2);
+  border-left: 2px solid var(--y);
+  box-shadow: -5px 0 25px rgba(0,0,0,0.7);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  padding: 80px 30px 30px;
+  transition: right 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.mobile-nav.open {
+  right: 0;
+}
+
+.mobile-nav a {
+  color: var(--w);
+  text-decoration: none;
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 12px 0;
+  border-bottom: 1px dotted rgba(226,169,45,0.3);
+}
+
+.mobile-nav a:hover {
+  color: var(--y);
+}
+
+/* Lớp phủ mờ nền */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-nav-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media(max-width: 800px) {
+  .desktop-nav {
+    display: none !important;
   }
-  100% {
-    transform: translateX(-50%);
+  .mobile-menu-btn {
+    display: flex;
   }
 }

@@ -1,0 +1,88 @@
+/* ==========================================================
+   frames.css — KHUNG DÙNG CHUNG cho blog.html / gallery.html / contact.html
+   Nạp SAU style.css:  <link rel="stylesheet" href="frames.css">
+   ========================================================== */
+
+/* ---------- 1. Khung tiêu đề trang ----------
+   Dáng như blog.html cũ (căn giữa, viền vàng phía dưới)
+   nhưng nền là gạch hoa văn như contact.html */
+.page-hero {
+  position: relative;
+  padding: 60px 0;
+  text-align: center;
+  color: var(--w);
+  background:
+    linear-gradient(rgba(8, 2, 1, .62), rgba(8, 2, 1, .62)),
+    var(--k) url("patterns/tile-on-dark.svg");
+  border-bottom: 2px solid var(--y);
+}
+/* Hoa sen dưới tiêu đề mục trong blog: căn giữa */
+.blog-section h2::after {
+  margin-left: auto;
+  margin-right: auto;
+  background-position: center;
+}
+.page-hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.25;
+  margin: 0 0 10px;
+}
+.page-hero .eyebrow { margin-bottom: 10px; }
+.page-hero .sub {
+  max-width: 620px;
+  margin: 0 auto;
+  color: #ecdcb8;
+  opacity: 1;
+}
+
+/* ---------- 2. Khung nền sáng ----------
+   Vàng tường + hoa văn đỏ mờ, chữ đen — giống khối "yellow" của contact.html */
+.light-panel {
+  background: var(--paper) url("patterns/tile-on-yellow-red.svg");
+  color: var(--k);
+  padding: 36px 32px;
+  border: 4px double var(--r2);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .35);
+}
+@media (max-width: 600px) {
+  .light-panel { padding: 22px 16px; }
+}
+
+/* ---------- 3. Danh sách bài viết trong blog.html (khung sáng) ---------- */
+.blog-list-panel {
+  max-width: 940px;
+  margin: 30px auto 0;
+}
+.light-panel .news-list-container {
+  margin: 0 auto;
+  min-height: 200px;
+}
+.light-panel .news-item-horizontal {
+  border-bottom: 1px solid rgba(126, 16, 21, .35);
+}
+.light-panel .news-item-horizontal:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.light-panel .news-item-thumb {
+  border: 2px solid var(--r2);
+  background: var(--k2);
+}
+.light-panel .news-item-category { color: var(--r2); }
+.light-panel .news-item-category span.time-ago { color: #5a3a1a; }
+.light-panel .news-item-title a { color: var(--k); }
+.light-panel .news-item-title a:hover { color: var(--r); }
+.light-panel .news-item-desc { color: #3a1a10; }
+.light-panel .no-articles { text-align: center; color: #4a2410; margin: 0; }
+
+.light-panel .pagination { margin-top: 30px; }
+.light-panel .page-node {
+  background: transparent;
+  color: var(--k);
+  border: 1px solid var(--r2);
+}
+.light-panel .page-node:hover,
+.light-panel .page-node.active {
+  background: var(--r2);
+  color: var(--y2);
+}

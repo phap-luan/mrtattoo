@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Aftercare: clear instructions and follow-up support">
+  <rect width="400" height="300" fill="#331311"/>
+  <circle cx="200" cy="150" r="130" fill="none" stroke="#E2A92D" stroke-opacity=".18" stroke-width="2"/>
+  <!-- ointment tube -->
+  <g transform="translate(150 150) rotate(-18)">
+    <path d="M-34-84h68l8 20h-84z" fill="#A3191E" stroke="#1f0c0a" stroke-width="3"/>
+    <path d="M-42-64h84l-12 150h-60z" fill="#F8EDD2" stroke="#1f0c0a" stroke-width="3"/>
+    <path d="M-32 90h64v18h-64z" fill="#E2A92D" stroke="#1f0c0a" stroke-width="3"/>
+    <path d="M0-30c-18 20-18 38 0 48 18-10 18-28 0-48z" fill="#7E1015"/>
+    <path d="M-26 30h52M-22 46h44" stroke="#7E1015" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <!-- water drops -->
+  <g fill="#E2A92D">
+    <path d="M286 74c-12 16-12 28 0 34 12-6 12-18 0-34z"/>
+    <path d="M326 118c-9 12-9 21 0 26 9-5 9-14 0-26z"/>
+  </g>
+  <!-- shield with check: support -->
+  <path d="M286 176l46 16v38c0 28-20 44-46 56-26-12-46-28-46-56v-38z" fill="#E2A92D" stroke="#1f0c0a" stroke-width="3"/>
+  <path d="M268 232l14 14 26-30" fill="none" stroke="#7E1015" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

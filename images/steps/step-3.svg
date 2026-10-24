@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Inking session: sterile single-use needles">
+  <rect width="400" height="300" fill="#331311"/>
+  <circle cx="200" cy="150" r="130" fill="none" stroke="#E2A92D" stroke-opacity=".18" stroke-width="2"/>
+  <!-- forearm -->
+  <path d="M0 214c70-34 160-44 260-30 60 8 110 26 140 46v70H0z" fill="#F8EDD2" fill-opacity=".92"/>
+  <path d="M0 214c70-34 160-44 260-30 60 8 110 26 140 46" fill="none" stroke="#A3191E" stroke-width="3"/>
+  <!-- fresh line on skin -->
+  <path d="M120 218c24-12 50-14 74-8 18 5 36 4 54-4" fill="none" stroke="#1f0c0a" stroke-width="5" stroke-linecap="round"/>
+  <!-- tattoo machine -->
+  <g transform="translate(250 98) rotate(28)">
+    <rect x="-24" y="-60" width="48" height="84" rx="10" fill="#E2A92D" stroke="#1f0c0a" stroke-width="3"/>
+    <rect x="-14" y="-48" width="28" height="12" rx="4" fill="#7E1015"/>
+    <circle cx="0" cy="-12" r="8" fill="#1f0c0a"/>
+    <rect x="-9" y="24" width="18" height="40" fill="#F8EDD2" stroke="#1f0c0a" stroke-width="3"/>
+    <path d="M-2 64h4l-2 20z" fill="#1f0c0a"/>
+  </g>
+  <!-- sterile sparkle -->
+  <g fill="#E2A92D">
+    <path d="M70 70l5 14 14 5-14 5-5 14-5-14-14-5 14-5z"/>
+    <path d="M330 66l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/>
+  </g>
+</svg>

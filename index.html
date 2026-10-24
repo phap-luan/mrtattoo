@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#FFC400">
+  <meta name="theme-color" content="#7E1015">
 
   <title>Mr Tattoo Hanoi Studio | Best Tattoo Studio in Hanoi Old Quarter</title>
   <meta name="description" content="Mr Tattoo Hanoi Studio - professional tattoo studio at 106 Hang Buom, Hanoi Old Quarter. Affordable custom tattoos from $10. Sterile single-use needles. Book via WhatsApp!">
@@ -17,187 +17,234 @@
   <meta property="og:image" content="https://mrtattoo.vn/images/og-cover.jpg">
   <meta property="og:locale" content="en_US">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap&subset=vietnamese" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* Hero Section với ảnh nền Khuê Văn Các và Ảnh xăm bên phải (Nghiêng phải 3 độ) */
-    .hero {
-      position: relative;
-      background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), url('link-anh-khue-van-cac.jpg') no-repeat center center/cover;
-      padding: 80px 0;
-      color: #fff;
-    }
-
-    .hero-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 40px;
-      align-items: center;
-    }
-
-    .hero-image-right {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 2px solid #FFC400;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      aspect-ratio: 3/4;
-      background: url('link-anh-hinh-xam-tren-tay.jpg') no-repeat center center/cover;
-      transform: rotate(3deg);
-      transition: transform 0.3s ease;
-    }
-
-    .hero-image-right:hover {
-      transform: rotate(0deg);
-    }
-
-    @media (max-width: 900px) {
-      .hero-container {
-        grid-template-columns: 1fr;
-      }
-      .hero-image-right {
-        max-width: 320px;
-        margin: 20px auto 0 auto;
-        width: 100%;
-        transform: rotate(0deg);
-      }
-    }
-
-    /* CSS CHO DẢI SLIDE ẢNH CHẠY NGANG (GỌN TRONG LỀ WRAP) */
-    .marquee-container {
-      overflow: hidden;
-      width: 100%;
-      position: relative;
+    /* =====================================================
+       4-STEP PROCESS: mỗi bước có 1 ảnh minh họa
+       ===================================================== */
+    .steps { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .steps li { display: flex; flex-direction: column; }
+    .step-figure {
+      margin: 14px 0 14px;
+      border: 12px solid transparent;
+      border-image: url("patterns/frame-gold.svg") 16 round;
       background: var(--k2);
-      border: 1px solid rgba(255, 196, 0, 0.4);
-      border-radius: 8px;
-      padding: 15px 0;
-      margin-top: 20px;
+      background-origin: padding-box;
+      background-clip: padding-box;
+      filter: drop-shadow(0 6px 14px rgba(60, 14, 12, .28));
     }
-
-    .marquee-track {
-      display: flex;
-      gap: 16px;
-      width: max-content;
-      animation: scrollMarquee 40s linear infinite;
-    }
-
-    .marquee-container:hover .marquee-track {
-      animation-play-state: paused;
-    }
-
-    .marquee-item {
-      height: 280px;
-      flex-shrink: 0;
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 196, 0, 0.3);
-      transition: border-color 0.2s, transform 0.2s;
-    }
-
-    .marquee-item:hover {
-      border-color: var(--y);
-      transform: scale(1.02);
-    }
-
-    .marquee-item img {
-      height: 100%;
-      width: auto;
-      object-fit: contain;
-      display: block;
-    }
-
-    @keyframes scrollMarquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* CSS CHO PHẦN NGHỆ SĨ */
-    .artist-slider-wrap {
-      position: relative;
-    }
-    .artist-slide {
-      display: none;
-    }
-    .artist-slide.active {
-      display: grid;
-      grid-template-columns: 0.8fr 1.4fr;
-      gap: 50px;
-      align-items: center;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-    .artist-slide img {
+    .step-figure img {
       width: 100%;
-      aspect-ratio: 4/5;
+      aspect-ratio: 4 / 3;
       object-fit: cover;
-      background: var(--k2);
-      border: 3px solid var(--y);
-      border-radius: 8px;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .artist-controls {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
-    .artist-btn {
-      background: var(--y);
-      color: var(--k);
-      border: none;
-      width: 40px;
-      height: 40px;
-      font-weight: 900;
-      font-size: 1.2rem;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .artist-btn:hover {
-      background: var(--y2);
-    }
-    @media(max-width: 800px) {
-      .artist-slide.active {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* CSS CHO KHỐI PROMO */
-    .promo-grid {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 40px;
-      align-items: center;
-    }
-    .promo-img-left {
-      border-radius: 8px;
-      overflow: hidden;
-      transform: rotate(-3deg);
-      border: 3px solid var(--k);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease;
-    }
-    .promo-img-left:hover {
-      transform: rotate(0deg);
-    }
-    .promo-img-left img {
-      width: 100%;
-      height: auto;
       display: block;
     }
-    @media(max-width: 800px) {
-      .promo-grid {
-        grid-template-columns: 1fr;
-      }
-      .promo-img-left {
-        max-width: 320px;
-        margin: 0 auto 20px auto;
-      }
+    .steps li span { color: #3a1a10; }
+
+    /* =====================================================
+       CLIENT REVIEWS: dải ô đánh giá tự chạy (giống Featured Portfolio)
+       ===================================================== */
+    .review-marquee {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+      background: var(--k2);
+      margin-top: 20px;
+      border: 14px solid transparent;
+      border-image: url("patterns/frame-gold.svg") 16 round;
+      background-origin: padding-box;
+      background-clip: padding-box;
+      padding: 14px 0;
+    }
+    .review-track {
+      display: flex;
+      gap: 18px;
+      width: max-content;
+      animation: scrollMarquee 90s linear infinite; /* scrollMarquee có sẵn trong style.css */
+    }
+    .review-marquee:hover .review-track,
+    .review-marquee:focus-within .review-track { animation-play-state: paused; }
+    .review-card {
+      flex: 0 0 300px;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      background: var(--k) url("patterns/tile-on-dark.svg");
+      border: 2px solid rgba(226, 169, 45, .45);
+      outline: 1px solid rgba(226, 169, 45, .3);
+      outline-offset: -6px;
+      color: var(--w);
+      transition: border-color .2s, transform .2s;
+    }
+    .review-card:hover { border-color: var(--y); transform: scale(1.02); }
+    .review-photo {
+      background: var(--k2);
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+    .review-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .review-body { padding: 16px 18px 20px; display: flex; flex-direction: column; flex: 1; }
+    .review-stars { color: var(--y); letter-spacing: .18em; font-size: 1rem; margin: 0 0 6px; }
+    .review-card blockquote { margin: 0; padding: 0; border: 0; background: none; box-shadow: none; flex: 1; }
+    .review-card blockquote p {
+      margin: 0 0 14px;
+      font-style: italic;
+      font-size: .95rem;
+      line-height: 1.6;
+      color: var(--w);
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .review-card cite { color: var(--y); font-style: normal; font-weight: 700; font-size: .9rem; }
+    @media (max-width: 800px) { .review-card { flex-basis: 260px; } }
+    @media (prefers-reduced-motion: reduce) {
+      .review-track { animation: none; }
+      .review-marquee { overflow-x: auto; }
+    }
+
+    /* =====================================================
+       TRAVEL CORNER & BLOG: 3 HÀNG NGANG (mỗi hàng 1 chuyên đề)
+       Trong mỗi hàng: bài mới nhất to, nổi bật bên trái;
+       2 bài cũ hơn nhỏ gọn xếp dọc bên phải.
+       ===================================================== */
+    .blog-rows { display: grid; gap: 26px; margin-top: 2rem; }
+    .blog-row {
+      background: var(--k) url("patterns/tile-on-dark.svg");
+      color: var(--w);
+      padding: 18px 20px 24px;
+      border: 16px solid transparent;
+      border-image: url("patterns/frame-gold.svg") 16 round;
+      background-origin: padding-box;
+      background-clip: padding-box;
+      box-shadow: 0 8px 22px rgba(60, 14, 12, .28);
+    }
+    /* Tiêu đề chuyên đề: bấm vào -> blog.html đúng tab */
+    .blog-row-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      border-bottom: 1px dotted rgba(226, 169, 45, .55);
+      text-decoration: none;
+      color: inherit;
+    }
+    .blog-row-head h3 {
+      margin: 0;
+      color: var(--y);
+      text-transform: uppercase;
+      font-size: 1.3rem;
+      line-height: 1.3;
+    }
+    .blog-row-head .more { margin: 0; font-size: .9rem; white-space: nowrap; }
+    .blog-row-head:hover h3,
+    .blog-row-head:focus-visible h3 { text-decoration: underline; }
+
+    /* Thân hàng: bài mới (trái, rộng) + danh sách 2 bài cũ (phải) */
+    .blog-row-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+    .blog-row-body > .blog-feature:only-child,
+    .blog-row-body > .blog-empty { grid-column: 1 / -1; }
+
+    /* Bài mới nhất: to, nổi bật */
+    .blog-feature { position: relative; }
+    .blog-feature-img {
+      display: block;
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--k2);
+      border: 2px solid var(--y);
+    }
+    .blog-feature-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s;
+    }
+    .blog-feature-img:hover img { transform: scale(1.05); }
+    .blog-badge {
+      position: absolute;
+      top: 10px; left: 10px;
+      background: var(--r2);
+      color: var(--y2);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border: 1px solid var(--y);
+    }
+    .blog-feature h4 {
+      margin: 14px 0 8px;
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      line-height: 1.3;
+    }
+    .blog-feature h4 a { color: var(--y2); text-decoration: none; }
+    .blog-feature h4 a:hover { text-decoration: underline; }
+    .blog-feature p {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #ecdcb8;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .blog-time { font-size: .8rem; color: #c9b58a; }
+
+    /* 2 bài cũ hơn: nhỏ gọn, xếp dọc bên phải */
+    .blog-older { list-style: none; margin: 0; padding: 0; }
+    .blog-older li { border-bottom: 1px dotted rgba(226, 169, 45, .4); }
+    .blog-older li:first-child { padding-top: 0; }
+    .blog-older li:last-child { border-bottom: 0; }
+    .blog-older a {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 0;
+      text-decoration: none;
+      color: var(--w);
+    }
+    .blog-older li:first-child a { padding-top: 0; }
+    .blog-older a:hover .blog-older-title { color: var(--y); text-decoration: underline; }
+    .blog-older-thumb {
+      width: 120px;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: var(--k2);
+      border: 1px solid rgba(226, 169, 45, .5);
+    }
+    .blog-older-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .blog-older-title {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-weight: 600;
+      font-size: .98rem;
+      line-height: 1.4;
+    }
+    .blog-older small { display: block; margin-top: 4px; font-size: .78rem; color: #c9b58a; }
+    .blog-empty { margin: 0; color: #ecdcb8; font-style: italic; font-size: .95rem; }
+
+    @media (max-width: 860px) {
+      .blog-row { padding: 14px 6px 18px; }
+      .blog-row-body { grid-template-columns: 1fr; gap: 20px; }
+      .blog-feature h4 { font-size: 1.35rem; }
     }
   </style>
 
@@ -209,12 +256,14 @@
     "image": "https://mrtattoo.vn/images/og-cover.jpg",
     "url": "https://mrtattoo.vn/",
     "telephone": "+84377616886",
+    "hasMap": "https://www.google.com/maps?cid=6222529882335831777",
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "106 Hang Buom",
-      "addressLocality": "Hanoi Old Quarter, Hoan Kiem",
-      "addressRegion": "Hanoi",
+      "streetAddress": "106 P. Hàng Buồm, Phố cổ Hà Nội",
+      "addressLocality": "Hoàn Kiếm",
+      "addressRegion": "Hà Nội",
+      "postalCode": "100000",
       "addressCountry": "VN"
     },
     "geo": { "@type": "GeoCoordinates", "latitude": 21.0340, "longitude": 105.8500 },
@@ -224,7 +273,7 @@
       "opens": "00:00",
       "closes": "23:59"
     }],
-    "sameAs": ["https://facebook.com/mrtattoohanoi", "https://instagram.com/mrtattoohanoi"]
+    "sameAs": ["https://facebook.com/mrtattoohanoi", "https://www.instagram.com/mrtattoo.hanoi/"]
   }
   </script>
   <script type="application/ld+json">
@@ -241,6 +290,45 @@
   </script>
 </head>
 <body>
+<!--SITE-HEADER:START-->
+<header class="site-header">
+  <a href="index.html" class="logo">MR TATTOO HANOI<span>.</span></a>
+
+  <!-- Desktop menu -->
+  <nav class="desktop-nav" aria-label="Main Navigation">
+    <a href="index.html">Home</a>
+    <a href="about-us.html">About Us</a>
+    <a href="gallery.html">Portfolio</a>
+    <a href="design.html">Design</a>
+    <a href="index.html#dich-vu">Services</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <a href="index.html#lien-he" class="btn btn-small">Book Now</a>
+  </nav>
+
+  <!-- Mobile hamburger button -->
+  <button class="mobile-menu-btn" aria-label="Toggle Menu" id="mobileMenuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile slide-out menu -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation">
+  <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close Menu">&times;</button>
+  <a href="index.html">Home</a>
+  <a href="about-us.html">About Us</a>
+  <a href="gallery.html">Portfolio</a>
+  <a href="design.html">Design</a>
+  <a href="index.html#dich-vu">Services</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact</a>
+  <a href="index.html#lien-he" class="btn" style="text-align: center; margin-top: 15px;">Book Now</a>
+</nav>
+
+<!--SITE-HEADER:END-->
 
   <main id="top">
 
@@ -249,13 +337,13 @@
       <div class="hero-container">
         <!-- Cột trái: Nội dung chữ -->
         <div class="hero-inner">
-          <p class="eyebrow" style="color: #FFC400; font-weight: 600; margin-bottom: 10px;">Tattoo studio · Hanoi Old Quarter · Since 2012</p>
-          <h1 style="font-size: clamp(2.2rem, 4.5vw, 3.5rem); line-height: 1.2; margin-bottom: 15px;">Ink you memory in Hanoi. <em style="color: #FFC400; font-style: normal;">Starting at only $10</em></h1>
-          <p class="slogan" style="color: #FFC400; font-style: italic; font-size: 1.1rem; margin-bottom: 15px; letter-spacing: 0.05em;">"Tattoo your journey in Hanoi"</p>
-          <p class="lead" style="margin-bottom: 30px; color: #ddd; font-size: 1.05rem;">Looking for an affordable, cheap-but-careful tattoo while you're in Vietnam? Find us on the 2nd floor of 106 Hàng Buồm — right in the heart of the Old Quarter. Message us your idea and we'll book your time.</p>
-          <div class="hero-actions" style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <a href="https://wa.me/84377616886" class="btn" style="background: #FFC400; color: #000; padding: 12px 24px; font-weight: bold; text-decoration: none; border-radius: 4px;" target="_blank" rel="noopener">Book on WhatsApp</a>
-            <a href="https://instagram.com/[tai-khoan]" class="btn btn-outline" style="border: 2px solid #FFC400; color: #FFC400; padding: 12px 24px; font-weight: bold; text-decoration: none; border-radius: 4px;" target="_blank" rel="noopener">Message on Instagram</a>
+          <p class="eyebrow">Tattoo studio · Hanoi Old Quarter · Since 2012</p>
+          <h1>Ink you memory in Hanoi. <em>Starting at only $10</em></h1>
+          <p class="slogan">"Tattoo your journey in Hanoi"</p>
+          <p class="lead">Looking for an affordable, cheap-but-careful tattoo while you're in Vietnam? Find us on the 2nd floor of 106 Hàng Buồm — right in the heart of the Old Quarter. Message us your idea and we'll book your time.</p>
+          <div class="hero-actions">
+            <a href="https://wa.me/84377616886" class="btn" target="_blank" rel="noopener">Book on WhatsApp</a>
+            <a href="https://www.instagram.com/mrtattoo.hanoi/" class="btn btn-outline" target="_blank" rel="noopener">Message on Instagram</a>
           </div>
         </div>
 
@@ -275,11 +363,11 @@
     </section>
 
     <!-- 4. TÁC PHẨM & SLIDE ẢNH CHẠY NGANG -->
-    <section id="tac-pham" class="section dark" style="padding-bottom: 20px;">
+    <section id="tac-pham" class="section dark">
       <div class="wrap">
         <h2>Featured <span class="y">Portfolio</span></h2>
         <p class="sub">Every tattoo is custom-designed, never copied.</p>
-        
+
         <div class="marquee-container" aria-label="Tattoo gallery scrolling banner">
           <div class="marquee-track">
             <div class="marquee-item"><img src="images/tac-pham-1.webp" alt="Tattoo 1" loading="lazy"></div>
@@ -316,8 +404,8 @@
           </div>
         </div>
 
-        <div class="center" style="margin-top: 30px;">
-          <a href="https://instagram.com/[tai-khoan]" class="btn">View More on Instagram</a>
+        <div class="center">
+          <a href="https://www.instagram.com/mrtattoo.hanoi/" class="btn" target="_blank" rel="noopener">View More on Instagram</a>
         </div>
       </div>
     </section>
@@ -354,7 +442,7 @@
     <!-- 6. NGHỆ SĨ -->
     <section id="nghe-si" class="section dark">
       <div class="wrap artist-slider-wrap" id="artistSlider">
-        
+
         <div class="artist-slide active">
           <img src="images/nghe-si-1.webp" alt="Artist [Artist Name 1]" width="640" height="800" loading="lazy">
           <div>
@@ -394,15 +482,27 @@
       </div>
     </section>
 
-    <!-- 7. QUY TRÌNH -->
+    <!-- 7. QUY TRÌNH: mỗi bước có 1 ảnh minh họa (images/steps/step-N.svg, có thể thay bằng ảnh thật) -->
     <section class="section yellow">
       <div class="wrap">
         <h2>4-Step Process</h2>
         <ol class="steps">
-          <li><b>Consultation</b><span>Share your concept, placement, and size.</span></li>
-          <li><b>Design &amp; Deposit</b><span>Approve the sketch and secure your booking slot.</span></li>
-          <li><b>Inking Session</b><span>Sterilized equipment opened right in front of you.</span></li>
-          <li><b>Aftercare</b><span>Receive clear instructions and follow-up support.</span></li>
+          <li>
+            <figure class="step-figure"><img src="images/steps/step1.webp" alt="Consultation: sharing your tattoo idea with the artist" width="400" height="300" loading="lazy"></figure>
+            <b>Consultation</b><span>Share your concept, placement, and size.</span>
+          </li>
+          <li>
+            <figure class="step-figure"><img src="images/steps/step2.webp" alt="Design and deposit: approving the sketch" width="400" height="300" loading="lazy"></figure>
+            <b>Design &amp; Deposit</b><span>Approve the sketch and secure your booking slot.</span>
+          </li>
+          <li>
+            <figure class="step-figure"><img src="images/steps/step3.webp" alt="Inking session with sterile single-use needles" width="400" height="300" loading="lazy"></figure>
+            <b>Inking Session</b><span>Sterilized equipment opened right in front of you.</span>
+          </li>
+          <li>
+            <figure class="step-figure"><img src="images/steps/step4.webp" alt="Aftercare: ointment and follow-up support" width="400" height="300" loading="lazy"></figure>
+            <b>Aftercare</b><span>Receive clear instructions and follow-up support.</span>
+          </li>
         </ol>
       </div>
     </section>
@@ -431,56 +531,58 @@
             <img src="link-anh-khuyen-mai.jpg" alt="Mr Tattoo Hanoi Studio promotion poster" width="900" height="1267" loading="lazy">
           </div>
           <div>
-            <div class="eyebrow" style="color: #000; font-weight: 700;">Limited-Time Offer</div>
-            <h2 style="margin:.8rem 0 1rem">Tattoo More, <em>Save More.</em></h2>
-            <p style="font-size:1.15rem;font-weight:500">Getting more than one tattoo in a single session? Enjoy increasing discounts based on the number of pieces!</p>
-            <div class="tiers" style="margin-top: 1.5rem; display: grid; gap: 1rem;">
-              <div class="tier" style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 6px;"><b>1st Tattoo:</b> <span>Standard price</span></div>
-              <div class="tier" style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 6px;"><b>30% OFF:</b> <span>On the 2nd tattoo (equal or lesser value than the 1st).</span></div>
-              <div class="tier" style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 6px;"><b>50% OFF:</b> <span>On the 3rd tattoo and every additional piece.</span></div>
+            <div class="eyebrow">Limited-Time Offer</div>
+            <h2>Tattoo More, <em>Save More.</em></h2>
+            <p>Getting more than one tattoo in a single session? Enjoy increasing discounts based on the number of pieces!</p>
+            <div class="tiers">
+              <div class="tier"><b>1st Tattoo:</b> <span>Standard price</span></div>
+              <div class="tier"><b>30% OFF:</b> <span>On the 2nd tattoo (equal or lesser value than the 1st).</span></div>
+              <div class="tier"><b>50% OFF:</b> <span>On the 3rd tattoo and every additional piece.</span></div>
             </div>
-            <p class="fine" style="margin-top: 1rem; font-size: 0.9rem;">*Valid for same-day bookings only. Message us on WhatsApp or Instagram for full details.</p>
+            <p class="fine">*Valid for same-day bookings only. Message us on WhatsApp or Instagram for full details.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- KHỐI 2: KHÁCH HÀNG NÓI GÌ -->
-    <section class="section dark">
+    <!-- KHỐI 2: CLIENT REVIEWS - dải tự chạy, dữ liệu lấy từ js/review-list.js -->
+    <section class="section dark" id="reviews">
       <div class="wrap">
         <h2>Client <span class="y">Reviews</span></h2>
-        <div class="cards three" style="margin-top: 2rem;">
-          <blockquote><p>"[Real client review text 1]"</p><cite>— [Client Name], [Country]</cite></blockquote>
-          <blockquote><p>"[Real client review text 2]"</p><cite>— [Client Name], [Country]</cite></blockquote>
-          <blockquote><p>"[Real client review text 3]"</p><cite>— [Client Name], [Country]</cite></blockquote>
+        <div class="review-marquee" aria-label="Client reviews scrolling banner">
+          <div class="review-track" id="reviewTrack"></div>
         </div>
       </div>
     </section>
 
-    <!-- KHỐI 3: FROM THE BLOG -->
-    <section class="section yellow">
+    <!-- KHỐI 3: TRAVEL CORNER & BLOG - dữ liệu lấy từ 3 file js/*-data.js -->
+    <section class="section yellow" id="blog-home">
       <div class="wrap">
-        <h2>Travel Corner &amp; <span style="color:#000">Blog</span></h2>
-        <p class="sub" style="color:#3b2e0c">Tattoo meanings, Hanoi travel tips, and studio diary.</p>
-        <div class="cards three" style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-          <article style="background: #0b0b0b; padding: 1.5rem; border-radius: 8px; color: #f5f5f5; border: 1px solid rgba(255,196,0,0.2);">
-            <span class="tag" style="font-size: 0.8rem; font-weight: 700; color: #FFC400;">Tattoo Meanings</span>
-            <h3 style="font-size: 1.2rem; margin: 0.5rem 0;"><a href="#" style="text-decoration: none; color: #FFC400;">Lotus Tattoo Meaning: Symbol of Resilience</a></h3>
-            <p style="font-size: 0.95rem; color: #aaa;">Why the lotus is one of the most loved small tattoos in Vietnam and how to wear it.</p>
-            <a class="more" href="#" style="display: inline-block; margin-top: 1rem; font-weight: 600; color: #FFC400;">Read more →</a>
-          </article>
-          <article style="background: #0b0b0b; padding: 1.5rem; border-radius: 8px; color: #f5f5f5; border: 1px solid rgba(255,196,0,0.2);">
-            <span class="tag" style="font-size: 0.8rem; font-weight: 700; color: #FFC400;">Hanoi Travel Corner</span>
-            <h3 style="font-size: 1.2rem; margin: 0.5rem 0;"><a href="#" style="text-decoration: none; color: #FFC400;">Old Quarter Guide for First-Time Visitors</a></h3>
-            <p style="font-size: 0.95rem; color: #aaa;">Streets, street food, and cafes within walking distance of our studio location.</p>
-            <a class="more" href="#" style="display: inline-block; margin-top: 1rem; font-weight: 600; color: #FFC400;">Read more →</a>
-          </article>
-          <article style="background: #0b0b0b; padding: 1.5rem; border-radius: 8px; color: #f5f5f5; border: 1px solid rgba(255,196,0,0.2);">
-            <span class="tag" style="font-size: 0.8rem; font-weight: 700; color: #FFC400;">Daily Diary</span>
-            <h3 style="font-size: 1.2rem; margin: 0.5rem 0;"><a href="#" style="text-decoration: none; color: #FFC400;">Quick Studio Updates &amp; Stories</a></h3>
-            <p style="font-size: 0.95rem; color: #aaa;">Short timeline posts: new artwork, custom designs, and daily life on Hang Buom street.</p>
-            <a class="more" href="#" style="display: inline-block; margin-top: 1rem; font-weight: 600; color: #FFC400;">Read diary →</a>
-          </article>
+        <h2>Travel Corner &amp; <span>Blog</span></h2>
+        <p class="sub">Tattoo meanings, Hanoi travel tips, and tattoo knowledge from the studio.</p>
+        <div class="blog-rows">
+
+          <section class="blog-row" aria-label="Tattoo Meanings">
+            <a class="blog-row-head" href="blog.html#meanings" aria-label="See all Tattoo Meanings articles">
+              <h3>Tattoo Meanings</h3><span class="more">View all →</span>
+            </a>
+            <div class="blog-row-body" id="home-meanings"></div>
+          </section>
+
+          <section class="blog-row" aria-label="Hanoi Travel Corner">
+            <a class="blog-row-head" href="blog.html#travel" aria-label="See all Hanoi Travel Corner articles">
+              <h3>Hanoi Travel Corner</h3><span class="more">View all →</span>
+            </a>
+            <div class="blog-row-body" id="home-travel"></div>
+          </section>
+
+          <section class="blog-row" aria-label="Tattoo Knowledge">
+            <a class="blog-row-head" href="blog.html#knowledge" aria-label="See all Tattoo Knowledge articles">
+              <h3>Tattoo Knowledge</h3><span class="more">View all →</span>
+            </a>
+            <div class="blog-row-body" id="home-knowledge"></div>
+          </section>
+
         </div>
       </div>
     </section>
@@ -503,7 +605,7 @@
         <p class="sub">Send us your idea and placement. We reply within the day.</p>
         <p>
           <a class="btn btn-dark" href="https://wa.me/84377616886" target="_blank" rel="noopener">Book on WhatsApp</a>
-          <a class="btn btn-dark" href="https://instagram.com/[tai-khoan]" target="_blank" rel="noopener">Message on Instagram</a>
+          <a class="btn btn-dark" href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">Message on Instagram</a>
         </p>
       </div>
     </section>
@@ -554,9 +656,222 @@
     }
   </script>
 
+  <!-- DỮ LIỆU: bài viết (do build.js sinh) + đánh giá khách hàng -->
+  <script src="js/meanings-data.js"></script>
+  <script src="js/travel-data.js"></script>
+  <script src="js/knowledge-data.js"></script>
+  <script src="js/review-list.js"></script>
+
+  <!-- CLIENT REVIEWS tự chạy -->
+  <script>
+    (function () {
+      var track = document.getElementById('reviewTrack');
+      if (!track) return;
+
+      function esc(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+          .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      var list = (typeof REVIEW_LIST !== 'undefined') ? REVIEW_LIST : [];
+      var showPlaceholders = (typeof REVIEW_SHOW_PLACEHOLDERS === 'undefined') || REVIEW_SHOW_PLACEHOLDERS;
+      list = list.filter(function (r) { return showPlaceholders || !r.placeholder; });
+
+      if (!list.length) {
+        var sec = document.getElementById('reviews');
+        if (sec) sec.style.display = 'none';
+        return;
+      }
+
+      function card(r, i, hidden) {
+        var stars = '';
+        var n = Math.max(0, Math.min(5, parseInt(r.rating, 10) || 0));
+        if (n > 0) {
+          stars = '<p class="review-stars" aria-label="' + n + ' out of 5 stars">' +
+                  '★'.repeat(n) + '☆'.repeat(5 - n) + '</p>';
+        }
+        var cite = esc(r.name) + (r.country ? ', ' + esc(r.country) : '');
+        return '<figure class="review-card"' + (hidden ? ' aria-hidden="true"' : '') + '>' +
+          '<div class="review-photo"><img src="' + esc(r.image) + '" alt="Tattoo by Mr Tattoo Hanoi for ' + esc(r.name) + '" loading="lazy" onerror="this.style.display=\'none\'"></div>' +
+          '<div class="review-body">' + stars +
+          '<blockquote><p>“' + esc(r.text) + '”</p></blockquote>' +
+          '<cite>— ' + cite + '</cite></div>' +
+          '</figure>';
+      }
+
+      // Nhân đôi danh sách để dải chạy lặp vô tận không bị đứt (-50% trong keyframes)
+      var html = '';
+      list.forEach(function (r, i) { html += card(r, i, false); });
+      list.forEach(function (r, i) { html += card(r, i, true); });
+      track.innerHTML = html;
+    })();
+  </script>
+
+  <!-- TRAVEL CORNER & BLOG: 3 chuyên đề, mỗi chuyên đề 1 bài mới nhất (nổi bật) + 2 bài cũ hơn -->
+  <script>
+    (function () {
+      function esc(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+          .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      // Đọc ngày từ "22-12-2025", "22/10/2026", "October 22, 2026"... ; không đọc được -> null
+      function parseDate(t) {
+        if (!t) return null;
+        t = String(t).trim();
+        var m = t.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})$/);
+        if (m) return new Date(+m[3], +m[2] - 1, +m[1]).getTime();
+        if (/\d{4}/.test(t)) {
+          var d = new Date(t);
+          if (!isNaN(d)) return d.getTime();
+        }
+        return null;
+      }
+
+      // Mới nhất lên đầu. Nếu mọi bài đều có ngày đọc được -> sắp theo ngày;
+      // nếu không -> bài được thêm sau (nằm cuối mảng) coi là mới hơn.
+      function newestFirst(list) {
+        var items = list.map(function (it, i) { return { it: it, i: i, ts: parseDate(it.date || it.time) }; });
+        var allDated = items.length > 0 && items.every(function (x) { return x.ts !== null; });
+        items.sort(function (a, b) {
+          if (allDated && a.ts !== b.ts) return b.ts - a.ts;
+          return b.i - a.i;
+        });
+        return items.map(function (x) { return x.it; });
+      }
+
+      function img(src, alt) {
+        return '<img src="' + esc(src) + '" alt="' + esc(alt) + '" loading="lazy" onerror="this.style.display=\'none\'">';
+      }
+
+      function render(containerId, data) {
+        var box = document.getElementById(containerId);
+        if (!box) return;
+        var list = newestFirst(Array.isArray(data) ? data : []);
+        if (!list.length) {
+          box.innerHTML = '<p class="blog-empty">New articles are coming soon.</p>';
+          return;
+        }
+
+        var top = list[0];
+        var html =
+          '<article class="blog-feature">' +
+            '<a class="blog-feature-img" href="' + esc(top.slug) + '" aria-label="' + esc(top.title) + '">' +
+              img(top.thumb, top.title) + '<span class="blog-badge">Newest</span>' +
+            '</a>' +
+            '<h4><a href="' + esc(top.slug) + '">' + esc(top.title) + '</a></h4>' +
+            '<p>' + esc(top.desc) + '</p>' +
+            '<span class="blog-time">' + esc(top.time) + '</span>' +
+          '</article>';
+
+        var older = list.slice(1, 3);
+        if (older.length) {
+          html += '<ul class="blog-older">';
+          older.forEach(function (it) {
+            html += '<li><a href="' + esc(it.slug) + '">' +
+              '<span class="blog-older-thumb">' + img(it.thumb, it.title) + '</span>' +
+              '<span><span class="blog-older-title">' + esc(it.title) + '</span><small>' + esc(it.time) + '</small></span>' +
+              '</a></li>';
+          });
+          html += '</ul>';
+        }
+        box.innerHTML = html;
+      }
+
+      render('home-meanings',  typeof meaningsData  !== 'undefined' ? meaningsData  : []);
+      render('home-travel',    typeof travelData    !== 'undefined' ? travelData    : []);
+      render('home-knowledge', typeof knowledgeData !== 'undefined' ? knowledgeData : []);
+    })();
+  </script>
+
   <!-- NHÚNG HEADER VÀ FOOTER TỰ ĐỘNG CHUNG CHO TOÀN HỆ THỐNG -->
   <script src="js/header.js"></script>
   <script src="js/footer.js"></script>
 
+<!--SITE-FOOTER:START-->
+<style>
+  /* All 3 footer headings share .footer-title so the columns line up */
+  .footer-grid-custom {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .footer-grid-custom .footer-title {
+    margin: 0 0 16px;
+    color: var(--y);
+    font-family: var(--font-head);
+    font-size: 1.05rem;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .footer-grid-custom p { margin: 0 0 10px; opacity: .85; line-height: 1.8; }
+  .footer-grid-custom address { margin: 0; font-style: normal; opacity: .85; line-height: 1.8; }
+  .footer-grid-custom .explore-list { list-style: none; padding: 0; margin: 0; }
+  .footer-grid-custom .explore-list li { margin-bottom: 8px; line-height: 1.5; }
+  .footer-grid-custom .explore-list li:first-child { line-height: 1.8; }
+  .footer-grid-custom .explore-list a { color: var(--w); opacity: .85; text-decoration: none; }
+  .footer-grid-custom .explore-list a:hover { color: var(--y); opacity: 1; }
+
+  /* Mobile: 3 stacked rows instead of 3 squeezed columns */
+  @media (max-width: 800px) {
+    .footer-grid-custom { grid-template-columns: 1fr; gap: 30px; }
+    .footer-grid-custom .footer-title { margin-bottom: 10px; }
+    .footer-grid-custom > div + div {
+      padding-top: 24px;
+      border-top: 1px dotted rgba(226, 169, 45, .35);
+    }
+  }
+</style>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid-custom">
+    <div>
+      <h4 class="footer-title">Mr Tattoo Hanoi Studio</h4>
+      <p>Small, affordable tattoos in the heart of Hanoi's Old Quarter. Since 2012.</p>
+      <p>
+        <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">Instagram</a> ·
+        <a href="https://facebook.com/[trang-cua-ban]" target="_blank" rel="noopener">Facebook</a> ·
+        <a href="https://wa.me/84377616886" target="_blank" rel="noopener">WhatsApp</a>
+      </p>
+    </div>
+    <div>
+      <h4 class="footer-title">Visit us</h4>
+      <!-- NAP (Name / Address / Phone): copy y hệt Google Business Profile & contact.html để chuẩn SEO local -->
+      <address>
+        <strong>Address:</strong> 106 P. Hàng Buồm, Phố cổ Hà Nội, Hoàn Kiếm, Hà Nội 100000<br>
+        <strong>Phone / WhatsApp:</strong> <a href="https://wa.me/84377616886" target="_blank" rel="noopener">0377 616 886</a><br>
+        <strong>Instagram:</strong> <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">@mrtattoo.hanoi</a><br>
+        <strong>Opening Hours:</strong> Open 24 hours, every day<br>
+        <a href="https://www.google.com/maps?cid=6222529882335831777" target="_blank" rel="noopener">Get directions</a>
+      </address>
+    </div>
+    <div>
+      <h4 class="footer-title">Explore</h4>
+      <ul class="explore-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about-us.html">About Us</a></li>
+        <li><a href="gallery.html">Portfolio</a></li>
+        <li><a href="design.html">Design</a></li>
+        <li><a href="blog.html">Blog &amp; Stories</a></li>
+        <li><a href="contact.html">Contact &amp; Map</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center;">
+    <p class="copy" style="margin: 0; opacity: 0.6; font-size: 0.85rem;">© 2026 Mr Tattoo Hanoi Studio · mrtattoo.vn · All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Floating buttons on mobile -->
+<div class="float-cta">
+  <a href="https://wa.me/84377616886" target="_blank" rel="noopener">WhatsApp</a>
+  <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">Instagram</a>
+</div>
+
+<!--SITE-FOOTER:END-->
 </body>
 </html>

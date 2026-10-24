@@ -8,9 +8,9 @@ const GALLERY_CONFIG = [
     total: 100  // <-- Khi thêm ảnh mới, bạn chỉ cần đổi số 150 thành 151, 152... ở đây!
   },
   { 
-    folder: "blackwork", 
-    category: "Blackwork", 
-    prefix: "bw-tattoo_", 
+    folder: "medium-large-custom-pieces", 
+    category: "Medium & Large Custom Pieces", 
+    prefix: "medium-large-tattoo_", 
     total: 80 
   },
   { 

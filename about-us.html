@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7E1015">
+
+  <title>About Us | Mr Tattoo Hanoi Studio</title>
+  <meta name="description" content="The story of Mr Tattoo Hanoi Studio: how a small Old Quarter tattoo room at 106 Hang Buom grew into a trusted studio for travelers and locals since 2012.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://mrtattoo.vn/about-us.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About Us | Mr Tattoo Hanoi Studio">
+  <meta property="og:description" content="The story behind Mr Tattoo Hanoi Studio in Hanoi Old Quarter.">
+  <meta property="og:url" content="https://mrtattoo.vn/about-us.html">
+  <meta property="og:image" content="https://mrtattoo.vn/images/about-studio.webp">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap&subset=vietnamese" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="frames.css">
+
+  <style>
+    /* ---- Ảnh chính + câu chuyện ---- */
+    .about-story {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .about-photo {
+      position: relative;
+      transform: rotate(-2deg);
+      transition: transform .3s ease;
+      border: 16px solid transparent;
+      border-image: url("patterns/frame-dark.svg") 16 round;
+      background: var(--paper);
+      filter: drop-shadow(0 10px 22px rgba(60, 14, 12, .35));
+    }
+    .about-photo:hover { transform: rotate(0deg); }
+    .about-photo img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      background: var(--k2);
+    }
+    .about-photo figcaption {
+      font-size: .85rem;
+      font-style: italic;
+      color: var(--r2);
+      text-align: center;
+      padding: 8px 0 0;
+    }
+    .about-text p { font-size: 1.08rem; margin: 0 0 18px; }
+    .about-text .lead-quote {
+      font-family: var(--font-head);
+      font-size: 1.35rem;
+      line-height: 1.5;
+      color: var(--r2);
+      border-left: 5px solid var(--r2);
+      padding-left: 18px;
+      margin: 0 0 24px;
+    }
+
+    /* ---- Dòng thời gian ---- */
+    .timeline {
+      list-style: none;
+      margin: 40px auto 0;
+      padding: 0;
+      max-width: 760px;
+      position: relative;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 74px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: rgba(226, 169, 45, .5);
+    }
+    .timeline li {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 40px;
+      margin-bottom: 30px;
+      position: relative;
+    }
+    .timeline li::before {
+      content: "";
+      position: absolute;
+      left: 68px;
+      top: 8px;
+      width: 14px;
+      height: 14px;
+      background: var(--y);
+      border: 2px solid var(--k);
+      border-radius: 50%;
+    }
+    .timeline .year {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--y);
+      line-height: 1.3;
+    }
+    .timeline h3 { margin: 0 0 4px; font-size: 1.15rem; color: var(--w); }
+    .timeline p { margin: 0; color: #ecdcb8; }
+
+    /* ---- Giá trị cốt lõi (thẻ sáng) ---- */
+    .values {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+      margin-top: 30px;
+    }
+    .values article {
+      background: var(--k) url("patterns/tile-on-dark.svg");
+      color: var(--w);
+      padding: 22px 20px;
+      border: 16px solid transparent;
+      border-image: url("patterns/frame-gold.svg") 16 round;
+      background-origin: padding-box;
+      background-clip: padding-box;
+    }
+    .values h3 { margin: 0 0 8px; color: var(--y); text-transform: uppercase; font-size: 1.05rem; }
+    .values p { margin: 0; color: #ecdcb8; font-size: .95rem; }
+
+    @media (max-width: 800px) {
+      .about-story { grid-template-columns: 1fr; gap: 36px; }
+      .about-photo { max-width: 360px; margin: 0 auto; }
+      .timeline::before { left: 54px; }
+      .timeline li { grid-template-columns: 44px 1fr; gap: 34px; }
+      .timeline li::before { left: 48px; }
+      .timeline .year { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<!--SITE-HEADER:START-->
+<header class="site-header">
+  <a href="index.html" class="logo">MR TATTOO HANOI<span>.</span></a>
+
+  <!-- Desktop menu -->
+  <nav class="desktop-nav" aria-label="Main Navigation">
+    <a href="index.html">Home</a>
+    <a href="about-us.html">About Us</a>
+    <a href="gallery.html">Portfolio</a>
+    <a href="design.html">Design</a>
+    <a href="index.html#dich-vu">Services</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <a href="index.html#lien-he" class="btn btn-small">Book Now</a>
+  </nav>
+
+  <!-- Mobile hamburger button -->
+  <button class="mobile-menu-btn" aria-label="Toggle Menu" id="mobileMenuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile slide-out menu -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation">
+  <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close Menu">&times;</button>
+  <a href="index.html">Home</a>
+  <a href="about-us.html">About Us</a>
+  <a href="gallery.html">Portfolio</a>
+  <a href="design.html">Design</a>
+  <a href="index.html#dich-vu">Services</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact</a>
+  <a href="index.html#lien-he" class="btn" style="text-align: center; margin-top: 15px;">Book Now</a>
+</nav>
+
+<!--SITE-HEADER:END-->
+
+  <!-- HEADER TỰ ĐỘNG NHÚNG TỪ js/header.js -->
+
+  <main id="top">
+
+    <!-- KHUNG TIÊU ĐỀ (dùng chung .page-hero) -->
+    <section class="page-hero">
+      <div class="wrap">
+        <p class="eyebrow">Our Story · Since 2012</p>
+        <h1>About <span class="y">Mr Tattoo Hanoi</span></h1>
+        <p class="sub">From one small room in the Old Quarter to a studio travelers and locals trust with their stories.</p>
+      </div>
+    </section>
+
+    <!-- ẢNH CHÍNH + LỊCH SỬ THÀNH LẬP -->
+    <section class="section yellow">
+      <div class="wrap">
+        <div class="about-story">
+
+          <figure class="about-photo" style="margin: 0;">
+            <img src="images/about-studio.webp" alt="Mr Tattoo Hanoi Studio on the 2nd floor of 106 Hang Buom, Old Quarter" width="800" height="1000" loading="lazy">
+            <figcaption>[Photo caption: the studio at 106 Hang Buom]</figcaption>
+          </figure>
+
+          <div class="about-text">
+            <h2>How It <span class="y">Began</span></h2>
+            <p class="lead-quote">"We started with one chair, one lamp, and a simple promise: clean, careful tattoos at honest prices."</p>
+            <p>Mr Tattoo Hanoi Studio opened in 2012 on the second floor of a narrow tube house at 106 Hàng Buồm, in the middle of Hanoi's Old Quarter. [Founder Name] had been tattooing for [X] years and wanted a place where first-timers felt as welcome as collectors.</p>
+            <p>In the early days, most clients were friends and neighbors from the surrounding streets. Word spread, then backpackers and travelers started climbing our stairs, asking for a small piece to remember Vietnam by. Many of them came back with friends.</p>
+            <p>Today we are a small team of artists working in styles from fine line and blackwork to Vietnamese motifs and cover-ups. Every design is drawn for the person wearing it, and every needle is single-use and opened in front of you.</p>
+            <p>The Old Quarter is still our home. Come up the stairs, say hello, and tell us your story.</p>
+            <p>
+              <a class="btn btn-dark" href="https://wa.me/84377616886" target="_blank" rel="noopener">Book on WhatsApp</a>
+              <a class="btn btn-outline-dark" href="gallery.html">See Our Work</a>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CÁC MỐC LỊCH SỬ -->
+    <section class="section dark">
+      <div class="wrap">
+        <div class="center">
+          <h2>Our <span class="y">Journey</span></h2>
+          <p class="sub">A few milestones along the way.</p>
+        </div>
+        <ul class="timeline">
+          <li>
+            <span class="year">2012</span>
+            <div>
+              <h3>The first chair</h3>
+              <p>Mr Tattoo opens its doors at 106 Hang Buom with a single artist and a handful of regulars.</p>
+            </div>
+          </li>
+          <li>
+            <span class="year">2016</span>
+            <div>
+              <h3>A growing team</h3>
+              <p>[Second artist] joins the studio, bringing new styles and more booking slots for travelers.</p>
+            </div>
+          </li>
+          <li>
+            <span class="year">2020</span>
+            <div>
+              <h3>Safety first, always</h3>
+              <p>[Describe a milestone: upgraded sterilization standards, new equipment, or studio renovation.]</p>
+            </div>
+          </li>
+          <li>
+            <span class="year">Today</span>
+            <div>
+              <h3>5000+ tattoos and counting</h3>
+              <p>Thousands of clients from around the world have left Hanoi with a piece of art and a story.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- GIÁ TRỊ CỐT LÕI -->
+    <section class="section yellow">
+      <div class="wrap">
+        <h2>What We <span class="y">Stand For</span></h2>
+        <div class="values">
+          <article>
+            <h3>Clean &amp; Safe</h3>
+            <p>Single-use sterile needles and disposable equipment, opened right in front of you.</p>
+          </article>
+          <article>
+            <h3>Honest Prices</h3>
+            <p>Affordable tattoos from $10, with a free quote before any ink touches skin.</p>
+          </article>
+          <article>
+            <h3>Truly Custom</h3>
+            <p>Every design is sketched for you and refined until you love it. Never copied.</p>
+          </article>
+          <article>
+            <h3>Rooted in Hanoi</h3>
+            <p>Inspired by the lotus, the Old Quarter, and the stories people carry with them.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA CUỐI TRANG -->
+    <section class="section dark">
+      <div class="wrap center">
+        <h2>Ready to Write Your Story?</h2>
+        <p class="sub">Send us your idea and placement. We reply within the day.</p>
+        <p>
+          <a class="btn" href="https://wa.me/84377616886" target="_blank" rel="noopener">Book on WhatsApp</a>
+          <a class="btn btn-outline" href="contact.html">Visit the Studio</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- NHÚNG HEADER VÀ FOOTER TỰ ĐỘNG CHUNG CHO TOÀN HỆ THỐNG -->
+  <script src="js/header.js"></script>
+  <script src="js/footer.js"></script>
+
+<!--SITE-FOOTER:START-->
+<style>
+  /* All 3 footer headings share .footer-title so the columns line up */
+  .footer-grid-custom {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .footer-grid-custom .footer-title {
+    margin: 0 0 16px;
+    color: var(--y);
+    font-family: var(--font-head);
+    font-size: 1.05rem;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .footer-grid-custom p { margin: 0 0 10px; opacity: .85; line-height: 1.8; }
+  .footer-grid-custom address { margin: 0; font-style: normal; opacity: .85; line-height: 1.8; }
+  .footer-grid-custom .explore-list { list-style: none; padding: 0; margin: 0; }
+  .footer-grid-custom .explore-list li { margin-bottom: 8px; line-height: 1.5; }
+  .footer-grid-custom .explore-list li:first-child { line-height: 1.8; }
+  .footer-grid-custom .explore-list a { color: var(--w); opacity: .85; text-decoration: none; }
+  .footer-grid-custom .explore-list a:hover { color: var(--y); opacity: 1; }
+
+  /* Mobile: 3 stacked rows instead of 3 squeezed columns */
+  @media (max-width: 800px) {
+    .footer-grid-custom { grid-template-columns: 1fr; gap: 30px; }
+    .footer-grid-custom .footer-title { margin-bottom: 10px; }
+    .footer-grid-custom > div + div {
+      padding-top: 24px;
+      border-top: 1px dotted rgba(226, 169, 45, .35);
+    }
+  }
+</style>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid-custom">
+    <div>
+      <h4 class="footer-title">Mr Tattoo Hanoi Studio</h4>
+      <p>Small, affordable tattoos in the heart of Hanoi's Old Quarter. Since 2012.</p>
+      <p>
+        <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">Instagram</a> ·
+        <a href="https://facebook.com/[trang-cua-ban]" target="_blank" rel="noopener">Facebook</a> ·
+        <a href="https://wa.me/84377616886" target="_blank" rel="noopener">WhatsApp</a>
+      </p>
+    </div>
+    <div>
+      <h4 class="footer-title">Visit us</h4>
+      <!-- NAP (Name / Address / Phone): copy y hệt Google Business Profile & contact.html để chuẩn SEO local -->
+      <address>
+        <strong>Address:</strong> 106 P. Hàng Buồm, Phố cổ Hà Nội, Hoàn Kiếm, Hà Nội 100000<br>
+        <strong>Phone / WhatsApp:</strong> <a href="https://wa.me/84377616886" target="_blank" rel="noopener">0377 616 886</a><br>
+        <strong>Instagram:</strong> <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">@mrtattoo.hanoi</a><br>
+        <strong>Opening Hours:</strong> Open 24 hours, every day<br>
+        <a href="https://www.google.com/maps?cid=6222529882335831777" target="_blank" rel="noopener">Get directions</a>
+      </address>
+    </div>
+    <div>
+      <h4 class="footer-title">Explore</h4>
+      <ul class="explore-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about-us.html">About Us</a></li>
+        <li><a href="gallery.html">Portfolio</a></li>
+        <li><a href="design.html">Design</a></li>
+        <li><a href="blog.html">Blog &amp; Stories</a></li>
+        <li><a href="contact.html">Contact &amp; Map</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center;">
+    <p class="copy" style="margin: 0; opacity: 0.6; font-size: 0.85rem;">© 2026 Mr Tattoo Hanoi Studio · mrtattoo.vn · All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Floating buttons on mobile -->
+<div class="float-cta">
+  <a href="https://wa.me/84377616886" target="_blank" rel="noopener">WhatsApp</a>
+  <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">Instagram</a>
+</div>
+
+<!--SITE-FOOTER:END-->
+</body>
+</html>

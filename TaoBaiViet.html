@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#FFC400">
   <title>Article Management Admin | Mr Tattoo Hanoi</title>
-  
+
   <link rel="stylesheet" href="style.css">
 
   <style>
@@ -53,6 +53,23 @@
       border-color: var(--y);
       outline: none;
     }
+
+    /* Ô chọn ngày bằng lịch */
+    .date-row { display: flex; gap: 8px; align-items: stretch; }
+    .date-row input[type="date"] { flex: 1; color-scheme: dark; cursor: pointer; }
+    .date-today-btn {
+      background: #222;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 6px;
+      padding: 0 12px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .date-today-btn:hover { background: var(--y); color: var(--k); border-color: var(--y); }
+    .date-hint { display: block; margin-top: 6px; font-size: 0.8rem; color: #8fd19e; }
 
     /* ------------------------------------------------------------- */
     /* CẤU TRÚC BỘ SOẠN THẢO TRỰC QUAN (WYSIWYG EDITOR)              */
@@ -119,6 +136,7 @@
     .editor-content h3 { color: #fff; margin-top: 12px; margin-bottom: 8px; font-size: 1.2rem; }
     .editor-content p { margin-bottom: 12px; font-size: 1rem; }
     .editor-content a { color: var(--y); text-decoration: underline; }
+    .editor-content img { max-width: 100%; height: auto; border-radius: 6px; margin: 10px 0; border: 1px solid #333; }
 
     /* Ô TEXTAREA HIỂN THỊ HTML THÔ KHI BẤM XEM CODE */
     .html-source-view {
@@ -166,18 +184,19 @@
       <h3 id="form-title">➕ Thêm Bài Viết Mới</h3>
       <form id="articleForm">
         <input type="hidden" id="editIndex" value="-1">
-        
+
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
           <div class="form-group">
             <label>Chuyên mục (Category):</label>
             <select id="category" class="form-control" required>
               <option value="tattoo-meanings">Tattoo Meanings</option>
               <option value="hanoi-travel-corner">Hanoi Travel Corner</option>
+              <option value="knowledge">Tattoo Knowledge</option>
             </select>
           </div>
           <div class="form-group">
-            <label>Tên file HTML (Filename):</label>
-            <input type="text" id="filename" class="form-control" placeholder="vd: lotus-tattoo-meaning.html" required>
+            <label>Tên file HTML (Filename) - Tự động tạo:</label>
+            <input type="text" id="filename" class="form-control" placeholder="vd: hinh-xam-co-gai.html" required>
           </div>
         </div>
 
@@ -198,16 +217,19 @@
           </div>
           <div class="form-group">
             <label>Ngày đăng (Date):</label>
-            <input type="text" id="date" class="form-control" placeholder="vd: October 22, 2026" required>
+            <!-- Bấm vào để mở lịch chọn ngày. Giá trị luôn là YYYY-MM-DD (chuẩn ISO 8601 cho SEO) -->
+            <div class="date-row">
+              <input type="date" id="date" class="form-control" required>
+              <button type="button" class="date-today-btn" id="dateTodayBtn">Hôm nay</button>
+            </div>
+            <span class="date-hint" id="dateHint"></span>
           </div>
         </div>
 
-        <!-- ------------------------------------------------------------- -->
-        /* BỘ SOẠN THẢO TRỰC QUAN CHO PHẦN HTML CONTENT                   */
-        <!-- ------------------------------------------------------------- -->
+        <!-- BỘ SOẠN THẢO TRỰC QUAN CHO PHẦN HTML CONTENT -->
         <div class="form-group">
           <label>Nội dung chi tiết (HTML Content Editor):</label>
-          
+
           <!-- THANH CÔNG CỤ -->
           <div class="editor-toolbar">
             <button type="button" class="editor-btn" onclick="formatDoc('formatBlock', 'h2')">H2</button>
@@ -218,25 +240,29 @@
             <button type="button" class="editor-btn" onclick="formatDoc('italic')"><i>I</i> (Nghiêng)</button>
             <button type="button" class="editor-btn" onclick="formatDoc('insertUnorderedList')">• Danh sách</button>
             <span style="color: #444;">|</span>
-            
+
             <!-- BẢNG CHỌN LINK NỘI BỘ NHANH -->
             <select id="quickLinkSelect" class="editor-select">
               <option value="">-- Chọn Link Nội Bộ --</option>
-              <option value="../index.html">Trang Chủ (Home)</option>
-              <option value="../gallery.html">Bộ Sưu Tập (Portfolio)</option>
-              <option value="../blog.html">Trang Tổng Blog</option>
+              <option value="../../index.html">Trang Chủ (Home)</option>
+              <option value="../../gallery.html">Bộ Sưu Tập (Portfolio)</option>
+              <option value="../../design.html">Thiết Kế (Design)</option>
+              <option value="../../blog.html">Trang Tổng Blog</option>
               <option value="https://wa.me/84377616886">Đặt lịch WhatsApp</option>
-              <option value="https://instagram.com/[tai-khoan]">Message Instagram</option>
+              <option value="https://www.instagram.com/mrtattoo.hanoi/">Message Instagram</option>
             </select>
-            <button type="button" class="editor-btn" style="background: var(--y); color: #000;" onclick="insertInternalLink()">🔗 Chèn Link Cụm Đã Bôi Đen</button>
-            
+            <button type="button" class="editor-btn" style="background: var(--y); color: #000;" onclick="insertInternalLink()">🔗 Chèn Link</button>
+
+            <!-- NÚT ĐÁNH DẤU ẢNH -->
+            <button type="button" class="editor-btn" style="background: #17a2b8; color: #fff;" onclick="insertImageTag()">🖼️ Đánh dấu Ảnh</button>
+
             <span style="color: #444; margin-left: auto;">|</span>
             <button type="button" class="editor-btn" style="background: #333;" onclick="toggleSourceView()">⌨ Xem Code HTML</button>
           </div>
 
-          <!-- KHUNG SOẠN THẢO (TỰ ĐỘNG BỌC <P> KHI ĐÃ NHẬP NỘI DUNG) -->
+          <!-- KHUNG SOẠN THẢO -->
           <div id="editor" class="editor-content" contenteditable="true" spellcheck="false"></div>
-          
+
           <!-- TEXTAREA CODE THÔ -->
           <textarea id="htmlSource" class="html-source-view" spellcheck="false"></textarea>
         </div>
@@ -262,13 +288,94 @@
     let isSourceMode = false;
 
     const form = document.getElementById('articleForm');
+    const titleInput = document.getElementById('title');
+    const filenameInput = document.getElementById('filename');
+    const dateInput = document.getElementById('date');
+    const dateHint = document.getElementById('dateHint');
     const editor = document.getElementById('editor');
     const htmlSource = document.getElementById('htmlSource');
     const articlesList = document.getElementById('articlesList');
     const totalCount = document.getElementById('totalCount');
     const formTitle = document.getElementById('form-title');
 
-    // 1. TỰ ĐỘNG BỌC THẺ <P> KHI NGƯỜI DÙNG XUỐNG DÒNG (ENTER)
+    /* ------------------------------------------------------------- */
+    /* NGÀY ĐĂNG: luôn lưu dạng YYYY-MM-DD (ISO 8601)                */
+    /* ------------------------------------------------------------- */
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const p2 = n => String(n).padStart(2, '0');
+
+    function todayIso() {
+      const d = new Date();
+      return d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate());
+    }
+
+    // Đổi mọi kiểu ngày cũ (22/10/2026, 22-10-2026, 2026/10/22, "October 22, 2026"...) về YYYY-MM-DD.
+    // Không đọc được -> trả về '' để bắt chọn lại bằng lịch.
+    function toIsoDate(str) {
+      const s = String(str == null ? '' : str).trim();
+      const ok = (y, m, d) => {
+        const t = new Date(Date.UTC(y, m - 1, d));
+        return (t.getUTCFullYear() === y && t.getUTCMonth() === m - 1 && t.getUTCDate() === d)
+          ? y + '-' + p2(m) + '-' + p2(d) : '';
+      };
+      let m = s.match(/^(\d{4})[\/\-.](\d{1,2})[\/\-.](\d{1,2})/);
+      if (m) return ok(+m[1], +m[2], +m[3]);
+      m = s.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})$/);   // ngày/tháng/năm (kiểu VN)
+      if (m) return ok(+m[3], +m[2], +m[1]);
+      if (/\d{4}/.test(s) && /[a-z]/i.test(s)) {
+        const d = new Date(s + ' 12:00:00');
+        if (!isNaN(d)) return d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate());
+      }
+      return '';
+    }
+
+    function prettyDate(iso) {
+      const m = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      return m ? MONTHS[+m[2] - 1] + ' ' + (+m[3]) + ', ' + m[1] : '';
+    }
+
+    function updateDateHint() {
+      dateHint.textContent = dateInput.value
+        ? '✔ Sẽ hiển thị: ' + prettyDate(dateInput.value) + '  ·  Lưu chuẩn SEO: ' + dateInput.value
+        : '';
+    }
+    dateInput.addEventListener('input', updateDateHint);
+    dateInput.addEventListener('change', updateDateHint);
+    // Bấm vào bất kỳ chỗ nào của ô cũng mở lịch (trình duyệt hỗ trợ showPicker)
+    dateInput.addEventListener('click', () => { try { dateInput.showPicker(); } catch (e) {} });
+    document.getElementById('dateTodayBtn').addEventListener('click', () => {
+      dateInput.value = todayIso();
+      updateDateHint();
+    });
+    function resetDateToToday() {
+      dateInput.value = todayIso();
+      updateDateHint();
+    }
+    resetDateToToday();
+
+    // Hàm chuyển đổi Tiêu đề có dấu thành dạng Slug chuẩn (ví dụ: hinh-xam-co-gai.html)
+    function generateSlug(str) {
+      return str
+        .toLowerCase()
+        .normalize('NFD') // Tách dấu tiếng Việt
+        .replace(/[̀-ͯ]/g, '') // Xóa các dấu sau khi tách
+        .replace(/[đĐ]/g, 'd') // Thay thế chữ đ/Đ
+        .replace(/([^0-9a-z-\s])/g, '') // Xóa ký tự đặc biệt
+        .replace(/(\s+)/g, '-') // Thay khoảng trắng bằng dấu gạch ngang
+        .replace(/-+/g, '-') // Thu gọn nhiều dấu gạch liên tiếp
+        .replace(/^-+|-+$/g, ''); // Cắt bỏ dấu gạch thừa ở 2 đầu
+    }
+
+    // 1. TỰ ĐỘNG CẬP NHẬT TÊN FILE KHI NHẬP TIÊU ĐỀ
+    titleInput.addEventListener('input', () => {
+      const slug = generateSlug(titleInput.value);
+      if (slug) {
+        filenameInput.value = slug + '.html';
+      } else {
+        filenameInput.value = '';
+      }
+    });
+
     document.execCommand('defaultParagraphSeparator', false, 'p');
 
     // 2. HÀM ĐỊNH DẠNG VĂN BẢN (H2, H3, Bold, List...)
@@ -300,7 +407,25 @@
       editor.focus();
     }
 
-    // 4. CHUYỂN ĐỔI QUA LẠI GIỮA XEM GIAO DIỆN VÀ CODE HTML THÔ
+    // 4. HÀM ĐÁNH DẤU ẢNH (Bôi đen tên/đường dẫn ảnh rồi bấm nút này để bọc thành thẻ <img>)
+    function insertImageTag() {
+      if (isSourceMode) return;
+
+      const imgPath = window.getSelection().toString().trim();
+      if (!imgPath) {
+        alert("Vui lòng bôi đen đoạn văn bản chứa đường dẫn/tên file ảnh trước khi bấm nút!");
+        return;
+      }
+
+      // Tạo thẻ HTML img bọc quanh đường dẫn ảnh vừa bôi đen
+      const imgHtml = `<img src="${imgPath}" alt="Mr Tattoo Hanoi artwork">`;
+
+      // Chèn thẻ img vào vị trí đang bôi đen
+      document.execCommand('insertHTML', false, imgHtml);
+      editor.focus();
+    }
+
+    // 5. CHUYỂN ĐỔI QUA LẠI GIỮA XEM GIAO DIỆN VÀ CODE HTML THÔ
     function toggleSourceView() {
       if (!isSourceMode) {
         htmlSource.value = editor.innerHTML;
@@ -315,7 +440,7 @@
       }
     }
 
-    // 5. HIỂN THỊ DANH SÁCH BÀI VIẾT
+    // 6. HIỂN THỊ DANH SÁCH BÀI VIẾT
     function renderList() {
       articlesList.innerHTML = '';
       totalCount.textContent = articles.length;
@@ -328,10 +453,11 @@
       articles.forEach((art, index) => {
         const div = document.createElement('div');
         div.className = 'article-list-item';
+        const shownDate = prettyDate(toIsoDate(art.date)) || art.date;
         div.innerHTML = `
           <div class="article-info">
             <h4>${art.title}</h4>
-            <span>📁 ${art.category} &nbsp;|&nbsp; 📄 ${art.filename} &nbsp;|&nbsp; 📅 ${art.date}</span>
+            <span>📁 ${art.category} &nbsp;|&nbsp; 📄 ${art.filename} &nbsp;|&nbsp; 📅 ${shownDate}</span>
           </div>
           <div>
             <button class="btn-edit" onclick="editArticle(${index})">Sửa</button>
@@ -344,13 +470,18 @@
       localStorage.setItem('mrtattoo_articles', JSON.stringify(articles));
     }
 
-    // 6. XỬ LÝ LƯU BÀI VIẾT TỪ FORM
+    // 7. XỬ LÝ LƯU BÀI VIẾT TỪ FORM
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const editIndex = document.getElementById('editIndex').value;
 
-      // Đảm bảo lấy đúng nội dung HTML dù đang ở chế độ xem code hay xem trực quan
       const contentHTML = isSourceMode ? htmlSource.value : editor.innerHTML;
+
+      const isoDate = toIsoDate(dateInput.value);
+      if (!isoDate) {
+        alert("Ngày đăng chưa hợp lệ. Hãy bấm vào ô Ngày đăng và chọn ngày trên lịch.");
+        return;
+      }
 
       const newArticle = {
         category: document.getElementById('category').value,
@@ -358,7 +489,7 @@
         title: document.getElementById('title').value,
         description: document.getElementById('description').value,
         image: document.getElementById('image').value,
-        date: document.getElementById('date').value,
+        date: isoDate,   // luôn YYYY-MM-DD
         content: contentHTML
       };
 
@@ -374,12 +505,13 @@
       editor.innerHTML = '';
       htmlSource.value = '';
       if (isSourceMode) toggleSourceView();
+      resetDateToToday();
 
       renderList();
       alert("Đã lưu bài viết thành công vào danh sách tạm!");
     });
 
-    // 7. SỬA BÀI VIẾT
+    // 8. SỬA BÀI VIẾT
     function editArticle(index) {
       const art = articles[index];
       document.getElementById('category').value = art.category;
@@ -387,7 +519,9 @@
       document.getElementById('title').value = art.title;
       document.getElementById('description').value = art.description;
       document.getElementById('image').value = art.image;
-      document.getElementById('date').value = art.date;
+      // Bài cũ có thể đang lưu ngày kiểu lộn xộn -> tự đổi sang chuẩn; không đọc được thì để hôm nay
+      dateInput.value = toIsoDate(art.date) || todayIso();
+      updateDateHint();
 
       if (isSourceMode) {
         htmlSource.value = art.content;
@@ -400,7 +534,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 8. XÓA BÀI VIẾT
+    // 9. XÓA BÀI VIẾT
     function deleteArticle(index) {
       if (confirm("Bạn có chắc chắn muốn xóa bài viết này không?")) {
         articles.splice(index, 1);
@@ -408,9 +542,10 @@
       }
     }
 
-    // 9. XUẤT FILE ARTICLES.JSON
+    // 10. XUẤT FILE ARTICLES.JSON (chuẩn hóa lại ngày của mọi bài trước khi xuất)
     function downloadJSON() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(articles, null, 2));
+      const out = articles.map(a => Object.assign({}, a, { date: toIsoDate(a.date) || a.date }));
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(out, null, 2));
       const downloadAnchor = document.createElement('a');
       downloadAnchor.setAttribute("href", dataStr);
       downloadAnchor.setAttribute("download", "articles.json");
@@ -420,7 +555,7 @@
       alert("Đã tải xuống file articles.json! Hãy copy file này thay thế file cũ trong thư mục dự án của bạn.");
     }
 
-    // 10. DỮ LIỆU MẪU
+    // 11. DỮ LIỆU MẪU
     function loadSampleData() {
       articles = [
         {
@@ -429,17 +564,8 @@
           "title": "The Legend of Eastern Dragons in Custom Body Art",
           "description": "Unpacking the mythology, power, and protective elements of traditional Asian dragon designs adapted for modern sleeves.",
           "image": "../images/tac-pham-3.webp",
-          "date": "October 22, 2026",
+          "date": "2026-10-22",
           "content": "<p>The dragon holds an ancient status in Asian cultures representing power and luck.</p><h2>The Symbolism of Eastern Dragons</h2><p>Unlike Western dragons, Asian dragons are benevolent protective beings. Check out our <a href=\"../gallery.html\">Portfolio</a> for custom ideas.</p>"
-        },
-        {
-          "category": "hanoi-travel-corner",
-          "filename": "old-quarter-walking-guide.html",
-          "title": "Old Quarter Walking Guide for First-Time Visitors",
-          "description": "Navigate the historic 36 streets safely, discover incredible street food, and find our studio conveniently nestled on the 2nd floor of 106 Hàng Buồm.",
-          "image": "../link-anh-khue-van-cac.jpg",
-          "date": "October 22, 2026",
-          "content": "<p>Exploring Hanoi Old Quarter is an unforgettable experience for visitors.</p><h2>Top Street Food Spots</h2><p>Located right near 106 Hang Buom, you can visit us or <a href=\"https://wa.me/84377616886\">Book on WhatsApp</a> easily.</p>"
         }
       ];
       renderList();

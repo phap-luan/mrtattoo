@@ -11,16 +11,9 @@
   <link rel="canonical" href="https://mrtattoo.vn/blog.html">
 
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="frames.css">
 
   <style>
-    .blog-header {
-      background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('images/og-cover.jpg') no-repeat center center/cover;
-      padding: 60px 0;
-      text-align: center;
-      color: #fff;
-      border-bottom: 2px solid var(--y);
-    }
-    
     .blog-nav-tabs {
       display: flex;
       justify-content: center;
@@ -241,24 +234,65 @@
     }
   </style>
 
-  <!-- Nhúng 2 file dữ liệu riêng biệt do build.js tự động tạo -->
+  <!-- Nhúng 3 file dữ liệu riêng biệt do build.js tự động tạo -->
   <script src="js/meanings-data.js"></script>
   <script src="js/travel-data.js"></script>
+  <script src="js/knowledge-data.js"></script>
 </head>
 <body>
+<!--SITE-HEADER:START-->
+<header class="site-header">
+  <a href="index.html" class="logo">MR TATTOO HANOI<span>.</span></a>
+
+  <!-- Desktop menu -->
+  <nav class="desktop-nav" aria-label="Main Navigation">
+    <a href="index.html">Home</a>
+    <a href="about-us.html">About Us</a>
+    <a href="gallery.html">Portfolio</a>
+    <a href="design.html">Design</a>
+    <a href="index.html#dich-vu">Services</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <a href="index.html#lien-he" class="btn btn-small">Book Now</a>
+  </nav>
+
+  <!-- Mobile hamburger button -->
+  <button class="mobile-menu-btn" aria-label="Toggle Menu" id="mobileMenuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile slide-out menu -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation">
+  <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close Menu">&times;</button>
+  <a href="index.html">Home</a>
+  <a href="about-us.html">About Us</a>
+  <a href="gallery.html">Portfolio</a>
+  <a href="design.html">Design</a>
+  <a href="index.html#dich-vu">Services</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact</a>
+  <a href="index.html#lien-he" class="btn" style="text-align: center; margin-top: 15px;">Book Now</a>
+</nav>
+
+<!--SITE-HEADER:END-->
 
   <!-- HEADER TỰ ĐỘNG NHÚNG TỪ js/header.js -->
 
   <main>
-    <section class="blog-header">
+    <!-- KHUNG TIÊU ĐỀ TRANG (dùng chung .page-hero) -->
+    <section class="page-hero">
       <div class="wrap">
-        <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 10px;">Studio Blog & <span class="y">Stories</span></h1>
-        <p style="color: #ccc; max-width: 600px; margin: 0 auto;">Insights on tattoo symbolism, traveling around Hanoi Old Quarter, and real-time daily journal entries.</p>
-        
+        <h1>Studio Blog & <span class="y">Stories</span></h1>
+        <p class="sub">Insights on tattoo symbolism, traveling around Hanoi Old Quarter, and tattoo knowledge & studio craft.</p>
+
         <div class="blog-nav-tabs">
           <button class="blog-tab-btn active" onclick="switchTab(event, 'meanings')">Tattoo Meanings</button>
           <button class="blog-tab-btn" onclick="switchTab(event, 'travel')">Hanoi Travel Corner</button>
-          <button class="blog-tab-btn" onclick="switchTab(event, 'diary')">Daily Diary (Timeline)</button>
+          <button class="blog-tab-btn" onclick="switchTab(event, 'knowledge')">Tattoo Knowledge</button>
         </div>
       </div>
     </section>
@@ -270,8 +304,11 @@
           <h2>Tattoo <span class="y">Meanings</span></h2>
           <p class="sub">Discover the historical and cultural significance behind traditional styles.</p>
         </div>
-        <div id="meanings-container" class="news-list-container"></div>
-        <div id="meanings-pagination" class="pagination"></div>
+        <!-- Danh sách bài viết bọc trong khung nền sáng -->
+        <div class="light-panel blog-list-panel">
+          <div id="meanings-container" class="news-list-container"></div>
+          <div id="meanings-pagination" class="pagination"></div>
+        </div>
       </div>
     </section>
 
@@ -282,39 +319,25 @@
           <h2>Hanoi <span class="y">Travel Corner</span></h2>
           <p class="sub">Local guides, hidden coffee spots, and attractions around Hanoi Old Quarter.</p>
         </div>
-        <div id="travel-container" class="news-list-container"></div>
-        <div id="travel-pagination" class="pagination"></div>
+        <!-- Danh sách bài viết bọc trong khung nền sáng -->
+        <div class="light-panel blog-list-panel">
+          <div id="travel-container" class="news-list-container"></div>
+          <div id="travel-pagination" class="pagination"></div>
+        </div>
       </div>
     </section>
 
-    <!-- MỤC 3: DAILY DIARY -->
-    <section id="section-diary" class="section dark blog-section">
+    <!-- MỤC 3: TATTOO KNOWLEDGE -->
+    <section id="section-knowledge" class="section dark blog-section">
       <div class="wrap">
-        <div style="text-align: center; margin-bottom: 30px;">
-          <h2>Daily <span class="y">Diary</span></h2>
-          <p class="sub">Real-time stories, flash sheet drops, and snapshots from our studio floor.</p>
+        <div style="text-align: center; margin-bottom: 20px;">
+          <h2>Tattoo <span class="y">Knowledge</span></h2>
+          <p class="sub">Tattoo care tips, techniques, equipment insights, and studio know-how.</p>
         </div>
-
-        <div class="timeline-feed">
-          <div class="feed-card">
-            <div class="feed-header">
-              <img src="images/nghe-si-1.webp" alt="Avatar" class="feed-avatar">
-              <div class="feed-author-info">
-                <h4>Mr Tattoo Hanoi Studio</h4>
-                <span class="feed-time">2 hours ago · 📍 106 Hang Buom, Hanoi</span>
-              </div>
-            </div>
-            <div class="feed-text">
-              Finished this delicate fine-line floral piece for a lovely traveler from Australia today! 🌿 Drop by our 2nd-floor studio if you're walking around Hoàn Kiếm!
-            </div>
-            <div class="feed-media">
-              <img src="images/tac-pham-2.webp" alt="Tattoo session" loading="lazy">
-            </div>
-            <div class="feed-footer">
-              <span>❤️ 48 likes · 3 comments</span>
-              <button class="feed-actions-btn" onclick="alert('Thanks for liking!')">👍 Like</button>
-            </div>
-          </div>
+        <!-- Danh sách bài viết bọc trong khung nền sáng -->
+        <div class="light-panel blog-list-panel">
+          <div id="knowledge-container" class="news-list-container"></div>
+          <div id="knowledge-pagination" class="pagination"></div>
         </div>
       </div>
     </section>
@@ -329,15 +352,27 @@
     const itemsPerPage = 10;
 
     function renderBlogList(category, page = 1) {
-      // Lấy dữ liệu tương ứng từ 2 biến meaningsData hoặc travelData
-      const data = category === 'meanings' ? (typeof meaningsData !== 'undefined' ? meaningsData : []) : (typeof travelData !== 'undefined' ? travelData : []);
+      // Lấy dữ liệu tương ứng từ 3 biến meaningsData, travelData, knowledgeData
+      let data = [];
+      let catLabel = '';
+      if (category === 'meanings') {
+        data = typeof meaningsData !== 'undefined' ? meaningsData : [];
+        catLabel = 'Tattoo Meanings';
+      } else if (category === 'travel') {
+        data = typeof travelData !== 'undefined' ? travelData : [];
+        catLabel = 'Hanoi Travel Corner';
+      } else if (category === 'knowledge') {
+        data = typeof knowledgeData !== 'undefined' ? knowledgeData : [];
+        catLabel = 'Tattoo Knowledge';
+      }
+
       const start = (page - 1) * itemsPerPage;
       const end = start + itemsPerPage;
       const paginatedItems = data.slice(start, end);
 
-      const containerId = category === 'meanings' ? 'meanings-container' : 'travel-container';
-      const paginationId = category === 'meanings' ? 'meanings-pagination' : 'travel-pagination';
-      
+      const containerId = `${category}-container`;
+      const paginationId = `${category}-pagination`;
+
       const container = document.getElementById(containerId);
       const paginationContainer = document.getElementById(paginationId);
 
@@ -345,14 +380,14 @@
 
       let html = '';
       if (paginatedItems.length === 0) {
-        html = '<p style="text-align: center; color: #888;">No articles found.</p>';
+        html = '<p class="no-articles" style="color: #666; text-align: center; padding: 30px 0;">No articles found yet in this category.</p>';
       } else {
         paginatedItems.forEach(item => {
           html += `
             <article class="news-item-horizontal">
               <a href="${item.slug}"><img src="${item.thumb}" alt="${item.title}" class="news-item-thumb" loading="lazy"></a>
               <div class="news-item-content">
-                <div class="news-item-category">${category === 'meanings' ? 'Tattoo Meanings' : 'Hanoi Travel Corner'} <span class="time-ago">· ${item.time}</span></div>
+                <div class="news-item-category">${catLabel} <span class="time-ago">· ${item.time}</span></div>
                 <h3 class="news-item-title"><a href="${item.slug}">${item.title}</a></h3>
                 <p class="news-item-desc">${item.desc}</p>
               </div>
@@ -369,21 +404,20 @@
           pageHtml += `<button class="page-node ${i === page ? 'active' : ''}" onclick="renderBlogList('${category}', ${i})">${i}</button>`;
         }
       }
-      paginationContainer.innerHTML = pageHtml;
+      if (paginationContainer) {
+        paginationContainer.innerHTML = pageHtml;
+      }
     }
 
     function switchTab(e, category) {
       document.querySelectorAll('.blog-section').forEach(sec => sec.classList.remove('active-section'));
       document.querySelectorAll('.blog-tab-btn').forEach(btn => btn.classList.remove('active'));
 
-      if (category === 'meanings') {
-        document.getElementById('section-meanings').classList.add('active-section');
-      } else if (category === 'travel') {
-        document.getElementById('section-travel').classList.add('active-section');
-      } else if (category === 'diary') {
-        document.getElementById('section-diary').classList.add('active-section');
+      const targetSection = document.getElementById(`section-${category}`);
+      if (targetSection) {
+        targetSection.classList.add('active-section');
       }
-      
+
       e.currentTarget.classList.add('active');
       window.scrollTo({ top: 250, behavior: 'smooth' });
     }
@@ -391,7 +425,91 @@
     document.addEventListener("DOMContentLoaded", () => {
       renderBlogList('meanings', 1);
       renderBlogList('travel', 1);
+      renderBlogList('knowledge', 1);
     });
   </script>
+<!--SITE-FOOTER:START-->
+<style>
+  /* All 3 footer headings share .footer-title so the columns line up */
+  .footer-grid-custom {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .footer-grid-custom .footer-title {
+    margin: 0 0 16px;
+    color: var(--y);
+    font-family: var(--font-head);
+    font-size: 1.05rem;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .footer-grid-custom p { margin: 0 0 10px; opacity: .85; line-height: 1.8; }
+  .footer-grid-custom address { margin: 0; font-style: normal; opacity: .85; line-height: 1.8; }
+  .footer-grid-custom .explore-list { list-style: none; padding: 0; margin: 0; }
+  .footer-grid-custom .explore-list li { margin-bottom: 8px; line-height: 1.5; }
+  .footer-grid-custom .explore-list li:first-child { line-height: 1.8; }
+  .footer-grid-custom .explore-list a { color: var(--w); opacity: .85; text-decoration: none; }
+  .footer-grid-custom .explore-list a:hover { color: var(--y); opacity: 1; }
+
+  /* Mobile: 3 stacked rows instead of 3 squeezed columns */
+  @media (max-width: 800px) {
+    .footer-grid-custom { grid-template-columns: 1fr; gap: 30px; }
+    .footer-grid-custom .footer-title { margin-bottom: 10px; }
+    .footer-grid-custom > div + div {
+      padding-top: 24px;
+      border-top: 1px dotted rgba(226, 169, 45, .35);
+    }
+  }
+</style>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid-custom">
+    <div>
+      <h4 class="footer-title">Mr Tattoo Hanoi Studio</h4>
+      <p>Small, affordable tattoos in the heart of Hanoi's Old Quarter. Since 2012.</p>
+      <p>
+        <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">Instagram</a> ·
+        <a href="https://facebook.com/[trang-cua-ban]" target="_blank" rel="noopener">Facebook</a> ·
+        <a href="https://wa.me/84377616886" target="_blank" rel="noopener">WhatsApp</a>
+      </p>
+    </div>
+    <div>
+      <h4 class="footer-title">Visit us</h4>
+      <!-- NAP (Name / Address / Phone): copy y hệt Google Business Profile & contact.html để chuẩn SEO local -->
+      <address>
+        <strong>Address:</strong> 106 P. Hàng Buồm, Phố cổ Hà Nội, Hoàn Kiếm, Hà Nội 100000<br>
+        <strong>Phone / WhatsApp:</strong> <a href="https://wa.me/84377616886" target="_blank" rel="noopener">0377 616 886</a><br>
+        <strong>Instagram:</strong> <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">@mrtattoo.hanoi</a><br>
+        <strong>Opening Hours:</strong> Open 24 hours, every day<br>
+        <a href="https://www.google.com/maps?cid=6222529882335831777" target="_blank" rel="noopener">Get directions</a>
+      </address>
+    </div>
+    <div>
+      <h4 class="footer-title">Explore</h4>
+      <ul class="explore-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about-us.html">About Us</a></li>
+        <li><a href="gallery.html">Portfolio</a></li>
+        <li><a href="design.html">Design</a></li>
+        <li><a href="blog.html">Blog &amp; Stories</a></li>
+        <li><a href="contact.html">Contact &amp; Map</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center;">
+    <p class="copy" style="margin: 0; opacity: 0.6; font-size: 0.85rem;">© 2026 Mr Tattoo Hanoi Studio · mrtattoo.vn · All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- Floating buttons on mobile -->
+<div class="float-cta">
+  <a href="https://wa.me/84377616886" target="_blank" rel="noopener">WhatsApp</a>
+  <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">Instagram</a>
+</div>
+
+<!--SITE-FOOTER:END-->
 </body>
 </html>

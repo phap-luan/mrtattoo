@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Consultation: share your idea">
+  <rect width="400" height="300" fill="#331311"/>
+  <circle cx="200" cy="150" r="130" fill="none" stroke="#E2A92D" stroke-opacity=".18" stroke-width="2"/>
+  <circle cx="200" cy="150" r="104" fill="none" stroke="#E2A92D" stroke-opacity=".12" stroke-width="2"/>
+  <!-- bubble 1: client -->
+  <path d="M48 70h170a14 14 0 0 1 14 14v70a14 14 0 0 1-14 14h-100l-34 28v-28H48a14 14 0 0 1-14-14V84a14 14 0 0 1 14-14z" fill="#F8EDD2"/>
+  <path d="M70 100h110M70 122h140M70 144h80" stroke="#7E1015" stroke-width="7" stroke-linecap="round"/>
+  <!-- bubble 2: artist -->
+  <path d="M182 168h170a14 14 0 0 1 14 14v52a14 14 0 0 1-14 14h-14v26l-34-26H182a14 14 0 0 1-14-14v-52a14 14 0 0 1 14-14z" fill="#E2A92D"/>
+  <!-- tiny lotus -->
+  <g transform="translate(274 214)" fill="none" stroke="#7E1015" stroke-width="4" stroke-linejoin="round">
+    <path d="M0 22C-18 10-20-8 0-24 20-8 18 10 0 22z"/>
+    <path d="M-2 22C-30 20-40 0-34-10 -16-8-6 4-2 22zM2 22C30 20 40 0 34-10 16-8 6 4 2 22z"/>
+  </g>
+</svg>
