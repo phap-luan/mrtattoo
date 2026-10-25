@@ -599,7 +599,7 @@
       </div>
     </section>
 
-    <!-- KHỐI 2: CLIENT REVIEWS - dải tự chạy, dữ liệu lấy từ js/review-list.js -->
+    <!-- KHỐI 2: CLIENT REVIEWS - dải tự chạy, dữ liệu thật lấy từ Google Maps (js/google-reviews.js) -->
     <section class="section dark" id="reviews">
       <div class="wrap">
         <h2>Client <span class="y">Reviews</span></h2>
@@ -731,51 +731,9 @@
   <script src="js/knowledge-data.js"></script>
   <script src="js/review-list.js"></script>
 
-  <!-- CLIENT REVIEWS tự chạy -->
-  <script>
-    (function () {
-      var track = document.getElementById('reviewTrack');
-      if (!track) return;
-
-      function esc(s) {
-        return String(s == null ? '' : s)
-          .replace(/&/g, '&amp;').replace(/"/g, '&quot;')
-          .replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      }
-
-      var list = (typeof REVIEW_LIST !== 'undefined') ? REVIEW_LIST : [];
-      var showPlaceholders = (typeof REVIEW_SHOW_PLACEHOLDERS === 'undefined') || REVIEW_SHOW_PLACEHOLDERS;
-      list = list.filter(function (r) { return showPlaceholders || !r.placeholder; });
-
-      if (!list.length) {
-        var sec = document.getElementById('reviews');
-        if (sec) sec.style.display = 'none';
-        return;
-      }
-
-      function card(r, i, hidden) {
-        var stars = '';
-        var n = Math.max(0, Math.min(5, parseInt(r.rating, 10) || 0));
-        if (n > 0) {
-          stars = '<p class="review-stars" aria-label="' + n + ' out of 5 stars">' +
-                  '★'.repeat(n) + '☆'.repeat(5 - n) + '</p>';
-        }
-        var cite = esc(r.name) + (r.country ? ', ' + esc(r.country) : '');
-        return '<figure class="review-card"' + (hidden ? ' aria-hidden="true"' : '') + '>' +
-          '<div class="review-photo"><img src="' + esc(r.image) + '" alt="Tattoo by Mr Tattoo Hanoi for ' + esc(r.name) + '" loading="lazy" onerror="this.style.display=\'none\'"></div>' +
-          '<div class="review-body">' + stars +
-          '<blockquote><p>“' + esc(r.text) + '”</p></blockquote>' +
-          '<cite>— ' + cite + '</cite></div>' +
-          '</figure>';
-      }
-
-      // Nhân đôi danh sách để dải chạy lặp vô tận không bị đứt (-50% trong keyframes)
-      var html = '';
-      list.forEach(function (r, i) { html += card(r, i, false); });
-      list.forEach(function (r, i) { html += card(r, i, true); });
-      track.innerHTML = html;
-    })();
-  </script>
+  <!-- CLIENT REVIEWS THẬT TỪ GOOGLE MAPS: google-config.js chứa API key, google-reviews.js xử lý -->
+  <script src="js/google-config.js"></script>
+  <script src="js/google-reviews.js"></script>
 
   <!-- TRAVEL CORNER & BLOG: 3 chuyên đề, mỗi chuyên đề 1 bài mới nhất (nổi bật) + 2 bài cũ hơn -->
   <script>

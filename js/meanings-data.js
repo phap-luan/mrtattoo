@@ -21,5 +21,13 @@ const meaningsData = [
     "time": "October 23, 2026",
     "date": "2026-10-23",
     "desc": "Fan BIGBANG bị hủy phòng sát ngày concert, homestay đáp trả: Giờ chị có phốt thì khách bên em cũng không ảnh hưởng"
+  },
+  {
+    "title": "Khue Van Cac Tattoo Meaning: Hanoi’s Pavilion of Knowledge Inked on Skin",
+    "slug": "tattoo-meanings/khue-van-cac-tattoo-meaning-hanois-pavilion-of-knowledge-inked-on-skin/",
+    "thumb": "images/blog-images/khuevancac-tattoo.webp",
+    "time": "October 25, 2026",
+    "date": "2026-10-25",
+    "desc": "Discover the meaning of the Khue Van Cac tattoo, Hanoi’s cultural emblem. Explore its symbolism, best placements and styles, with custom designs at Mr Tattoo Hanoi Studio."
   }
 ];

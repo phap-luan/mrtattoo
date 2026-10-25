@@ -25,6 +25,27 @@
 
   <style>
     /* =====================================================
+       HERO: khung ảnh tự đổi 5 ảnh, mỗi 5 giây (mờ dần chuyển ảnh)
+       ===================================================== */
+    .hero-image-right {
+      background: var(--k2);          /* ghi đè ảnh nền cũ trong style.css */
+      overflow: hidden;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity .9s ease-in-out;
+    }
+    .hero-slide.active { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-slide { transition: none; }
+    }
+
+    /* =====================================================
        SERVICES: ảnh nhỏ nằm gọn trong khung, dưới số 01-04
        ===================================================== */
     .service-thumb {
@@ -277,65 +298,6 @@
       .blog-row-body { grid-template-columns: 1fr; gap: 20px; }
       .blog-feature h4 { font-size: 1.35rem; }
     }
-/* =====================================================
-   HERO IMAGE SLIDER (Khung 5 ảnh tự chạy 5s)
-   ===================================================== */
-.hero-image-slider {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  border: 16px solid transparent;
-  border-image: url("patterns/frame-gold.svg") 16 round;
-  background: var(--k2);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-}
-
-.hero-image-slider img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1s ease-in-out; /* Mờ dần mượt mà trong 1 giây */
-}
-
-.hero-image-slider img.active {
-  opacity: 1;
-}
-.horizontal-image-slider {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  margin: 20px auto 0;
-  padding: 10px 0;
-}
-.slider-track {
-  display: flex;
-  gap: 16px;
-  will-change: transform;
-  width: max-content;
-}
-.slider-track a {
-  display: block;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-.slider-track img {
-  height: 220px; /* Chiều cao ảnh tùy chỉnh */
-  width: auto;
-  object-fit: cover;
-  display: block;
-  border-radius: 4px;
-  border: 1px solid rgba(226, 169, 45, .4);
-  transition: border-color .2s, transform .2s;
-}
-.slider-track a:hover img {
-  border-color: var(--y);
-  transform: scale(1.02);
-}
   </style>
 
   <script type="application/ld+json">
@@ -445,13 +407,13 @@
           </div>
         </div>
 
-        <!-- Cột phải: Khung 5 ảnh tự động chạy 5 giây -->
-        <div class="hero-image-slider" id="heroSlider" aria-label="Hero Tattoo Showcase">
-          <img src="images/tattoo-working-001.jpg" alt="Custom tattoo by Mr Tattoo Hanoi 1" class="active">
-          <img src="images/tattoo-working-002.jpg" alt="Custom tattoo by Mr Tattoo Hanoi 2">
-          <img src="images/tattoo-working-003.jpg" alt="Custom tattoo by Mr Tattoo Hanoi 3">
-          <img src="images/tattoo-working-004.jpg" alt="Custom tattoo by Mr Tattoo Hanoi 4">
-          <img src="images/tattoo-working-005.jpg" alt="Custom tattoo by Mr Tattoo Hanoi 5">
+        <!-- Cột phải: Khung ảnh hình xăm, tự đổi 5 ảnh mỗi 5 giây (thay link ảnh tại đây) -->
+        <div class="hero-image-right" id="heroSlider">
+          <img class="hero-slide active" src="images/tattoo-working-001.webp" alt="Custom tattoo by Mr Tattoo Hanoi Studio, example 1" width="600" height="800" fetchpriority="high">
+          <img class="hero-slide" src="images/tattoo-working-002.webp" alt="Custom tattoo by Mr Tattoo Hanoi Studio, example 2" width="600" height="800" loading="lazy">
+          <img class="hero-slide" src="images/tattoo-working-003.webp" alt="Custom tattoo by Mr Tattoo Hanoi Studio, example 3" width="600" height="800" loading="lazy">
+          <img class="hero-slide" src="images/tattoo-working-004.webp" alt="Custom tattoo by Mr Tattoo Hanoi Studio, example 4" width="600" height="800" loading="lazy">
+          <img class="hero-slide" src="images/tattoo-working-005.webp" alt="Custom tattoo by Mr Tattoo Hanoi Studio, example 5" width="600" height="800" loading="lazy">
         </div>
       </div>
     </section>
@@ -466,33 +428,33 @@
       </ul>
     </section>
 
-    <!-- 4. TÁC PHẨM & SLIDE ẢNH CHẠY NGANG (Dạng trượt qua lại thông minh) -->
+    <!-- 4. TÁC PHẨM & SLIDE ẢNH CHẠY NGANG -->
     <section id="tac-pham" class="section dark">
       <div class="wrap">
         <h2>Featured <span class="y">Portfolio</span></h2>
         <p class="sub">Every tattoo is custom-designed, never copied.</p>
 
-        <div class="horizontal-image-slider" aria-label="Tattoo gallery scrolling banner">
-          <div class="slider-track" id="sliderTrack">
-            <a href="gallery.html"><img src="gallery/medium-large-custom-pieces/full/medium-large-tattoo_007.webp" alt="Custom tattoo 1" loading="lazy"></a>
-            <a href="gallery.html"><img src="gallery/medium-large-custom-pieces/full/medium-large-tattoo_001.webp" alt="Custom tattoo 2" loading="lazy"></a>
-            <a href="gallery.html"><img src="gallery/medium-large-custom-pieces/full/medium-large-tattoo_004.webp" alt="Custom tattoo 3" loading="lazy"></a>
-            <a href="gallery.html"><img src="gallery/medium-large-custom-pieces/full/medium-large-tattoo_005.webp" alt="Custom tattoo 4" loading="lazy"></a>
-            <a href="gallery.html"><img src="images/tac-pham-5.webp" alt="Custom tattoo 5" loading="lazy"></a>
-            <a href="gallery.html"><img src="images/tac-pham-6.webp" alt="Custom tattoo 6" loading="lazy"></a>
-            <a href="gallery.html"><img src="images/tac-pham-7.webp" alt="Custom tattoo 7" loading="lazy"></a>
-            <a href="gallery.html"><img src="images/tac-pham-8.webp" alt="Custom tattoo 8" loading="lazy"></a>
-            <a href="gallery.html"><img src="images/tac-pham-9.webp" alt="Custom tattoo 9" loading="lazy"></a>
-            <a href="gallery.html"><img src="images/tac-pham-10.webp" alt="Custom tattoo 10" loading="lazy"></a>
-            <a href="gallery.html"><img src="images/tac-pham-11.webp" alt="Custom tattoo 11" loading="lazy"></a>
-            <a href="gallery.html"><img src="images/tac-pham-12.webp" alt="Custom tattoo 12" loading="lazy"></a>
-            <a href="gallery.html"><img src="images/tac-pham-13.webp" alt="Custom tattoo 13" loading="lazy"></a>
-            <a href="gallery.html"><img src="images/tac-pham-14.webp" alt="Custom tattoo 14" loading="lazy"></a>
-            <a href="gallery.html"><img src="images/tac-pham-15.webp" alt="Custom tattoo 15" loading="lazy"></a>
+        <div class="marquee-container" aria-label="Tattoo gallery scrolling banner">
+          <div class="marquee-track">
+            <div class="marquee-item"><img src="images/tac-pham-1.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 1" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-2.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 2" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-3.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 3" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-4.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 4" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-5.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 5" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-6.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 6" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-7.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 7" loading="lazy"></div>
+<!-- Nhân bản lặp vô tận (alt rỗng + aria-hidden để không bị đọc/đếm 2 lần) -->
+            <div class="marquee-item"><img src="images/tac-pham-8.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 8" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-9.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 9" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-10.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 10" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-11.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 11" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-12.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 12" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-13.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 13" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-14.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 14" loading="lazy"></div>
           </div>
         </div>
 
-        <div class="center" style="margin-top: 30px;">
+        <div class="center">
           <a href="gallery.html" class="btn">See Full Portfolio</a>
           <a href="https://www.instagram.com/mrtattoo.hanoi/" class="btn btn-outline" target="_blank" rel="noopener">More on Instagram</a>
         </div>
@@ -506,25 +468,25 @@
         <div class="cards">
           <article>
             <span class="num">01</span>
-            <figure class="service-thumb"><img src="images/services/service-1.webp" alt="Minimalist and fine line tattoo in Hanoi" width="400" height="300" loading="lazy"></figure>
+            <figure class="service-thumb"><img src="images/fine-line-tattoo.webp" alt="Minimalist and fine line tattoo in Hanoi" width="400" height="300" loading="lazy"></figure>
             <h3>Minimalist &amp; Fine Line</h3>
             <p>Delicate small tattoos, perfect for first-timers. Done in 30-60 minutes.</p>
           </article>
           <article>
             <span class="num">02</span>
-            <figure class="service-thumb"><img src="images/services/service-2.webp" alt="Custom art style tattoo: realism, Japanese, blackwork" width="400" height="300" loading="lazy"></figure>
+            <figure class="service-thumb"><img src="images/custom-art-styles-tattoo.webp" alt="Custom art style tattoo: realism, Japanese, blackwork" width="400" height="300" loading="lazy"></figure>
             <h3>Custom Art Styles</h3>
             <p>Realism, Japanese, Blackwork, Watercolor and traditional motifs, tailored to you.</p>
           </article>
           <article>
             <span class="num">03</span>
-            <figure class="service-thumb"><img src="images/services/service-3.webp" alt="Scar and cover-up tattoo example" width="400" height="300" loading="lazy"></figure>
+            <figure class="service-thumb"><img src="images/cover-tattoo.webp" alt="Scar and cover-up tattoo example" width="400" height="300" loading="lazy"></figure>
             <h3>Scar &amp; Cover-up</h3>
             <p>Cover old tattoos, scars or faded ink with a fresh, clever design.</p>
           </article>
           <article>
             <span class="num">04</span>
-            <figure class="service-thumb"><img src="images/services/service-4.webp" alt="Custom tattoo design sketch" width="400" height="300" loading="lazy"></figure>
+            <figure class="service-thumb"><img src="images/design-tattoo.webp" alt="Custom tattoo design sketch" width="400" height="300" loading="lazy"></figure>
             <h3>Custom Design</h3>
             <p>Bring your idea. We sketch and refine it until you love it.</p>
           </article>
@@ -539,7 +501,7 @@
         <div class="artist-slide active">
           <img src="images/tattoo-artist-Son.webp" alt="Tattoo Artist Son Nguyen, founder of Mr Tattoo Hanoi Studio" width="640" height="800" loading="lazy">
           <div>
-            <h2>Tattoo Artist <span class="y">SON</span></h2>
+            <h2>Meet Tattoo Artist <span class="y">SON</span></h2>
             <p>Born and raised in Hanoi, Son has been tattooing since 2008 and founded Mr Tattoo Hanoi Studio in 2012. With more than 10,000 tattoos behind him, he works comfortably in Asian, European and American styles, from simple minimalist pieces to complex custom projects.</p>
             <p>Every tattoo starts with listening to your story. Safety comes first: single-use needles, authentic inks, and a clean, comfortable studio in the Old Quarter.</p>
             <ul class="ticks">
@@ -557,7 +519,7 @@
         <div class="artist-slide">
           <img src="images/tattoo-artist-Loy.webp" alt="Tattoo Artist Loy, mini tattoo, fine line and dotwork specialist in Hanoi" width="640" height="800" loading="lazy">
           <div>
-            <h2>Tattoo Artist <span class="y">LOY</span></h2>
+            <h2>Meet Tattoo Artist <span class="y">LOY</span></h2>
             <p>Loy has been part of Mr Tattoo Hanoi Studio since 2016. Calm, patient and meticulous, he is our go-to artist for mini tattoos, fine line and dotwork, where every dot and every hairline stroke has to be exactly right.</p>
             <p>If you want a small, delicate tattoo that looks clean and crisp for years, Loy's steady hand and attention to detail make him a perfect fit, especially for first-timers.</p>
             <ul class="ticks">
@@ -621,18 +583,17 @@
       <div class="wrap promo">
         <div class="promo-grid">
           <div class="promo-img-left">
-            <img src="link-anh-khuyen-mai.jpg" alt="Mr Tattoo Hanoi Studio promotion poster: save up to 50% on multiple tattoos" width="900" height="1267" loading="lazy">
+            <img src="images/tattoo-deal.webp" alt="Mr Tattoo Hanoi Studio promotion poster: save up to 30% on multiple tattoos" width="900" height="1267" loading="lazy">
           </div>
           <div>
-            <div class="eyebrow">Limited-Time Offer</div>
+            <div class="eyebrow">Limited-Time Promotion</div>
             <h2>Tattoo More, <em>Save More.</em></h2>
             <p>Getting more than one tattoo in a single session? Enjoy increasing discounts based on the number of pieces!</p>
             <div class="tiers">
-              <div class="tier"><b>1st Tattoo:</b> <span>Standard price</span></div>
-              <div class="tier"><b>30% OFF:</b> <span>On the 2nd tattoo (equal or lesser value than the 1st).</span></div>
-              <div class="tier"><b>50% OFF:</b> <span>On the 3rd tattoo and every additional piece.</span></div>
+              <div class="tier"><b>1st TATTOO:</b> <span>Standard price</span></div>
+              <div class="tier"><b>2nd & SUBSEQUENT TATTOOS:</b> <span>Get 30% OFF EACH<br>(Valid on tattoos of equal or lesser value to the previous one. Max discount: 1,000,000 vnđ per tattoo)</span></div>
             </div>
-            <p class="fine">*Valid for same-day bookings only. Message us on WhatsApp or Instagram for full details.</p>
+            <p class="fine">*Conditions Apply. Offers valid on same-day bookings.<br>Message us on WhatsApp or Instagram for full details.</p>
           </div>
         </div>
       </div>
@@ -706,6 +667,20 @@
 
   </main>
 
+  <!-- SCRIPT ĐỔI ẢNH HERO: 5 giây / ảnh, lặp vô tận -->
+  <script>
+    (function () {
+      var slides = document.querySelectorAll('#heroSlider .hero-slide');
+      if (slides.length < 2) return;
+      var i = 0;
+      setInterval(function () {
+        slides[i].classList.remove('active');
+        i = (i + 1) % slides.length;
+        slides[i].classList.add('active');
+      }, 5000);
+    })();
+  </script>
+
   <!-- SCRIPT ĐIỀU KHIỂN SLIDER NGHỆ SĨ -->
   <script>
     let currentArtist = 0;
@@ -758,57 +733,49 @@
 
   <!-- CLIENT REVIEWS tự chạy -->
   <script>
-  (function () {
-    const track = document.getElementById('sliderTrack');
-    if (!track) return;
-    
-    let position = 0;
-    let direction = -1; // Bắt đầu chạy sang trái
-    const speed = 0.6;  // Tốc độ chạy (có thể chỉnh to/nhỏ tùy ý)
+    (function () {
+      var track = document.getElementById('reviewTrack');
+      if (!track) return;
 
-    function animate() {
-      const containerWidth = track.parentElement.offsetWidth;
-      const trackWidth = track.scrollWidth;
-      
-      // Nếu dịch chuyển hết chiều dài ảnh thì đổi chiều
-      if (Math.abs(position) >= trackWidth - containerWidth) {
-        direction = 1;
+      function esc(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+          .replace(/</g, '&lt;').replace(/>/g, '&gt;');
       }
-      if (position >= 0) {
-        direction = -1;
-      }
-      
-      position += speed * direction;
-      track.style.transform = `translateX(${position}px)`;
-      requestAnimationFrame(animate);
-    }
-    
-    // Tạm dừng khi rê chuột vào thanh trượt cho khách dễ nhìn/click ảnh
-    track.addEventListener('mouseenter', () => { speedTemp = speed; speed = 0; });
-    // Ở đây ta dùng cách đơn giản hơn: kiểm tra cờ dừng
-    let isPaused = false;
-    track.addEventListener('mouseenter', () => isPaused = true);
-    track.addEventListener('mouseleave', () => isPaused = false);
 
-    function smoothAnimate() {
-      if (!isPaused) {
-        const containerWidth = track.parentElement.offsetWidth;
-        const trackWidth = track.scrollWidth;
-        
-        if (Math.abs(position) >= trackWidth - containerWidth) {
-          direction = 1;
-        }
-        if (position >= 0) {
-          direction = -1;
-        }
-        position += speed * direction;
-        track.style.transform = `translateX(${position}px)`;
+      var list = (typeof REVIEW_LIST !== 'undefined') ? REVIEW_LIST : [];
+      var showPlaceholders = (typeof REVIEW_SHOW_PLACEHOLDERS === 'undefined') || REVIEW_SHOW_PLACEHOLDERS;
+      list = list.filter(function (r) { return showPlaceholders || !r.placeholder; });
+
+      if (!list.length) {
+        var sec = document.getElementById('reviews');
+        if (sec) sec.style.display = 'none';
+        return;
       }
-      requestAnimationFrame(smoothAnimate);
-    }
-    smoothAnimate();
-  })();
-</script>
+
+      function card(r, i, hidden) {
+        var stars = '';
+        var n = Math.max(0, Math.min(5, parseInt(r.rating, 10) || 0));
+        if (n > 0) {
+          stars = '<p class="review-stars" aria-label="' + n + ' out of 5 stars">' +
+                  '★'.repeat(n) + '☆'.repeat(5 - n) + '</p>';
+        }
+        var cite = esc(r.name) + (r.country ? ', ' + esc(r.country) : '');
+        return '<figure class="review-card"' + (hidden ? ' aria-hidden="true"' : '') + '>' +
+          '<div class="review-photo"><img src="' + esc(r.image) + '" alt="Tattoo by Mr Tattoo Hanoi for ' + esc(r.name) + '" loading="lazy" onerror="this.style.display=\'none\'"></div>' +
+          '<div class="review-body">' + stars +
+          '<blockquote><p>“' + esc(r.text) + '”</p></blockquote>' +
+          '<cite>— ' + cite + '</cite></div>' +
+          '</figure>';
+      }
+
+      // Nhân đôi danh sách để dải chạy lặp vô tận không bị đứt (-50% trong keyframes)
+      var html = '';
+      list.forEach(function (r, i) { html += card(r, i, false); });
+      list.forEach(function (r, i) { html += card(r, i, true); });
+      track.innerHTML = html;
+    })();
+  </script>
 
   <!-- TRAVEL CORNER & BLOG: 3 chuyên đề, mỗi chuyên đề 1 bài mới nhất (nổi bật) + 2 bài cũ hơn -->
   <script>
@@ -975,24 +942,5 @@
 </div>
 
 <!--SITE-FOOTER:END-->
-<!-- SCRIPT ĐIỀU KHIỂN HERO SLIDER 5 GIÂY -->
-  <script>
-    (function() {
-      const heroImages = document.querySelectorAll('#heroSlider img');
-      if (!heroImages.length) return;
-
-      let currentHeroIndex = 0;
-      setInterval(() => {
-        // Tắt ảnh hiện tại
-        heroImages[currentHeroIndex].classList.remove('active');
-        
-        // Chuyển sang ảnh kế tiếp (lặp lại từ đầu nếu hết 5 ảnh)
-        currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
-        
-        // Bật ảnh mới
-        heroImages[currentHeroIndex].classList.add('active');
-      }, 5000); // 5000ms = 5 giây
-    })();
-  </script>
 </body>
 </html>
