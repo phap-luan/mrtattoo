@@ -5,17 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#7E1015">
 
-  <title>Mr Tattoo Hanoi Studio | Best Tattoo Studio in Hanoi Old Quarter</title>
-  <meta name="description" content="Mr Tattoo Hanoi Studio - professional tattoo studio at 106 Hang Buom, Hanoi Old Quarter. Affordable custom tattoos from $10. Sterile single-use needles. Book via WhatsApp!">
-  <meta name="robots" content="index, follow">
+  <title>Tattoo in Hanoi Old Quarter from $10 | Mr Tattoo Hanoi Studio</title>
+  <meta name="description" content="Affordable tattoo studio at 106 Hang Buom, Hanoi Old Quarter. Custom fine line, mini and blackwork tattoos from $10. Sterile needles. Book on WhatsApp.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://mrtattoo.vn/">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Mr Tattoo Hanoi Studio | Hanoi Old Quarter">
-  <meta property="og:description" content="Affordable custom tattoos starting from $10 in the heart of Hanoi Old Quarter. Clean, safe, and professional.">
+  <meta property="og:title" content="Tattoo in Hanoi Old Quarter from $10 | Mr Tattoo Hanoi Studio">
+  <meta property="og:description" content="Custom tattoos from $10 in the heart of Hanoi Old Quarter. 10,000+ tattoos, sterile single-use needles. Book on WhatsApp.">
   <meta property="og:url" content="https://mrtattoo.vn/">
   <meta property="og:image" content="https://mrtattoo.vn/images/og-cover.jpg">
   <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,26 +25,77 @@
 
   <style>
     /* =====================================================
+       HERO: khung ảnh tự đổi 5 ảnh, mỗi 5 giây (mờ dần chuyển ảnh)
+       ===================================================== */
+    .hero-image-right {
+      background: var(--k2);          /* ghi đè ảnh nền cũ trong style.css */
+      overflow: hidden;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity .9s ease-in-out;
+    }
+    .hero-slide.active { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-slide { transition: none; }
+    }
+
+    /* =====================================================
+       SERVICES: ảnh nhỏ nằm gọn trong khung, dưới số 01-04
+       ===================================================== */
+    .service-thumb {
+      margin: 12px 0 6px;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: var(--k2);
+      border: 1px solid rgba(226, 169, 45, .5);
+    }
+    .service-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s;
+    }
+    .cards article:hover .service-thumb img { transform: scale(1.05); }
+
+    /* =====================================================
        4-STEP PROCESS: mỗi bước có 1 ảnh minh họa
        ===================================================== */
-    .steps { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-    .steps li { display: flex; flex-direction: column; }
+    .steps {
+      margin-top: 0;
+      gap: 18px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .steps li { display: flex; flex-direction: column; padding-top: 0; }
+    .steps li::before { margin-bottom: 2px; }
     .step-figure {
-      margin: 14px 0 14px;
-      border: 12px solid transparent;
+      margin: 10px 0 14px;
+      border: 16px solid transparent;
       border-image: url("patterns/frame-gold.svg") 16 round;
-      background: var(--k2);
+      background: var(--k) url("patterns/tile-on-dark.svg");
       background-origin: padding-box;
       background-clip: padding-box;
-      filter: drop-shadow(0 6px 14px rgba(60, 14, 12, .28));
+      box-shadow: 0 8px 22px rgba(60, 14, 12, .28);
     }
     .step-figure img {
       width: 100%;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 5 / 4;
       object-fit: cover;
       display: block;
     }
     .steps li span { color: #3a1a10; }
+    @media (max-width: 860px) {
+      .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 480px) {
+      .steps { grid-template-columns: 1fr; }
+    }
 
     /* =====================================================
        CLIENT REVIEWS: dải ô đánh giá tự chạy (giống Featured Portfolio)
@@ -147,17 +199,17 @@
     .blog-row-head:hover h3,
     .blog-row-head:focus-visible h3 { text-decoration: underline; }
 
-    /* Thân hàng: bài mới (trái, rộng) + danh sách 2 bài cũ (phải) */
+    /* Thân hàng: bài mới (trái) + danh sách 2 bài cũ (phải), chia 50:50 */
     .blog-row-body {
       display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 28px;
       align-items: start;
     }
     .blog-row-body > .blog-feature:only-child,
     .blog-row-body > .blog-empty { grid-column: 1 / -1; }
 
-    /* Bài mới nhất: to, nổi bật */
+    /* Bài mới nhất */
     .blog-feature { position: relative; }
     .blog-feature-img {
       display: block;
@@ -189,7 +241,7 @@
     .blog-feature h4 {
       margin: 14px 0 8px;
       font-family: var(--font-head);
-      font-size: 1.6rem;
+      font-size: 1.35rem;
       line-height: 1.3;
     }
     .blog-feature h4 a { color: var(--y2); text-decoration: none; }
@@ -253,11 +305,18 @@
     "@context": "https://schema.org",
     "@type": "TattooParlor",
     "name": "Mr Tattoo Hanoi Studio",
+    "description": "Affordable custom tattoo studio in Hanoi Old Quarter since 2012. Fine line, mini tattoos, dotwork, blackwork, realism and cover-ups from $10.",
     "image": "https://mrtattoo.vn/images/og-cover.jpg",
     "url": "https://mrtattoo.vn/",
     "telephone": "+84377616886",
     "hasMap": "https://www.google.com/maps?cid=6222529882335831777",
-    "priceRange": "$$",
+    "priceRange": "$",
+    "foundingDate": "2012",
+    "founder": { "@type": "Person", "name": "Son Nguyen" },
+    "employee": [
+      { "@type": "Person", "name": "Son Nguyen", "jobTitle": "Tattoo Artist & Founder" },
+      { "@type": "Person", "name": "Loy", "jobTitle": "Tattoo Artist" }
+    ],
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "106 P. Hàng Buồm, Phố cổ Hà Nội",
@@ -281,10 +340,11 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
+      {"@type":"Question","name":"How much does a tattoo cost in Hanoi?","acceptedAnswer":{"@type":"Answer","text":"Mini tattoos at Mr Tattoo Hanoi Studio start from $10. Medium and large pieces are quoted by size, detail, color and placement. Message us on WhatsApp for a free quote."}},
+      {"@type":"Question","name":"Where is Mr Tattoo Hanoi Studio?","acceptedAnswer":{"@type":"Answer","text":"We are on the 2nd floor of 106 Hàng Buồm, in the Hanoi Old Quarter (Hoàn Kiếm), and open 24 hours, every day."}},
       {"@type":"Question","name":"Do tattoos hurt?","acceptedAnswer":{"@type":"Answer","text":"Pain levels vary depending on the placement and individual pain threshold. We will advise you on suitable placements."}},
-      {"@type":"Question","name":"How are tattoo prices calculated?","acceptedAnswer":{"@type":"Answer","text":"Prices depend on size, detail, color, and placement. Send us your idea for a free quote."}},
-      {"@type":"Question","name":"How do I care for my new tattoo?","acceptedAnswer":{"@type":"Answer","text":"Keep it clean, apply ointment as instructed, avoid direct sunlight and swimming for the first 2 weeks."}},
-      {"@type":"Question","name":"Are your equipment and needles sterile?","acceptedAnswer":{"@type":"Answer","text":"100% single-use sterile needles and disposable equipment opened right in front of you."}}
+      {"@type":"Question","name":"Are your equipment and needles sterile?","acceptedAnswer":{"@type":"Answer","text":"100% single-use sterile needles and disposable equipment opened right in front of you."}},
+      {"@type":"Question","name":"How do I care for my new tattoo?","acceptedAnswer":{"@type":"Answer","text":"Keep it clean, apply ointment as instructed, avoid direct sunlight and swimming for the first 2 weeks."}}
     ]
   }
   </script>
@@ -338,27 +398,33 @@
         <!-- Cột trái: Nội dung chữ -->
         <div class="hero-inner">
           <p class="eyebrow">Tattoo studio · Hanoi Old Quarter · Since 2012</p>
-          <h1>Ink you memory in Hanoi. <em>Starting at only $10</em></h1>
-          <p class="slogan">"Tattoo your journey in Hanoi"</p>
-          <p class="lead">Looking for an affordable, cheap-but-careful tattoo while you're in Vietnam? Find us on the 2nd floor of 106 Hàng Buồm — right in the heart of the Old Quarter. Message us your idea and we'll book your time.</p>
+          <h1>Tattoo in Hanoi, <em>from only $10</em></h1>
+          <p class="slogan">"Ink your memory in Hanoi"</p>
+          <p class="lead">Affordable, careful, custom tattoos on the 2nd floor of 106 Hàng Buồm, in the heart of the Old Quarter. Message us your idea and we'll book your time.</p>
           <div class="hero-actions">
             <a href="https://wa.me/84377616886" class="btn" target="_blank" rel="noopener">Book on WhatsApp</a>
             <a href="https://www.instagram.com/mrtattoo.hanoi/" class="btn btn-outline" target="_blank" rel="noopener">Message on Instagram</a>
           </div>
         </div>
 
-        <!-- Cột phải: Khung ảnh hình xăm trên tay -->
-        <div class="hero-image-right" aria-label="Tattoo artwork on arm"></div>
+        <!-- Cột phải: Khung ảnh hình xăm, tự đổi 5 ảnh mỗi 5 giây (thay link ảnh tại đây) -->
+        <div class="hero-image-right" id="heroSlider">
+          <img class="hero-slide active" src="images/tattoo-working-001.webp" alt="Custom tattoo by Mr Tattoo Hanoi Studio, example 1" width="600" height="800" fetchpriority="high">
+          <img class="hero-slide" src="images/tattoo-working-002.webp" alt="Custom tattoo by Mr Tattoo Hanoi Studio, example 2" width="600" height="800" loading="lazy">
+          <img class="hero-slide" src="images/tattoo-working-003.webp" alt="Custom tattoo by Mr Tattoo Hanoi Studio, example 3" width="600" height="800" loading="lazy">
+          <img class="hero-slide" src="images/tattoo-working-004.webp" alt="Custom tattoo by Mr Tattoo Hanoi Studio, example 4" width="600" height="800" loading="lazy">
+          <img class="hero-slide" src="images/tattoo-working-005.webp" alt="Custom tattoo by Mr Tattoo Hanoi Studio, example 5" width="600" height="800" loading="lazy">
+        </div>
       </div>
     </section>
 
-    <!-- 3. DẢI TIN CẬY -->
+    <!-- 3. DẢI TIN CẬY (đồng bộ với trang About Us) -->
     <section class="trust" aria-label="Highlights">
       <ul>
-        <li><strong>10+</strong><span>Years Experience</span></li>
-        <li><strong>5000+</strong><span>Tattoos Completed</span></li>
-        <li><strong>100%</strong><span>Sterile & Safe</span></li>
-        <li><strong>[4.9]★</strong><span>Google Reviews</span></li>
+        <li><strong>15+</strong><span>Years Experience</span></li>
+        <li><strong>10,000+</strong><span>Tattoos Completed</span></li>
+        <li><strong>100%</strong><span>Sterile &amp; Safe</span></li>
+        <li><strong>[5.0]★</strong><span>Google Reviews</span></li>
       </ul>
     </section>
 
@@ -370,70 +436,59 @@
 
         <div class="marquee-container" aria-label="Tattoo gallery scrolling banner">
           <div class="marquee-track">
-            <div class="marquee-item"><img src="images/tac-pham-1.webp" alt="Tattoo 1" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-2.webp" alt="Tattoo 2" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-3.webp" alt="Tattoo 3" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-4.webp" alt="Tattoo 4" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-5.webp" alt="Tattoo 5" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-6.webp" alt="Tattoo 6" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-7.webp" alt="Tattoo 7" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-8.webp" alt="Tattoo 8" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-9.webp" alt="Tattoo 9" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-10.webp" alt="Tattoo 10" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-11.webp" alt="Tattoo 11" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-12.webp" alt="Tattoo 12" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-13.webp" alt="Tattoo 13" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-14.webp" alt="Tattoo 14" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-15.webp" alt="Tattoo 15" loading="lazy"></div>
-            <!-- Nhân bản lặp vô tận -->
-            <div class="marquee-item"><img src="images/tac-pham-1.webp" alt="Tattoo 1" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-2.webp" alt="Tattoo 2" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-3.webp" alt="Tattoo 3" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-4.webp" alt="Tattoo 4" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-5.webp" alt="Tattoo 5" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-6.webp" alt="Tattoo 6" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-7.webp" alt="Tattoo 7" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-8.webp" alt="Tattoo 8" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-9.webp" alt="Tattoo 9" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-10.webp" alt="Tattoo 10" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-11.webp" alt="Tattoo 11" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-12.webp" alt="Tattoo 12" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-13.webp" alt="Tattoo 13" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-14.webp" alt="Tattoo 14" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-15.webp" alt="Tattoo 15" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-1.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 1" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-2.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 2" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-3.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 3" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-4.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 4" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-5.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 5" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-6.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 6" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-7.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 7" loading="lazy"></div>
+<!-- Nhân bản lặp vô tận (alt rỗng + aria-hidden để không bị đọc/đếm 2 lần) -->
+            <div class="marquee-item"><img src="images/tac-pham-8.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 8" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-9.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 9" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-10.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 10" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-11.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 11" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-12.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 12" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-13.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 13" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/tac-pham-14.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 14" loading="lazy"></div>
           </div>
         </div>
 
         <div class="center">
-          <a href="https://www.instagram.com/mrtattoo.hanoi/" class="btn" target="_blank" rel="noopener">View More on Instagram</a>
+          <a href="gallery.html" class="btn">See Full Portfolio</a>
+          <a href="https://www.instagram.com/mrtattoo.hanoi/" class="btn btn-outline" target="_blank" rel="noopener">More on Instagram</a>
         </div>
       </div>
     </section>
 
-    <!-- 5. DỊCH VỤ -->
+    <!-- 5. DỊCH VỤ: mỗi ô có 1 ảnh nhỏ dưới số (thay ảnh trong images/services/) -->
     <section id="dich-vu" class="section yellow">
       <div class="wrap">
         <h2>Tattoo Services</h2>
         <div class="cards">
           <article>
             <span class="num">01</span>
-            <h3>Minimalist & Fine Line</h3>
-            <p>Delicate and subtle small tattoos, perfect for first-timers, completed in 30-60 minutes.</p>
+            <figure class="service-thumb"><img src="images/services/service-1.webp" alt="Minimalist and fine line tattoo in Hanoi" width="400" height="300" loading="lazy"></figure>
+            <h3>Minimalist &amp; Fine Line</h3>
+            <p>Delicate small tattoos, perfect for first-timers. Done in 30-60 minutes.</p>
           </article>
           <article>
             <span class="num">02</span>
+            <figure class="service-thumb"><img src="images/services/service-2.webp" alt="Custom art style tattoo: realism, Japanese, blackwork" width="400" height="300" loading="lazy"></figure>
             <h3>Custom Art Styles</h3>
-            <p>Realism, Japanese, Blackwork, Watercolor, and traditional motifs tailored to your taste.</p>
+            <p>Realism, Japanese, Blackwork, Watercolor and traditional motifs, tailored to you.</p>
           </article>
           <article>
             <span class="num">03</span>
-            <h3>Scar & Cover-up</h3>
-            <p>Expertly cover old tattoos, scars, or damaged ink with fresh, clever custom designs.</p>
+            <figure class="service-thumb"><img src="images/services/service-3.webp" alt="Scar and cover-up tattoo example" width="400" height="300" loading="lazy"></figure>
+            <h3>Scar &amp; Cover-up</h3>
+            <p>Cover old tattoos, scars or faded ink with a fresh, clever design.</p>
           </article>
           <article>
             <span class="num">04</span>
+            <figure class="service-thumb"><img src="images/services/service-4.webp" alt="Custom tattoo design sketch" width="400" height="300" loading="lazy"></figure>
             <h3>Custom Design</h3>
-            <p>Bring your ideas, and we will sketch and refine them until you are completely satisfied.</p>
+            <p>Bring your idea. We sketch and refine it until you love it.</p>
           </article>
         </div>
       </div>
@@ -444,14 +499,14 @@
       <div class="wrap artist-slider-wrap" id="artistSlider">
 
         <div class="artist-slide active">
-          <img src="images/nghe-si-1.webp" alt="Artist [Artist Name 1]" width="640" height="800" loading="lazy">
+          <img src="images/tattoo-artist-Son.webp" alt="Tattoo Artist Son Nguyen, founder of Mr Tattoo Hanoi Studio" width="640" height="800" loading="lazy">
           <div>
-            <h2>Meet <span class="y">[Artist Name 1]</span></h2>
-            <p>With over [X] years of tattooing experience, [Artist Name 1] specializes in [Primary Style]. Every tattoo begins with listening closely to your story and ideas.</p>
-            <p>At Mr Tattoo Hanoi Studio, safety comes first: single-use needles, authentic inks, and a clean, comfortable environment.</p>
+            <h2>Meet Tattoo Artist <span class="y">SON</span></h2>
+            <p>Born and raised in Hanoi, Son has been tattooing since 2008 and founded Mr Tattoo Hanoi Studio in 2012. With more than 10,000 tattoos behind him, he works comfortably in Asian, European and American styles, from simple minimalist pieces to complex custom projects.</p>
+            <p>Every tattoo starts with listening to your story. Safety comes first: single-use needles, authentic inks, and a clean, comfortable studio in the Old Quarter.</p>
             <ul class="ticks">
-              <li>Style: [Blackwork / Japanese / Fine Line]</li>
-              <li>Authentic, sterile equipment</li>
+              <li>Founder &amp; lead artist · tattooing since 2008</li>
+              <li>All styles: Asian, European, American, custom</li>
               <li>Free consultation before inking</li>
             </ul>
             <div class="artist-controls">
@@ -462,15 +517,15 @@
         </div>
 
         <div class="artist-slide">
-          <img src="images/nghe-si-2.webp" alt="Artist [Artist Name 2]" width="640" height="800" loading="lazy">
+          <img src="images/tattoo-artist-Loy.webp" alt="Tattoo Artist Loy, mini tattoo, fine line and dotwork specialist in Hanoi" width="640" height="800" loading="lazy">
           <div>
-            <h2>Meet <span class="y">[Artist Name 2]</span></h2>
-            <p>A long-time member of our studio, [Artist Name 2] focuses on [Secondary Style], delivering exceptional precision and sharp details.</p>
-            <p>Committed to absolute sterilization standards to provide complete peace of mind for every client.</p>
+            <h2>Meet Tattoo Artist <span class="y">LOY</span></h2>
+            <p>Loy has been part of Mr Tattoo Hanoi Studio since 2016. Calm, patient and meticulous, he is our go-to artist for mini tattoos, fine line and dotwork, where every dot and every hairline stroke has to be exactly right.</p>
+            <p>If you want a small, delicate tattoo that looks clean and crisp for years, Loy's steady hand and attention to detail make him a perfect fit, especially for first-timers.</p>
             <ul class="ticks">
-              <li>Style: [Realism / Lettering / Custom]</li>
-              <li>Highly skilled and dedicated</li>
-              <li>Exclusive design support</li>
+              <li>Specialties: mini tattoo, fine line, dotwork</li>
+              <li>With the studio since 2016</li>
+              <li>Gentle, careful and precise</li>
             </ul>
             <div class="artist-controls">
               <button class="artist-btn" onclick="prevArtistFn()" aria-label="Previous artist">&#10094;</button>
@@ -482,25 +537,25 @@
       </div>
     </section>
 
-    <!-- 7. QUY TRÌNH: mỗi bước có 1 ảnh minh họa (images/steps/step-N.svg, có thể thay bằng ảnh thật) -->
+    <!-- 7. QUY TRÌNH: mỗi bước có 1 ảnh minh họa -->
     <section class="section yellow">
       <div class="wrap">
         <h2>4-Step Process</h2>
         <ol class="steps">
           <li>
-            <figure class="step-figure"><img src="images/steps/step1.webp" alt="Consultation: sharing your tattoo idea with the artist" width="400" height="300" loading="lazy"></figure>
+            <figure class="step-figure"><img src="images/steps/step1.webp" alt="Consultation: sharing your tattoo idea with the artist" width="400" height="320" loading="lazy"></figure>
             <b>Consultation</b><span>Share your concept, placement, and size.</span>
           </li>
           <li>
-            <figure class="step-figure"><img src="images/steps/step2.webp" alt="Design and deposit: approving the sketch" width="400" height="300" loading="lazy"></figure>
+            <figure class="step-figure"><img src="images/steps/step2.webp" alt="Design and deposit: approving the sketch" width="400" height="320" loading="lazy"></figure>
             <b>Design &amp; Deposit</b><span>Approve the sketch and secure your booking slot.</span>
           </li>
           <li>
-            <figure class="step-figure"><img src="images/steps/step3.webp" alt="Inking session with sterile single-use needles" width="400" height="300" loading="lazy"></figure>
+            <figure class="step-figure"><img src="images/steps/step3.webp" alt="Inking session with sterile single-use needles" width="400" height="320" loading="lazy"></figure>
             <b>Inking Session</b><span>Sterilized equipment opened right in front of you.</span>
           </li>
           <li>
-            <figure class="step-figure"><img src="images/steps/step4.webp" alt="Aftercare: ointment and follow-up support" width="400" height="300" loading="lazy"></figure>
+            <figure class="step-figure"><img src="images/steps/step4.webp" alt="Aftercare: ointment and follow-up support" width="400" height="320" loading="lazy"></figure>
             <b>Aftercare</b><span>Receive clear instructions and follow-up support.</span>
           </li>
         </ol>
@@ -514,12 +569,12 @@
         <table>
           <thead><tr><th>Size / Type</th><th>Starts From</th></tr></thead>
           <tbody>
-            <tr><td>Mini (under 5cm)</td><td>[$10 / VND equivalent]</td></tr>
-            <tr><td>Medium (5-15cm)</td><td>[Contact for quote]</td></tr>
-            <tr><td>Large / Full Sleeve &amp; Back</td><td>Custom Quote</td></tr>
+            <tr><td>Mini (under 5cm)</td><td>From $10</td></tr>
+            <tr><td>Medium (5-15cm)</td><td>Free quote</td></tr>
+            <tr><td>Large / Full Sleeve &amp; Back</td><td>Custom quote</td></tr>
           </tbody>
         </table>
-        <p class="note">Actual pricing depends on detail level, colors, and placement. Send your ideas for a free estimate.</p>
+        <p class="note">Final price depends on detail, colors and placement. Send your idea on WhatsApp for a free estimate.</p>
       </div>
     </section>
 
@@ -528,7 +583,7 @@
       <div class="wrap promo">
         <div class="promo-grid">
           <div class="promo-img-left">
-            <img src="link-anh-khuyen-mai.jpg" alt="Mr Tattoo Hanoi Studio promotion poster" width="900" height="1267" loading="lazy">
+            <img src="link-anh-khuyen-mai.jpg" alt="Mr Tattoo Hanoi Studio promotion poster: save up to 50% on multiple tattoos" width="900" height="1267" loading="lazy">
           </div>
           <div>
             <div class="eyebrow">Limited-Time Offer</div>
@@ -587,14 +642,15 @@
       </div>
     </section>
 
-    <!-- 9. HỎI ĐÁP -->
+    <!-- 9. HỎI ĐÁP (khớp 100% với FAQPage JSON-LD ở đầu trang) -->
     <section class="section dark">
       <div class="wrap narrow">
         <h2>Frequently Asked <span class="y">Questions</span></h2>
+        <details><summary>How much does a tattoo cost in Hanoi?</summary><p>Mini tattoos at Mr Tattoo Hanoi Studio start from $10. Medium and large pieces are quoted by size, detail, color and placement. Message us on WhatsApp for a free quote.</p></details>
+        <details><summary>Where is Mr Tattoo Hanoi Studio?</summary><p>We are on the 2nd floor of 106 Hàng Buồm, in the Hanoi Old Quarter (Hoàn Kiếm), and open 24 hours, every day.</p></details>
         <details><summary>Do tattoos hurt?</summary><p>Pain levels vary depending on the placement and individual pain threshold. We will advise you on suitable placements.</p></details>
-        <details><summary>How are tattoo prices calculated?</summary><p>Prices depend on size, detail, color, and placement. Send us your idea for a free quote.</p></details>
-        <details><summary>How do I care for my new tattoo?</summary><p>Keep it clean, apply ointment as instructed, avoid direct sunlight and swimming for the first 2 weeks.</p></details>
         <details><summary>Are your equipment and needles sterile?</summary><p>100% single-use sterile needles and disposable equipment opened right in front of you.</p></details>
+        <details><summary>How do I care for my new tattoo?</summary><p>Keep it clean, apply ointment as instructed, avoid direct sunlight and swimming for the first 2 weeks.</p></details>
       </div>
     </section>
 
@@ -611,6 +667,20 @@
     </section>
 
   </main>
+
+  <!-- SCRIPT ĐỔI ẢNH HERO: 5 giây / ảnh, lặp vô tận -->
+  <script>
+    (function () {
+      var slides = document.querySelectorAll('#heroSlider .hero-slide');
+      if (slides.length < 2) return;
+      var i = 0;
+      setInterval(function () {
+        slides[i].classList.remove('active');
+        i = (i + 1) % slides.length;
+        slides[i].classList.add('active');
+      }, 5000);
+    })();
+  </script>
 
   <!-- SCRIPT ĐIỀU KHIỂN SLIDER NGHỆ SĨ -->
   <script>
