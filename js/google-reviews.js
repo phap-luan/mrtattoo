@@ -108,7 +108,15 @@
       'X-Goog-FieldMask': 'rating,userRatingCount,googleMapsUri,reviews.rating,reviews.text,reviews.relativePublishTimeDescription,reviews.authorAttribution'
     }
   })
-    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (r) {
+      if (!r.ok) {
+        return r.text().then(function (body) {
+          console.error('GOOGLE PLACES ERROR ' + r.status + ':', body);
+          throw new Error(r.status);
+        });
+      }
+      return r.json();
+    })
     .then(function (d) {
       useData(d);
       try { localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), d: d })); } catch (e) {}
