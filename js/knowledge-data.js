@@ -8,10 +8,11 @@ const knowledgeData = [
     "desc": "Everything you need to know about caring for your fresh tattoo in humid tropical weather, from washing techniques to ointment application."
   },
   {
-    "title": "iPhone Duo mở bán: Hàng trăm người xếp hàng từ 2 ngày trước, nhiều người có thể ra về tay trắng",
-    "slug": "knowledge/iphone-duo-mo-ban-hang-tram-nguoi-xep-hang-tu-2-ngay-truoc-nhieu-nguoi-co-the-ra-ve-tay-trang/",
-    "thumb": "anc.jpg",
-    "time": "22-12-2026",
-    "desc": "iPhone Duo mở bán: Hàng trăm người xếp hàng từ 2 ngày trước, nhiều người có thể ra về tay trắng"
+    "title": "The History of Tattooing in Vietnam: From Ancient Water Spirits to Modern Hanoi Ink",
+    "slug": "knowledge/the-history-of-tattooing-in-vietnam-from-ancient-water-spirits-to-modern-hanoi-ink/",
+    "thumb": "images/blog-images/vietco-tattoo.webp",
+    "time": "October 26, 2026",
+    "date": "2026-10-26",
+    "desc": "Explore the history of tattooing in Vietnam, from Đông Sơn-era beliefs and Trần dynasty warriors to highland traditions and Hanoi’s modern custom tattoo scene."
   }
 ];
