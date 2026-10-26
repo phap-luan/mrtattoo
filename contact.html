@@ -15,6 +15,117 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap&subset=vietnamese" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="frames.css">
+
+  <style>
+    /* =====================================================
+       BỐ CỤC LIÊN HỆ: desktop 2 cột, mobile xếp thành các hàng ngang
+       ===================================================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .contact-grid h3 { font-size: 1.8rem; margin: 0 0 20px; }
+    .contact-list { list-style: none; padding: 0; margin: 0; line-height: 1.9; font-size: 1.05rem; }
+    .contact-list li { margin-bottom: 8px; overflow-wrap: anywhere; }
+    .contact-list a { color: inherit; text-decoration: underline; }
+    .quick-booking { margin-top: 30px; }
+    .quick-booking .btn-row { margin-top: 15px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .map-box {
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+      border: 2px solid #222;
+      border-radius: 8px;
+    }
+    .map-box iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .map-note { font-size: .95rem; margin: 12px 0 0; color: #4a2410; }
+    .map-note strong { color: var(--r2); }
+
+    @media (max-width: 800px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+      .contact-grid h3 { font-size: 1.5rem; margin-bottom: 14px; }
+      .contact-list { font-size: 1rem; line-height: 1.7; }
+      .map-box { height: 320px; }
+      .quick-booking .btn { flex: 1 1 100%; text-align: center; }
+    }
+
+    /* =====================================================
+       LƯỚI ẢNH CỬA HÀNG (justified grid giống gallery.html)
+       ===================================================== */
+    .studio-photos { margin-bottom: 48px; }
+    .studio-photos h2::after { display: none; }   /* bỏ họa tiết sen dưới tiêu đề */
+    .studio-photos .sub { margin-bottom: 24px; }
+    .justified-grid {
+      --row-h: 220px;
+      --gap: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--gap);
+    }
+    .justified-grid::after { content: ""; flex-grow: 1000000; }
+    .jg-item {
+      position: relative;
+      display: block;
+      flex-basis: calc(var(--r) * var(--row-h));
+      overflow: hidden;
+      cursor: pointer;
+      background: #111;
+      border: 0;
+      border-radius: 8px;
+      padding: 0;
+      outline: 1px solid rgba(255, 196, 0, 0.15);
+      outline-offset: -1px;
+    }
+    .jg-item i { display: block; padding-bottom: calc(100% / var(--r)); }
+    .jg-item img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease, filter .3s ease;
+    }
+    .jg-item:hover img,
+    .jg-item:focus-visible img { transform: scale(1.05); filter: brightness(1.08); }
+    .jg-item:focus-visible { outline: 2px solid var(--y); outline-offset: -2px; }
+    @media (max-width: 1024px) { .justified-grid { --row-h: 180px; } }
+    @media (max-width: 768px)  { .justified-grid { --row-h: 130px; --gap: 4px; } }
+    @media (max-width: 480px)  { .justified-grid { --row-h: 100px; } }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 8px;
+      border: 2px solid var(--y);
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: var(--y);
+      font-size: 2.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      background: none;
+      border: 0;
+      line-height: 1;
+    }
+  </style>
 </head>
 <body>
 <!--SITE-HEADER:START-->
@@ -69,24 +180,35 @@
     </section>
 
     <!-- THÔNG TIN CHI TIẾT & BẢN ĐỒ -->
-    <section class="section yellow" style="padding: 40px 0;">
+    <section class="section yellow" style="padding: 60px 0 40px;">
       <div class="wrap">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
 
-          <!-- Cột trái: Thông tin liên hệ cơ bản -->
+        <!-- LƯỚI ẢNH CỬA HÀNG (nằm trên cùng, chung nền với phần thông tin) -->
+        <div class="studio-photos">
+          <h2>Mr Tattoo Studio</h2>
+          <p class="sub">A look inside and outside our studio at 106 Hang Buom, Hanoi Old Quarter.</p>
+          <div class="justified-grid" id="studioGrid"></div>
+        </div>
+
+        <div class="contact-grid">
+
+          <!-- Cột trái: Thông tin liên hệ -->
           <div>
-            <h3 style="font-size: 1.8rem; margin-bottom: 20px;">Studio Information</h3>
-            <ul style="list-style: none; padding: 0; line-height: 2; font-size: 1.1rem;">
+            <h3>Studio Information</h3>
+            <ul class="contact-list">
               <li><strong>📍 Address:</strong> 106 P. Hàng Buồm, Phố cổ Hà Nội, Hoàn Kiếm, Hà Nội 100000</li>
-              <li><strong>📞 Phone / WhatsApp:</strong> <a href="https://wa.me/84377616886" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">0377 616 886</a></li>
-              <li><strong>📷 Instagram:</strong> <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener" style="color: inherit; text-decoration: underline;">@mrtattoo.hanoi</a></li>
+              <li><strong>📞 Phone / WhatsApp:</strong> <a href="https://wa.me/84377616886" target="_blank" rel="noopener">0377 616 886</a></li>
+              <li><strong>📷 Instagram:</strong> <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">@mrtattoo.hanoi</a></li>
+              <li><strong>📘 Facebook:</strong> <a href="https://facebook.com/XamNgheThuatHaNoi/" target="_blank" rel="noopener">facebook.com/XamNgheThuatHaNoi/</a></li>
+              <li><strong>🌐 Website:</strong> <a href="https://mrtattoo.vn">mrtattoo.vn</a></li>
+              <li><strong>📧 Email:</strong> <a href="mailto:mrtattoo.hanoi@gmail.com">mrtattoo.hanoi@gmail.com</a></li>
               <li><strong>🕒 Opening Hours:</strong> Open 24 hours, every day</li>
             </ul>
 
-            <div style="margin-top: 30px;">
+            <div class="quick-booking">
               <h4>Quick Booking</h4>
               <p>The fastest way to get a quote and book your slot is through direct messaging (appointments are recommended):</p>
-              <div style="margin-top: 15px; display: flex; gap: 15px; flex-wrap: wrap;">
+              <div class="btn-row">
                 <a href="https://wa.me/84377616886" class="btn btn-dark" target="_blank" rel="noopener">Book on WhatsApp</a>
                 <a href="https://www.instagram.com/mrtattoo.hanoi/" class="btn btn-dark" target="_blank" rel="noopener">Message on Instagram</a>
               </div>
@@ -95,19 +217,18 @@
 
           <!-- Cột phải: Bản đồ Google Maps nhúng -->
           <div>
-            <h3 style="font-size: 1.8rem; margin-bottom: 20px;">Find Us on Map</h3>
-            <div style="width: 100%; height: 400px; border-radius: 8px; overflow: hidden; border: 2px solid #222;">
+            <h3>Find Us on Map</h3>
+            <div class="map-box">
               <iframe
                 src="https://www.google.com/maps?cid=6222529882335831777&amp;hl=en&amp;output=embed"
-                width="100%"
-                height="100%"
-                style="border:0;"
+                title="Mr Tattoo Hanoi Studio on Google Maps"
                 allowfullscreen=""
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade">
               </iframe>
             </div>
-            <p style="font-size: 0.9rem; margin-top: 10px; color: #555;">* We are located on the 2nd floor at 106 Hang Buom street. Feel free to call us if you need help finding the entrance!</p>
+            <p class="map-note"><strong>Find us on Google Maps:</strong> Search “Mr Tattoo Hanoi Studio” or “106 Hang Buom” to get directions.</p>
+            <p class="map-note">* We are located on the 2nd floor at 106 Hang Buom street. Feel free to call us if you need help finding the entrance!</p>
           </div>
 
         </div>
@@ -116,9 +237,91 @@
 
   </main>
 
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Studio photo preview">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close preview">&times;</button>
+    <img src="" alt="Enlarged studio photo" class="lightbox-img" id="lightboxImg">
+  </div>
+
   <!-- NHÚNG HEADER VÀ FOOTER TỰ ĐỘNG CHUNG CHO TOÀN HỆ THỐNG -->
   <script src="js/header.js"></script>
   <script src="js/footer.js"></script>
+
+  <!-- LƯỚI ẢNH CỬA HÀNG: sửa danh sách file ở đây. Thêm/bớt ảnh chỉ cần thêm/xóa 1 dòng. -->
+  <script>
+    (function () {
+      var STUDIO_PHOTOS = [
+        { src: "images/studio/studio-01.webp", alt: "Mr Tattoo Hanoi Studio, 106 Hang Buom, Old Quarter - photo 1" },
+        { src: "images/studio/studio-02.webp", alt: "Mr Tattoo Hanoi Studio, 106 Hang Buom, Old Quarter - photo 2" },
+        { src: "images/studio/studio-03.webp", alt: "Mr Tattoo Hanoi Studio, 106 Hang Buom, Old Quarter - photo 3" },
+        { src: "images/studio/studio-04.webp", alt: "Mr Tattoo Hanoi Studio, 106 Hang Buom, Old Quarter - photo 4" },
+        { src: "images/studio/studio-05.webp", alt: "Mr Tattoo Hanoi Studio, 106 Hang Buom, Old Quarter - photo 5" },
+        { src: "images/studio/studio-06.webp", alt: "Mr Tattoo Hanoi Studio, 106 Hang Buom, Old Quarter - photo 6" },
+        { src: "images/studio/studio-07.webp", alt: "Mr Tattoo Hanoi Studio, 106 Hang Buom, Old Quarter - photo 7" },
+        { src: "images/studio/studio-08.webp", alt: "Mr Tattoo Hanoi Studio, 106 Hang Buom, Old Quarter - photo 8" },
+        { src: "images/studio/studio-09.webp", alt: "Mr Tattoo Hanoi Studio, 106 Hang Buom, Old Quarter - photo 9" },
+        { src: "images/studio/studio-10.webp", alt: "Mr Tattoo Hanoi Studio, 106 Hang Buom, Old Quarter - photo 10" }
+      ];
+
+      var grid = document.getElementById('studioGrid');
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = document.getElementById('lightboxImg');
+      var lightboxClose = document.getElementById('lightboxClose');
+      if (!grid) return;
+
+      // Đo kích thước thật của từng ảnh để chia hàng theo tỉ lệ
+      function measure(p) {
+        return new Promise(function (resolve) {
+          var probe = new Image();
+          probe.onload = function () { p.w = probe.naturalWidth; p.h = probe.naturalHeight; resolve(p); };
+          probe.onerror = function () { p.w = 0; p.h = 0; resolve(p); };
+          probe.src = p.src;
+        });
+      }
+
+      Promise.all(STUDIO_PHOTOS.map(measure)).then(function (list) {
+        var frag = document.createDocumentFragment();
+        list.filter(function (p) { return p.w && p.h; }).forEach(function (p) {
+          var ratio = p.w / p.h;
+          var cell = document.createElement('button');
+          cell.type = 'button';
+          cell.className = 'jg-item';
+          cell.style.setProperty('--r', ratio.toFixed(4));
+          cell.style.flexGrow = (ratio * 100).toFixed(2);
+          cell.setAttribute('aria-label', 'View larger: ' + p.alt);
+
+          var spacer = document.createElement('i');
+          var img = document.createElement('img');
+          img.src = p.src;
+          img.alt = p.alt;
+          img.width = p.w;
+          img.height = p.h;
+          img.loading = 'lazy';
+          img.decoding = 'async';
+
+          cell.appendChild(spacer);
+          cell.appendChild(img);
+          cell.addEventListener('click', function () {
+            lightboxImg.src = p.src;
+            lightboxImg.alt = p.alt;
+            lightbox.classList.add('active');
+            lightboxClose.focus();
+          });
+          frag.appendChild(cell);
+        });
+        grid.appendChild(frag);
+      });
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        lightboxImg.src = '';
+      }
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+      });
+    })();
+  </script>
 
 <!--SITE-FOOTER:START-->
 <style>
@@ -164,7 +367,7 @@
       <p>Small, affordable tattoos in the heart of Hanoi's Old Quarter. Since 2012.</p>
       <p>
         <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">Instagram</a> ·
-        <a href="https://facebook.com/[trang-cua-ban]" target="_blank" rel="noopener">Facebook</a> ·
+        <a href="https://facebook.com/XamNgheThuatHaNoi/" target="_blank" rel="noopener">Facebook</a> ·
         <a href="https://wa.me/84377616886" target="_blank" rel="noopener">WhatsApp</a>
       </p>
     </div>

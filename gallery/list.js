@@ -11,7 +11,7 @@ const GALLERY_CONFIG = [
     folder: "medium-large-custom-pieces", 
     category: "Medium & Large Custom Pieces", 
     prefix: "medium-large-tattoo_", 
-    total: 80 
+    total: 100 
   },
   { 
     folder: "vietnamese-motifs", 

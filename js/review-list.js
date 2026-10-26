@@ -1,33 +1,30 @@
 // js/review-list.js
-// Danh sách đánh giá khách hàng cho khối "Client Reviews" ở index.html (chạy tự động giống Featured Portfolio).
+// Danh sách đánh giá khách hàng cho khối "Client Reviews" ở index.html (dải ảnh chạy tự động).
 //
-// CÁCH DÙNG:
-//  - Mỗi đánh giá là 1 object. Thay [..] bằng đánh giá THẬT của khách (copy từ Google Maps, Instagram, WhatsApp...).
-//  - rating: số sao 1-5 (để 0 thì không hiện sao).
-//  - image : ảnh của ô đánh giá (ảnh hình xăm / ảnh khách). Mặc định dùng ảnh trong images/tac-pham-N.webp.
-//            Muốn dùng ảnh riêng: đặt file vào images/reviews/ rồi sửa đường dẫn, ví dụ "images/reviews/anna.webp".
-//  - placeholder: true = ô mẫu chưa có nội dung thật. Khi đã điền đánh giá thật, XÓA dòng "placeholder: true"
-//            (hoặc đổi thành false) cho ô đó.
-//  - Thêm / bớt đánh giá: chỉ cần thêm / xóa object, không phải sửa index.html.
+// CÁCH DÙNG: mỗi đánh giá chỉ cần 2 thông tin:
+//  - image: link ảnh VUÔNG 1x1 (ảnh chụp màn hình đánh giá / ảnh khách). Ví dụ "images/reviews/anna.webp".
+//  - link : link bài đánh giá trên Google Maps. Ví dụ "https://goo.gl/maps/ex5GkbZcrvcTeGpM6?g_st=az"
+//           Khách bấm vào ảnh sẽ mở link này ở tab mới. Để link: "" thì ảnh chỉ để xem, không bấm được.
+//  - Thêm / bớt đánh giá: chỉ cần thêm / xóa 1 dòng, không phải sửa index.html.
+//  - Danh sách rỗng ([]) thì cả khối Client Reviews tự ẩn.
 //
-// Khi site đã có đủ đánh giá thật, đặt REVIEW_SHOW_PLACEHOLDERS = false để ẩn mọi ô mẫu còn sót lại.
-
-const REVIEW_SHOW_PLACEHOLDERS = true;
+// Các dòng dưới đây là MẪU: thay bằng ảnh và link thật của bạn.
 
 const REVIEW_LIST = [
-  { name: "[Client Name 1]",  country: "[Country]", rating: 0, image: "images/tac-pham-1.webp",  text: "[Real client review text 1]",  placeholder: true },
-  { name: "[Client Name 2]",  country: "[Country]", rating: 0, image: "images/tac-pham-2.webp",  text: "[Real client review text 2]",  placeholder: true },
-  { name: "[Client Name 3]",  country: "[Country]", rating: 0, image: "images/tac-pham-3.webp",  text: "[Real client review text 3]",  placeholder: true },
-  { name: "[Client Name 4]",  country: "[Country]", rating: 0, image: "images/tac-pham-4.webp",  text: "[Real client review text 4]",  placeholder: true },
-  { name: "[Client Name 5]",  country: "[Country]", rating: 0, image: "images/tac-pham-5.webp",  text: "[Real client review text 5]",  placeholder: true },
-  { name: "[Client Name 6]",  country: "[Country]", rating: 0, image: "images/tac-pham-6.webp",  text: "[Real client review text 6]",  placeholder: true },
-  { name: "[Client Name 7]",  country: "[Country]", rating: 0, image: "images/tac-pham-7.webp",  text: "[Real client review text 7]",  placeholder: true },
-  { name: "[Client Name 8]",  country: "[Country]", rating: 0, image: "images/tac-pham-8.webp",  text: "[Real client review text 8]",  placeholder: true },
-  { name: "[Client Name 9]",  country: "[Country]", rating: 0, image: "images/tac-pham-9.webp",  text: "[Real client review text 9]",  placeholder: true },
-  { name: "[Client Name 10]", country: "[Country]", rating: 0, image: "images/tac-pham-10.webp", text: "[Real client review text 10]", placeholder: true },
-  { name: "[Client Name 11]", country: "[Country]", rating: 0, image: "images/tac-pham-11.webp", text: "[Real client review text 11]", placeholder: true },
-  { name: "[Client Name 12]", country: "[Country]", rating: 0, image: "images/tac-pham-12.webp", text: "[Real client review text 12]", placeholder: true },
-  { name: "[Client Name 13]", country: "[Country]", rating: 0, image: "images/tac-pham-13.webp", text: "[Real client review text 13]", placeholder: true },
-  { name: "[Client Name 14]", country: "[Country]", rating: 0, image: "images/tac-pham-14.webp", text: "[Real client review text 14]", placeholder: true },
-  { name: "[Client Name 15]", country: "[Country]", rating: 0, image: "images/tac-pham-15.webp", text: "[Real client review text 15]", placeholder: true }
+  { image: "images/review/tattoo-review-01.webp", link: "https://goo.gl/maps/MvXP6F5EFhP99taR8?g_st=az" },
+  { image: "images/review/tattoo-review-02.webp", link: "https://goo.gl/maps/KYEDp5GHDG7LKwjb9?g_st=az" },
+  { image: "images/review/tattoo-review-03.webp", link: "https://goo.gl/maps/qSEdQGoPAtXfL39e6?g_st=az" },
+  { image: "images/review/tattoo-review-04.webp", link: "https://goo.gl/maps/h1imKZ4fWSCfDT4Y9?g_st=az" },
+  { image: "images/review/tattoo-review-05.webp", link: "https://goo.gl/maps/oko9G2SrQtPHPN5a7?g_st=az" },
+  { image: "images/review/tattoo-review-06.webp", link: "https://goo.gl/maps/BFwR3aMTHVV81X9i7?g_st=az" },
+  { image: "images/review/tattoo-review-07.webp", link: "https://goo.gl/maps/CpkMnF47XZnTUufe6?g_st=az" },
+  { image: "images/review/tattoo-review-08.webp", link: "https://goo.gl/maps/sWWwacc7KYZFjeL59?g_st=az" },
+  { image: "images/review/tattoo-review-09.webp", link: "https://goo.gl/maps/RA3YvugL8BWkYAJX7?g_st=az" },
+  { image: "images/review/tattoo-review-10.webp", link: "https://goo.gl/maps/4VV7ATjQ3JHJfxFf8?g_st=az" },
+  { image: "images/review/tattoo-review-11.webp", link: "https://goo.gl/maps/hCHVMvFF1oFgJMtS9?g_st=az" },
+  { image: "images/review/tattoo-review-12.webp", link: "https://goo.gl/maps/RHooG1AYeupH9kNR6?g_st=az" },
+  { image: "images/review/tattoo-review-13.webp", link: "https://goo.gl/maps/ERV7TbGWK9ZcQJwm8?g_st=az" },
+  { image: "images/review/tattoo-review-14.webp", link: "https://goo.gl/maps/3yr7G7BsqJd8c1au6?g_st=az" },
+  { image: "images/review/tattoo-review-15.webp", link: "https://goo.gl/maps/4wuRmzNgc7MwxPf88?g_st=az" },
+  { image: "images/review/tattoo-review-16.webp", link: "https://goo.gl/maps/ex5GkbZcrvcTeGpM6?g_st=az" }
 ];

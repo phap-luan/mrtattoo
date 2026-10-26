@@ -46,6 +46,67 @@
     }
 
     /* =====================================================
+       FEATURED PORTFOLIO: dải ảnh thumb tự chạy, bấm vào -> phóng to ảnh full
+       Dữ liệu lấy từ js/photo-list.js
+       ===================================================== */
+    .photo-item {
+      height: 280px;
+      flex-shrink: 0;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      background: var(--k2);
+      border: 2px solid rgba(226, 169, 45, .45);
+      outline: 1px solid rgba(226, 169, 45, .3);
+      outline-offset: -6px;
+      cursor: zoom-in;
+      transition: border-color .2s, transform .2s;
+    }
+    .photo-item:hover,
+    .photo-item:focus-visible { border-color: var(--y); transform: scale(1.02); }
+    .photo-item img { height: 100%; width: auto; object-fit: contain; display: block; }
+    .marquee-container:focus-within .marquee-track { animation-play-state: paused; }
+    @media (max-width: 800px) { .photo-item { height: 220px; } }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-container { overflow-x: auto; }
+    }
+
+    /* Lightbox: ảnh full */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(10, 4, 3, .92);
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border: 3px solid var(--y);
+      background: var(--k2);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .7);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: transparent;
+      border: 0;
+      color: var(--y);
+      font-size: 2.6rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0 8px;
+    }
+    .lightbox-close:hover,
+    .lightbox-close:focus-visible { color: var(--w); }
+
+    /* =====================================================
        SERVICES: ảnh nhỏ nằm gọn trong khung, dưới số 01-04
        ===================================================== */
     .service-thumb {
@@ -98,7 +159,8 @@
     }
 
     /* =====================================================
-       CLIENT REVIEWS: dải ô đánh giá tự chạy (giống Featured Portfolio)
+       CLIENT REVIEWS: dải ảnh vuông 1x1 tự chạy; bấm vào ảnh -> mở bài đánh giá trên Google Maps
+       Dữ liệu lấy từ js/review-list.js (chỉ cần: image + link)
        ===================================================== */
     .review-marquee {
       overflow: hidden;
@@ -116,45 +178,28 @@
       display: flex;
       gap: 18px;
       width: max-content;
-      animation: scrollMarquee 90s linear infinite; /* scrollMarquee có sẵn trong style.css */
+      animation: scrollMarquee 60s linear infinite; /* scrollMarquee có sẵn trong style.css */
     }
     .review-marquee:hover .review-track,
     .review-marquee:focus-within .review-track { animation-play-state: paused; }
     .review-card {
-      flex: 0 0 300px;
-      display: flex;
-      flex-direction: column;
+      flex: 0 0 280px;
+      aspect-ratio: 1 / 1;
+      display: block;
       margin: 0;
-      background: var(--k) url("patterns/tile-on-dark.svg");
+      overflow: hidden;
+      background: var(--k2);
       border: 2px solid rgba(226, 169, 45, .45);
       outline: 1px solid rgba(226, 169, 45, .3);
       outline-offset: -6px;
-      color: var(--w);
       transition: border-color .2s, transform .2s;
     }
-    .review-card:hover { border-color: var(--y); transform: scale(1.02); }
-    .review-photo {
-      background: var(--k2);
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-    }
-    .review-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .review-body { padding: 16px 18px 20px; display: flex; flex-direction: column; flex: 1; }
-    .review-stars { color: var(--y); letter-spacing: .18em; font-size: 1rem; margin: 0 0 6px; }
-    .review-card blockquote { margin: 0; padding: 0; border: 0; background: none; box-shadow: none; flex: 1; }
-    .review-card blockquote p {
-      margin: 0 0 14px;
-      font-style: italic;
-      font-size: .95rem;
-      line-height: 1.6;
-      color: var(--w);
-      display: -webkit-box;
-      -webkit-line-clamp: 5;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .review-card cite { color: var(--y); font-style: normal; font-weight: 700; font-size: .9rem; }
-    @media (max-width: 800px) { .review-card { flex-basis: 260px; } }
+    a.review-card { cursor: pointer; }
+    .review-card:hover,
+    .review-card:focus-visible { border-color: var(--y); transform: scale(1.02); }
+    .review-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .review-more { margin-top: 28px; }
+    @media (max-width: 800px) { .review-card { flex-basis: 230px; } }
     @media (prefers-reduced-motion: reduce) {
       .review-track { animation: none; }
       .review-marquee { overflow-x: auto; }
@@ -428,30 +473,14 @@
       </ul>
     </section>
 
-    <!-- 4. TÁC PHẨM & SLIDE ẢNH CHẠY NGANG -->
+    <!-- 4. FEATURED PORTFOLIO: dải ảnh thumb chạy ngang, dữ liệu lấy từ js/photo-list.js (thumb + full) -->
     <section id="tac-pham" class="section dark">
       <div class="wrap">
         <h2>Featured <span class="y">Portfolio</span></h2>
-        <p class="sub">Every tattoo is custom-designed, never copied.</p>
+        <p class="sub">A showcase of our custom works. Click any photo to see the details.</p>
 
-        <div class="marquee-container" aria-label="Tattoo gallery scrolling banner">
-          <div class="marquee-track">
-            <div class="marquee-item"><img src="images/tac-pham-1.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 1" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-2.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 2" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-3.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 3" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-4.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 4" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-5.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 5" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-6.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 6" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-7.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 7" loading="lazy"></div>
-<!-- Nhân bản lặp vô tận (alt rỗng + aria-hidden để không bị đọc/đếm 2 lần) -->
-            <div class="marquee-item"><img src="images/tac-pham-8.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 8" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-9.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 9" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-10.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 10" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-11.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 11" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-12.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 12" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-13.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 13" loading="lazy"></div>
-            <div class="marquee-item"><img src="images/tac-pham-14.webp" alt="Custom tattoo by Mr Tattoo Hanoi, example 14" loading="lazy"></div>
-          </div>
+        <div class="marquee-container" id="photoMarquee" aria-label="Tattoo gallery scrolling banner">
+          <div class="marquee-track" id="photoTrack"></div>
         </div>
 
         <div class="center">
@@ -460,6 +489,12 @@
         </div>
       </div>
     </section>
+
+    <!-- Lightbox hiển thị ảnh full khi bấm vào ảnh ở Featured Portfolio -->
+    <div class="lightbox" id="photoLightbox" role="dialog" aria-modal="true" aria-label="Enlarged tattoo photo">
+      <button type="button" class="lightbox-close" id="photoLightboxClose" aria-label="Close photo">&times;</button>
+      <img id="photoLightboxImg" src="" alt="">
+    </div>
 
     <!-- 5. DỊCH VỤ: mỗi ô có 1 ảnh nhỏ dưới số (thay ảnh trong images/services/) -->
     <section id="dich-vu" class="section yellow">
@@ -599,12 +634,16 @@
       </div>
     </section>
 
-    <!-- KHỐI 2: CLIENT REVIEWS - dải tự chạy, dữ liệu thật lấy từ Google Maps (js/google-reviews.js) -->
+    <!-- KHỐI 2: CLIENT REVIEWS - dải ảnh vuông tự chạy, dữ liệu lấy từ js/review-list.js (image + link) -->
     <section class="section dark" id="reviews">
       <div class="wrap">
         <h2>Client <span class="y">Reviews</span></h2>
+        <p class="sub">Real reviews from our clients on Google Maps. Click any review to read it in full.</p>
         <div class="review-marquee" aria-label="Client reviews scrolling banner">
           <div class="review-track" id="reviewTrack"></div>
+        </div>
+        <div class="center review-more">
+          <a href="https://www.google.com/maps/place/Mr+Tattoo+Hanoi+Studio/@21.0358734,105.8471359,18z/data=!4m8!3m7!1s0x3135ab5748b5ec49:0x565addf5a8e166e1!8m2!3d21.0353999!4d105.8501902!9m1!1b1!16s%2Fg%2F11h0y72cc1?hl=vi&amp;entry=ttu&amp;g_ep=EgoyMDI2MTAyMC4wIKXMDSoASAFQAw%3D%3D" class="btn" target="_blank" rel="noopener">See All Reviews on Google Maps</a>
         </div>
       </div>
     </section>
@@ -725,15 +764,117 @@
     }
   </script>
 
-  <!-- DỮ LIỆU: bài viết (do build.js sinh) + đánh giá khách hàng -->
+  <!-- DỮ LIỆU: bài viết (do build.js sinh) + ảnh Portfolio + đánh giá khách hàng -->
   <script src="js/meanings-data.js"></script>
   <script src="js/travel-data.js"></script>
   <script src="js/knowledge-data.js"></script>
+  <script src="js/photo-list.js"></script>
   <script src="js/review-list.js"></script>
 
-  <!-- CLIENT REVIEWS THẬT TỪ GOOGLE MAPS: google-config.js chứa API key, google-reviews.js xử lý -->
-  <script src="js/google-config.js"></script>
-  <script src="js/google-reviews.js"></script>
+  <!-- FEATURED PORTFOLIO tự chạy: hiển thị thumb, bấm vào -> mở ảnh full (lightbox) -->
+  <script>
+    (function () {
+      var track = document.getElementById('photoTrack');
+      var box = document.getElementById('photoMarquee');
+      if (!track || !box) return;
+
+      function esc(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+          .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      var list = (typeof PHOTO_LIST !== 'undefined' && Array.isArray(PHOTO_LIST)) ? PHOTO_LIST : [];
+      list = list.filter(function (p) { return p && (p.thumb || p.full); });
+      if (!list.length) { box.style.display = 'none'; return; }
+
+      function item(p, i, hidden) {
+        var thumb = p.thumb || p.full;
+        var full = p.full || p.thumb;
+        return '<button type="button" class="marquee-item photo-item" data-full="' + esc(full) + '"' +
+          ' aria-label="Enlarge tattoo photo ' + (i + 1) + '"' +
+          (hidden ? ' aria-hidden="true" tabindex="-1"' : '') + '>' +
+          '<img src="' + esc(thumb) + '" alt="' + (hidden ? '' : 'Custom tattoo by Mr Tattoo Hanoi, example ' + (i + 1)) + '" loading="lazy" onerror="this.parentNode.style.display=\'none\'">' +
+          '</button>';
+      }
+
+      // Nhân đôi danh sách để dải chạy lặp vô tận không bị đứt (-50% trong keyframes)
+      var html = '';
+      list.forEach(function (p, i) { html += item(p, i, false); });
+      list.forEach(function (p, i) { html += item(p, i, true); });
+      track.innerHTML = html;
+
+      // Lightbox
+      var lb = document.getElementById('photoLightbox');
+      var lbImg = document.getElementById('photoLightboxImg');
+      var lbClose = document.getElementById('photoLightboxClose');
+      var lastFocus = null;
+
+      function openLb(src, trigger) {
+        lastFocus = trigger || null;
+        lbImg.src = src;
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        lbClose.focus();
+      }
+      function closeLb() {
+        lb.classList.remove('open');
+        lbImg.removeAttribute('src');
+        document.body.style.overflow = '';
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      track.addEventListener('click', function (e) {
+        var b = e.target.closest ? e.target.closest('.photo-item') : null;
+        if (b) openLb(b.getAttribute('data-full'), b);
+      });
+      lb.addEventListener('click', function (e) {
+        if (e.target !== lbImg) closeLb();   // bấm nền hoặc nút X -> đóng
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && lb.classList.contains('open')) closeLb();
+      });
+    })();
+  </script>
+
+  <!-- CLIENT REVIEWS tự chạy: ảnh vuông, bấm vào -> mở link bài đánh giá -->
+  <script>
+    (function () {
+      var track = document.getElementById('reviewTrack');
+      if (!track) return;
+
+      function esc(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+          .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      var list = (typeof REVIEW_LIST !== 'undefined' && Array.isArray(REVIEW_LIST)) ? REVIEW_LIST : [];
+      list = list.filter(function (r) { return r && r.image; });
+
+      if (!list.length) {
+        var sec = document.getElementById('reviews');
+        if (sec) sec.style.display = 'none';
+        return;
+      }
+
+      function card(r, i, hidden) {
+        var alt = hidden ? '' : 'Client review ' + (i + 1) + ' of Mr Tattoo Hanoi Studio';
+        var img = '<img src="' + esc(r.image) + '" alt="' + esc(alt) + '" loading="lazy" onerror="this.parentNode.style.display=\'none\'">';
+        if (r.link) {
+          return '<a class="review-card" href="' + esc(r.link) + '" target="_blank" rel="noopener"' +
+            (hidden ? ' aria-hidden="true" tabindex="-1"' : ' aria-label="Open client review ' + (i + 1) + ' on Google Maps"') + '>' + img + '</a>';
+        }
+        return '<div class="review-card"' + (hidden ? ' aria-hidden="true"' : '') + '>' + img + '</div>';
+      }
+
+      // Nhân đôi danh sách để dải chạy lặp vô tận không bị đứt (-50% trong keyframes)
+      var html = '';
+      list.forEach(function (r, i) { html += card(r, i, false); });
+      list.forEach(function (r, i) { html += card(r, i, true); });
+      track.innerHTML = html;
+    })();
+  </script>
 
   <!-- TRAVEL CORNER & BLOG: 3 chuyên đề, mỗi chuyên đề 1 bài mới nhất (nổi bật) + 2 bài cũ hơn -->
   <script>
