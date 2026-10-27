@@ -6,7 +6,7 @@ const STUDIO = 'Mr Tattoo Hanoi Studio';
 const LOGO_URL = `${SITE}/images/og-cover.jpg`;
 
 // Các trang tĩnh ở thư mục gốc sẽ được nhúng sẵn header/footer
-const STATIC_PAGES = ['index.html', 'about-us.html', 'gallery.html', 'design.html', 'blog.html', 'contact.html'];
+const STATIC_PAGES = ['index.html', 'info-mr-tattoo/index.html', 'tattoo-gallery/index.html', 'designs/index.html', 'blog/index.html', 'contact/index.html'];
 
 const articles = require('./articles.json');
 
@@ -112,18 +112,19 @@ document.addEventListener('DOMContentLoaded', function () {${rootDetect}
   }
 
   // To mau muc menu cua trang hien tai
-  var here = p.split('/').pop() || 'index.html';
+  var here = p.replace(/index\\.html$/, '');
+  if (here.charAt(here.length - 1) !== '/') here += '/';
   document.querySelectorAll('.desktop-nav a:not(.btn)').forEach(function (link) {
-    var href = link.getAttribute('href');
-    if (href.indexOf('#') === -1 && href.split('/').pop() === here) {
+    var href = link.getAttribute('href') || '';
+    if (href.indexOf('#') === -1 && href === here) {
       link.style.color = 'var(--y)';
     }
   });
 
-  // blog.html#meanings | #travel | #knowledge -> mo dung tab chuyen de
+  // /blog/#meanings | #travel | #knowledge -> mo dung tab chuyen de
   // (dung cho cac link "chuyen de" tu khoi Travel Corner & Blog o trang chu)
   function openBlogTabFromHash() {
-    if (here !== 'blog.html') return;
+    if (here !== '/blog/') return;
     var map = { meanings: 0, travel: 1, knowledge: 2 };
     var key = (window.location.hash || '').replace('#', '');
     var btns = document.querySelectorAll('.blog-tab-btn');
@@ -236,7 +237,7 @@ articles.forEach(art => {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE + '/' },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE}/blog.html` },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE}/blog/` },
       { '@type': 'ListItem', position: 3, name: art.title, item: currentUrl }
     ]
   };
@@ -440,7 +441,7 @@ ${withRoot(headerTpl, '../../')}
     <div class="wrap">
       <article class="article-card">
         <nav class="article-breadcrumb" aria-label="Breadcrumb">
-          <a href="../../index.html">Home</a> › <a href="../../blog.html">Blog</a> › <span>${categoryLabel}</span>
+          <a href="/">Home</a> › <a href="/blog/">Blog</a> › <span>${categoryLabel}</span>
         </nav>
         <div class="article-meta">
           <span class="article-cat-badge">${categoryLabel}</span>
@@ -544,14 +545,14 @@ fs.writeFileSync('js/knowledge-data.js',
 /* ------------------------------------------------------------------ */
 const sitemapEntries = [
   { loc: `${SITE}/`, priority: '1.0' },
-  { loc: `${SITE}/about-us.html`, priority: '0.7' },
-  { loc: `${SITE}/gallery.html`, priority: '0.8' },
-  { loc: `${SITE}/design.html`, priority: '0.8' },
-  { loc: `${SITE}/blog.html`, priority: '0.7' },
-  { loc: `${SITE}/contact.html`, priority: '0.7' }
+  { loc: `${SITE}/info-mr-tattoo/`, priority: '0.7' },
+  { loc: `${SITE}/tattoo-gallery/`, priority: '0.8' },
+  { loc: `${SITE}/designs/`, priority: '0.8' },
+  { loc: `${SITE}/blog/`, priority: '0.7' },
+  { loc: `${SITE}/contact/`, priority: '0.7' }
 ].filter(e => {
-  const file = e.loc === `${SITE}/` ? 'index.html' : e.loc.replace(`${SITE}/`, '');
-  return fs.existsSync(file);
+  const rel = e.loc.replace(`${SITE}/`, '');           // '' hoac 'blog/'
+  return fs.existsSync(rel + 'index.html');
 });
 
 [...finalMeanings, ...finalTravel, ...finalKnowledge].forEach(item => {
