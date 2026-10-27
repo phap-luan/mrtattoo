@@ -10,8 +10,8 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://mrtattoo.vn/blog/">
 
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/frames.css">
+  <link rel="stylesheet" href="/mrtattoo/style.css">
+  <link rel="stylesheet" href="/mrtattoo/frames.css">
 
   <style>
     .blog-nav-tabs {
@@ -235,25 +235,25 @@
   </style>
 
   <!-- Nhúng 3 file dữ liệu riêng biệt do build.js tự động tạo -->
-  <script src="/js/meanings-data.js"></script>
-  <script src="/js/travel-data.js"></script>
-  <script src="/js/knowledge-data.js"></script>
+  <script src="/mrtattoo/js/meanings-data.js"></script>
+  <script src="/mrtattoo/js/travel-data.js"></script>
+  <script src="/mrtattoo/js/knowledge-data.js"></script>
 </head>
 <body>
 <!--SITE-HEADER:START-->
 <header class="site-header">
-  <a href="/" class="logo">MR TATTOO HANOI<span>.</span></a>
+  <a href="/mrtattoo/" class="logo">MR TATTOO HANOI<span>.</span></a>
 
   <!-- Desktop menu -->
   <nav class="desktop-nav" aria-label="Main Navigation">
-    <a href="/">Home</a>
-    <a href="/info-mr-tattoo/">About Us</a>
-    <a href="/tattoo-gallery/">Portfolio</a>
-    <a href="/designs/">Design</a>
-    <a href="/#dich-vu">Services</a>
-    <a href="/blog/">Blog</a>
-    <a href="/contact/">Contact</a>
-    <a href="/#lien-he" class="btn btn-small">Book Now</a>
+    <a href="/mrtattoo/">Home</a>
+    <a href="/mrtattoo/info-mr-tattoo/">About Us</a>
+    <a href="/mrtattoo/tattoo-gallery/">Portfolio</a>
+    <a href="/mrtattoo/designs/">Design</a>
+    <a href="/mrtattoo/#dich-vu">Services</a>
+    <a href="/mrtattoo/blog/">Blog</a>
+    <a href="/mrtattoo/contact/">Contact</a>
+    <a href="/mrtattoo/#lien-he" class="btn btn-small">Book Now</a>
   </nav>
 
   <!-- Mobile hamburger button -->
@@ -268,14 +268,14 @@
 <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation">
   <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close Menu">&times;</button>
-  <a href="/">Home</a>
-  <a href="/info-mr-tattoo/">About Us</a>
-  <a href="/tattoo-gallery/">Portfolio</a>
-  <a href="/designs/">Design</a>
-  <a href="/#dich-vu">Services</a>
-  <a href="/blog/">Blog</a>
-  <a href="/contact/">Contact</a>
-  <a href="/#lien-he" class="btn" style="text-align: center; margin-top: 15px;">Book Now</a>
+  <a href="/mrtattoo/">Home</a>
+  <a href="/mrtattoo/info-mr-tattoo/">About Us</a>
+  <a href="/mrtattoo/tattoo-gallery/">Portfolio</a>
+  <a href="/mrtattoo/designs/">Design</a>
+  <a href="/mrtattoo/#dich-vu">Services</a>
+  <a href="/mrtattoo/blog/">Blog</a>
+  <a href="/mrtattoo/contact/">Contact</a>
+  <a href="/mrtattoo/#lien-he" class="btn" style="text-align: center; margin-top: 15px;">Book Now</a>
 </nav>
 
 <!--SITE-HEADER:END-->
@@ -345,14 +345,14 @@
 
   <!-- FOOTER & NÚT NỔI TỰ ĐỘNG NHÚNG TỪ js/footer.js -->
 
-  <script src="/js/header.js"></script>
-  <script src="/js/footer.js"></script>
+  <script src="/mrtattoo/js/header.js"></script>
+  <script src="/mrtattoo/js/footer.js"></script>
 
   <script>
     const itemsPerPage = 10;
 
     // Duong dan tuyet doi: bai viet nam o /tattoo-meanings/..., khong phai /blog/...
-    const abs = u => (!u || /^(https?:)?\/\//.test(u) || u.charAt(0) === '/') ? u : '/' + u;
+    const abs = u => (!u || /^(https?:)?\/\//.test(u) || u.charAt(0) === '/') ? (u.indexOf('/mrtattoo/') === 0 ? u : '/mrtattoo' + u) : '/mrtattoo/' + u;
 
     function renderBlogList(category, page = 1) {
       // Lấy dữ liệu tương ứng từ 3 biến meaningsData, travelData, knowledgeData
@@ -493,12 +493,12 @@
     <div>
       <h4 class="footer-title">Explore</h4>
       <ul class="explore-list">
-        <li><a href="/">Home</a></li>
-        <li><a href="/info-mr-tattoo/">About Us</a></li>
-        <li><a href="/tattoo-gallery/">Portfolio</a></li>
-        <li><a href="/designs/">Design</a></li>
-        <li><a href="/blog/">Blog &amp; Stories</a></li>
-        <li><a href="/contact/">Contact &amp; Map</a></li>
+        <li><a href="/mrtattoo/">Home</a></li>
+        <li><a href="/mrtattoo/info-mr-tattoo/">About Us</a></li>
+        <li><a href="/mrtattoo/tattoo-gallery/">Portfolio</a></li>
+        <li><a href="/mrtattoo/designs/">Design</a></li>
+        <li><a href="/mrtattoo/blog/">Blog &amp; Stories</a></li>
+        <li><a href="/mrtattoo/contact/">Contact &amp; Map</a></li>
       </ul>
     </div>
   </div>

@@ -1,9 +1,9 @@
 // js/header.js — TU DONG SINH boi build.js tu partials/header.html. Khong sua tay.
 document.addEventListener('DOMContentLoaded', function () {
   var p = window.location.pathname;
-  var isSub = p.indexOf('/tattoo-meanings/') !== -1 || p.indexOf('/hanoi-travel-corner/') !== -1 || p.indexOf('/knowledge/') !== -1;
+  var isSub = p.indexOf('/mrtattoo/tattoo-meanings/') !== -1 || p.indexOf('/mrtattoo/hanoi-travel-corner/') !== -1 || p.indexOf('/mrtattoo/knowledge/') !== -1;
   var root = isSub ? '../../' : '';
-  var TEMPLATE = "<header class=\"site-header\">\n  <a href=\"/\" class=\"logo\">MR TATTOO HANOI<span>.</span></a>\n\n  <!-- Desktop menu -->\n  <nav class=\"desktop-nav\" aria-label=\"Main Navigation\">\n    <a href=\"/\">Home</a>\n    <a href=\"/info-mr-tattoo/\">About Us</a>\n    <a href=\"/tattoo-gallery/\">Portfolio</a>\n    <a href=\"/designs/\">Design</a>\n    <a href=\"/#dich-vu\">Services</a>\n    <a href=\"/blog/\">Blog</a>\n    <a href=\"/contact/\">Contact</a>\n    <a href=\"/#lien-he\" class=\"btn btn-small\">Book Now</a>\n  </nav>\n\n  <!-- Mobile hamburger button -->\n  <button class=\"mobile-menu-btn\" aria-label=\"Toggle Menu\" id=\"mobileMenuBtn\">\n    <span></span>\n    <span></span>\n    <span></span>\n  </button>\n</header>\n\n<!-- Mobile slide-out menu -->\n<div class=\"mobile-nav-overlay\" id=\"mobileNavOverlay\"></div>\n<nav class=\"mobile-nav\" id=\"mobileNav\" aria-label=\"Mobile Navigation\">\n  <button class=\"mobile-close-btn\" id=\"mobileCloseBtn\" aria-label=\"Close Menu\">&times;</button>\n  <a href=\"/\">Home</a>\n  <a href=\"/info-mr-tattoo/\">About Us</a>\n  <a href=\"/tattoo-gallery/\">Portfolio</a>\n  <a href=\"/designs/\">Design</a>\n  <a href=\"/#dich-vu\">Services</a>\n  <a href=\"/blog/\">Blog</a>\n  <a href=\"/contact/\">Contact</a>\n  <a href=\"/#lien-he\" class=\"btn\" style=\"text-align: center; margin-top: 15px;\">Book Now</a>\n</nav>\n";
+  var TEMPLATE = "<header class=\"site-header\">\n  <a href=\"/mrtattoo/\" class=\"logo\">MR TATTOO HANOI<span>.</span></a>\n\n  <!-- Desktop menu -->\n  <nav class=\"desktop-nav\" aria-label=\"Main Navigation\">\n    <a href=\"/mrtattoo/\">Home</a>\n    <a href=\"/mrtattoo/info-mr-tattoo/\">About Us</a>\n    <a href=\"/mrtattoo/tattoo-gallery/\">Portfolio</a>\n    <a href=\"/mrtattoo/designs/\">Design</a>\n    <a href=\"/mrtattoo/#dich-vu\">Services</a>\n    <a href=\"/mrtattoo/blog/\">Blog</a>\n    <a href=\"/mrtattoo/contact/\">Contact</a>\n    <a href=\"/mrtattoo/#lien-he\" class=\"btn btn-small\">Book Now</a>\n  </nav>\n\n  <!-- Mobile hamburger button -->\n  <button class=\"mobile-menu-btn\" aria-label=\"Toggle Menu\" id=\"mobileMenuBtn\">\n    <span></span>\n    <span></span>\n    <span></span>\n  </button>\n</header>\n\n<!-- Mobile slide-out menu -->\n<div class=\"mobile-nav-overlay\" id=\"mobileNavOverlay\"></div>\n<nav class=\"mobile-nav\" id=\"mobileNav\" aria-label=\"Mobile Navigation\">\n  <button class=\"mobile-close-btn\" id=\"mobileCloseBtn\" aria-label=\"Close Menu\">&times;</button>\n  <a href=\"/mrtattoo/\">Home</a>\n  <a href=\"/mrtattoo/info-mr-tattoo/\">About Us</a>\n  <a href=\"/mrtattoo/tattoo-gallery/\">Portfolio</a>\n  <a href=\"/mrtattoo/designs/\">Design</a>\n  <a href=\"/mrtattoo/#dich-vu\">Services</a>\n  <a href=\"/mrtattoo/blog/\">Blog</a>\n  <a href=\"/mrtattoo/contact/\">Contact</a>\n  <a href=\"/mrtattoo/#lien-he\" class=\"btn\" style=\"text-align: center; margin-top: 15px;\">Book Now</a>\n</nav>\n";
 
   // Du phong: neu trang chua duoc build san header thi chen bang JS
   if (!document.querySelector('.site-header')) {
@@ -11,11 +11,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // To mau muc menu cua trang hien tai
-  var here = p.replace(/index\.html$/, '');
+  var here = p.replace(/^\/mrtattoo/, '').replace(/index\.html$/, '');
   if (here.charAt(here.length - 1) !== '/') here += '/';
   document.querySelectorAll('.desktop-nav a:not(.btn)').forEach(function (link) {
     var href = link.getAttribute('href') || '';
-    if (href.indexOf('#') === -1 && href === here) {
+    if (href.indexOf('#') === -1 && href.replace(/^\/mrtattoo/, '') === here) {
       link.style.color = 'var(--y)';
     }
   });
