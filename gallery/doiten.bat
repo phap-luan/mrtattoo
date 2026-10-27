@@ -24,8 +24,8 @@ echo.
 echo Đang đổi tên, vui lòng chờ...
 echo ---------------------------------------------------
 
-:: Gọi PowerShell để đổi tên với số đếm bắt đầu tùy chỉnh
-powershell -Command "$dir = '%target_dir%'; $prefix = '%prefix%'; $i = [int]%start_num%; Get-ChildItem -Path $dir -Filter '*.webp' | Sort-Object Name | ForEach-Object { $newName = '{0}{1:D3}.webp' -f $prefix, $i; Rename-Item $_.FullName -NewName $newName; Write-Host ('[OK] ' + $_.Name + ' ---> ' + $newName); $i++ }"
+:: Gọi PowerShell để đổi tên với số đếm tăng dần tự nhiên (không giới hạn 3 chữ số)
+powershell -Command "$dir = '%target_dir%'; $prefix = '%prefix%'; $i = [int]%start_num%; Get-ChildItem -Path $dir -Filter '*.webp' | Sort-Object Name | ForEach-Object { $newName = '{0}{1}.webp' -f $prefix, $i; Rename-Item $_.FullName -NewName $newName; Write-Host ('[OK] ' + $_.Name + ' ---> ' + $newName); $i++ }"
 
 echo ---------------------------------------------------
 echo [HOÀN TẤT] Đã đổi tên thành công theo số thứ tự mới!

@@ -15,9 +15,9 @@ const DESIGN_CONFIG = [
     total: 30
   },
   {
-    folder: "vietnamese-motif-designs",
+    folder: "vietnamese-tattoo-designs",
     category: "Vietnamese Motifs",
-    prefix: "vn-design_",
-    total: 20
+    prefix: "vn-tattoo-design_",
+    total: 100
   }
 ];
