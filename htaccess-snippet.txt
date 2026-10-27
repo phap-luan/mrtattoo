@@ -1,0 +1,6 @@
+# Dan vao dau file .htaccess (Apache / cPanel)
+Redirect 301 /about-us.html /info-mr-tattoo/
+Redirect 301 /blog.html /blog/
+Redirect 301 /contact.html /contact/
+Redirect 301 /design.html /designs/
+Redirect 301 /gallery.html /tattoo-gallery/

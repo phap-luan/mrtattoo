@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var p = window.location.pathname;
   var isSub = p.indexOf('/tattoo-meanings/') !== -1 || p.indexOf('/hanoi-travel-corner/') !== -1 || p.indexOf('/knowledge/') !== -1;
   var root = isSub ? '../../' : '';
-  var TEMPLATE = "<header class=\"site-header\">\n  <a href=\"{{root}}index.html\" class=\"logo\">MR TATTOO HANOI<span>.</span></a>\n\n  <!-- Desktop menu -->\n  <nav class=\"desktop-nav\" aria-label=\"Main Navigation\">\n    <a href=\"{{root}}index.html\">Home</a>\n    <a href=\"{{root}}about-us.html\">About Us</a>\n    <a href=\"{{root}}gallery.html\">Portfolio</a>\n    <a href=\"{{root}}design.html\">Design</a>\n    <a href=\"{{root}}index.html#dich-vu\">Services</a>\n    <a href=\"{{root}}blog.html\">Blog</a>\n    <a href=\"{{root}}contact.html\">Contact</a>\n    <a href=\"{{root}}index.html#lien-he\" class=\"btn btn-small\">Book Now</a>\n  </nav>\n\n  <!-- Mobile hamburger button -->\n  <button class=\"mobile-menu-btn\" aria-label=\"Toggle Menu\" id=\"mobileMenuBtn\">\n    <span></span>\n    <span></span>\n    <span></span>\n  </button>\n</header>\n\n<!-- Mobile slide-out menu -->\n<div class=\"mobile-nav-overlay\" id=\"mobileNavOverlay\"></div>\n<nav class=\"mobile-nav\" id=\"mobileNav\" aria-label=\"Mobile Navigation\">\n  <button class=\"mobile-close-btn\" id=\"mobileCloseBtn\" aria-label=\"Close Menu\">&times;</button>\n  <a href=\"{{root}}index.html\">Home</a>\n  <a href=\"{{root}}about-us.html\">About Us</a>\n  <a href=\"{{root}}gallery.html\">Portfolio</a>\n  <a href=\"{{root}}design.html\">Design</a>\n  <a href=\"{{root}}index.html#dich-vu\">Services</a>\n  <a href=\"{{root}}blog.html\">Blog</a>\n  <a href=\"{{root}}contact.html\">Contact</a>\n  <a href=\"{{root}}index.html#lien-he\" class=\"btn\" style=\"text-align: center; margin-top: 15px;\">Book Now</a>\n</nav>\n";
+  var TEMPLATE = "<header class=\"site-header\">\n  <a href=\"/\" class=\"logo\">MR TATTOO HANOI<span>.</span></a>\n\n  <!-- Desktop menu -->\n  <nav class=\"desktop-nav\" aria-label=\"Main Navigation\">\n    <a href=\"/\">Home</a>\n    <a href=\"/info-mr-tattoo/\">About Us</a>\n    <a href=\"/tattoo-gallery/\">Portfolio</a>\n    <a href=\"/designs/\">Design</a>\n    <a href=\"/#dich-vu\">Services</a>\n    <a href=\"/blog/\">Blog</a>\n    <a href=\"/contact/\">Contact</a>\n    <a href=\"/#lien-he\" class=\"btn btn-small\">Book Now</a>\n  </nav>\n\n  <!-- Mobile hamburger button -->\n  <button class=\"mobile-menu-btn\" aria-label=\"Toggle Menu\" id=\"mobileMenuBtn\">\n    <span></span>\n    <span></span>\n    <span></span>\n  </button>\n</header>\n\n<!-- Mobile slide-out menu -->\n<div class=\"mobile-nav-overlay\" id=\"mobileNavOverlay\"></div>\n<nav class=\"mobile-nav\" id=\"mobileNav\" aria-label=\"Mobile Navigation\">\n  <button class=\"mobile-close-btn\" id=\"mobileCloseBtn\" aria-label=\"Close Menu\">&times;</button>\n  <a href=\"/\">Home</a>\n  <a href=\"/info-mr-tattoo/\">About Us</a>\n  <a href=\"/tattoo-gallery/\">Portfolio</a>\n  <a href=\"/designs/\">Design</a>\n  <a href=\"/#dich-vu\">Services</a>\n  <a href=\"/blog/\">Blog</a>\n  <a href=\"/contact/\">Contact</a>\n  <a href=\"/#lien-he\" class=\"btn\" style=\"text-align: center; margin-top: 15px;\">Book Now</a>\n</nav>\n";
 
   // Du phong: neu trang chua duoc build san header thi chen bang JS
   if (!document.querySelector('.site-header')) {
@@ -11,10 +11,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // To mau muc menu cua trang hien tai
-  var here = p.split('/').pop() || 'index.html';
+  var here = p.replace(/index\.html$/, '');
+  if (here.charAt(here.length - 1) !== '/') here += '/';
   document.querySelectorAll('.desktop-nav a:not(.btn)').forEach(function (link) {
-    var href = link.getAttribute('href');
-    if (href.indexOf('#') === -1 && href.split('/').pop() === here) {
+    var href = link.getAttribute('href') || '';
+    if (href.indexOf('#') === -1 && href === here) {
       link.style.color = 'var(--y)';
     }
   });
@@ -22,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // blog.html#meanings | #travel | #knowledge -> mo dung tab chuyen de
   // (dung cho cac link "chuyen de" tu khoi Travel Corner & Blog o trang chu)
   function openBlogTabFromHash() {
-    if (here !== 'blog.html') return;
+    if (here !== '/blog/') return;
     var map = { meanings: 0, travel: 1, knowledge: 2 };
     var key = (window.location.hash || '').replace('#', '');
     var btns = document.querySelectorAll('.blog-tab-btn');

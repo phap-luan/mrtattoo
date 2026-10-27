@@ -5,23 +5,23 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mrtattoo.vn/about-us.html</loc>
+    <loc>https://mrtattoo.vn/info-mr-tattoo/</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mrtattoo.vn/gallery.html</loc>
+    <loc>https://mrtattoo.vn/tattoo-gallery/</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mrtattoo.vn/design.html</loc>
+    <loc>https://mrtattoo.vn/designs/</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mrtattoo.vn/blog.html</loc>
+    <loc>https://mrtattoo.vn/blog/</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mrtattoo.vn/contact.html</loc>
+    <loc>https://mrtattoo.vn/contact/</loc>
     <priority>0.7</priority>
   </url>
   <url>
