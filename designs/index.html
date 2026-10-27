@@ -241,21 +241,20 @@
         filterBar.appendChild(btn);
 
         for (let i = 1; i <= group.total; i++) {
-          let indexStr = String(i).padStart(3, '0');
-          let filename = `${group.prefix}${indexStr}.webp`;
-          let seoAlt = `${group.category} tattoo design drawing #${i} by Mr Tattoo Hanoi Studio at 106 Hang Buom Old Quarter`;
+  let filename = `${group.prefix}${i}.webp`;
+  let seoAlt = `${group.category} tattoo design drawing #${i} by Mr Tattoo Hanoi Studio at 106 Hang Buom Old Quarter`;
 
-          allImagesData.push({
-            category: group.category,
-            filename: filename,
-            alt: seoAlt,
-            thumbSrc: `/design/${group.folder}/thumbs/${filename}`,
-            fullSrc: `/design/${group.folder}/full/${filename}`,
-            w: 0,
-            h: 0,
-            state: 'pending' // pending | ok | failed
-          });
-        }
+  allImagesData.push({
+    category: group.category,
+    filename: filename,
+    alt: seoAlt,
+    thumbSrc: `/design/${group.folder}/thumbs/${filename}`,
+    fullSrc: `/design/${group.folder}/full/${filename}`,
+    w: 0,
+    h: 0,
+    state: 'pending' // pending | ok | failed
+  });
+}
       });
 
       // Tải trước ảnh nhỏ để biết kích thước thật (tỉ lệ) của từng ảnh
