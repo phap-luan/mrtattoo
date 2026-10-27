@@ -6,7 +6,9 @@ const STUDIO = 'Mr Tattoo Hanoi Studio';
 const LOGO_URL = `${SITE}/images/og-cover.jpg`;
 
 // Các trang tĩnh ở thư mục gốc sẽ được nhúng sẵn header/footer
-const STATIC_PAGES = ['index.html', 'info-mr-tattoo/index.html', 'tattoo-gallery/index.html', 'designs/index.html', 'blog/index.html', 'contact/index.html'];
+// Bỏ qua các thư mục này khi quét tìm trang HTML
+const SKIP_DIRS = new Set(['node_modules', 'partials', 'js', 'images', 'gallery', 'design', 'patterns', 'fonts', 'css', '.git']);
+const WATCH = process.argv.includes('--watch');
 
 const articles = require('./articles.json');
 
@@ -97,10 +99,10 @@ const placeFooter = (html, block) => {
 /* ------------------------------------------------------------------ */
 if (!fs.existsSync('js')) fs.mkdirSync('js', { recursive: true });
 
+// Moi link/asset trong partials deu la duong dan tuyet doi (/...), nen khong can tinh "root" nua.
 const rootDetect = `
   var p = window.location.pathname;
-  var isSub = p.indexOf('/tattoo-meanings/') !== -1 || p.indexOf('/hanoi-travel-corner/') !== -1 || p.indexOf('/knowledge/') !== -1;
-  var root = isSub ? '../../' : '';`;
+  var root = '';`;
 
 const headerJs = `// js/header.js — TU DONG SINH boi build.js tu partials/header.html. Khong sua tay.
 document.addEventListener('DOMContentLoaded', function () {${rootDetect}
@@ -175,16 +177,61 @@ fs.writeFileSync('js/footer.js', footerJs, 'utf8');
 console.log('[Partials] js/header.js + js/footer.js da duoc sinh lai');
 
 /* ------------------------------------------------------------------ */
-/* Nhúng sẵn header/footer vào các trang tĩnh                          */
+/* Đồng bộ header/footer vào MỌI trang (trang tĩnh + bài viết cũ/mới)    */
+/* Quét tự động mọi file .html trong site — KHÔNG cần articles.json.     */
+/* Trang nào có cặp dấu hiệu <!--SITE-HEADER:START/END--> sẽ được cập nhật. */
 /* ------------------------------------------------------------------ */
-STATIC_PAGES.forEach(file => {
-  if (!fs.existsSync(file)) return;
-  let html = fs.readFileSync(file, 'utf8');
-  html = upsertBlock(html, 'SITE-HEADER', withRoot(headerTpl, ''), placeHeader);
-  html = upsertBlock(html, 'SITE-FOOTER', withRoot(footerTpl, ''), placeFooter);
-  fs.writeFileSync(file, html, 'utf8');
-  console.log(`[Static page] header/footer da nhung vao ${file}`);
-});
+function findHtmlFiles(dir, out) {
+  fs.readdirSync(dir, { withFileTypes: true }).forEach(ent => {
+    if (ent.name.startsWith('.')) return;
+    const full = path.join(dir, ent.name);
+    if (ent.isDirectory()) {
+      if (!SKIP_DIRS.has(ent.name)) findHtmlFiles(full, out);
+    } else if (ent.name.endsWith('.html')) {
+      out.push(full);
+    }
+  });
+  return out;
+}
+
+// Link kiểu cũ (còn sót trong bài viết cũ) -> URL mới. Chạy nhiều lần vẫn an toàn.
+const LEGACY_LINKS = [
+  [/href="(?:\.\.\/)*(?:\/)?about-us\.html"/g, 'href="/info-mr-tattoo/"'],
+  [/href="(?:\.\.\/)*(?:\/)?gallery\.html"/g, 'href="/tattoo-gallery/"'],
+  [/href="(?:\.\.\/)*(?:\/)?design\.html"/g, 'href="/designs/"'],
+  [/href="(?:\.\.\/)*(?:\/)?contact\.html"/g, 'href="/contact/"'],
+  [/href="(?:\.\.\/)*(?:\/)?blog\.html(#[^"]*)?"/g, (m, h) => `href="/blog/${h || ''}"`],
+  [/href="(?:\.\.\/)*(?:\/)?index\.html(#[^"]*)?"/g, (m, h) => `href="/${h || ''}"`],
+  [/href="(?:\.\.\/)+style\.css"/g, 'href="/style.css"'],
+  [/href="(?:\.\.\/)+frames\.css"/g, 'href="/frames.css"'],
+  [/src="(?:\.\.\/)+js\//g, 'src="/js/'],
+  [/url\("(?:\.\.\/)+patterns\//g, 'url("/patterns/']
+];
+
+function syncPages() {
+  const files = findHtmlFiles('.', []);
+  let n = 0, warn = [];
+  files.forEach(file => {
+    const raw = fs.readFileSync(file, 'utf8');
+    const crlf = raw.includes('\r\n');
+    let html = raw.replace(/\r\n/g, '\n');
+    const before = html;
+    const hasMarkers = html.includes('<!--SITE-HEADER:START-->') && html.includes('<!--SITE-FOOTER:START-->');
+    if (!hasMarkers && !/<body/.test(html)) return;           // không phải trang đầy đủ
+    if (!hasMarkers && path.basename(file) !== 'index.html') return; // chỉ tự chèn mới cho index.html
+    html = upsertBlock(html, 'SITE-HEADER', withRoot(headerTpl, ''), placeHeader);
+    html = upsertBlock(html, 'SITE-FOOTER', withRoot(footerTpl, ''), placeFooter);
+    if (!hasMarkers) warn.push(file);
+    LEGACY_LINKS.forEach(([re, to]) => { html = html.replace(re, to); });
+    if (html !== before) {
+      fs.writeFileSync(file, crlf ? html.replace(/\n/g, '\r\n') : html, 'utf8');
+      n++;
+    }
+  });
+  console.log(`[Sync] Da quet ${files.length} trang HTML, cap nhat ${n} trang`);
+  if (warn.length) console.log('[Sync] CHU Y: trang chua co dau hieu SITE-HEADER/SITE-FOOTER (da chen moi, hay kiem tra header/footer cu bi lap):\n  ' + warn.join('\n  '));
+}
+syncPages();
 
 /* ------------------------------------------------------------------ */
 /* Sinh các bài viết                                                   */
@@ -208,7 +255,7 @@ articles.forEach(art => {
   // Ảnh bìa: bài nằm sâu 2 cấp (../../images/...)
   const cleanImagePath = /^https?:/.test(art.image)
     ? art.image
-    : '../../' + art.image.replace(/^(\.\.\/)+/, '');
+    : '/' + art.image.replace(/^(\.\.\/)+/, '').replace(/^\//, '');
   const ogImage = absImage(art.image);
 
   const published = isoDate(art.date) || todayIso;
@@ -269,20 +316,20 @@ articles.forEach(art => {
   <meta name="twitter:description" content="${esc(art.description)}">
   <meta name="twitter:image" content="${ogImage}">
 
-  <!-- LUI 2 CAP THU MUC VE THU MUC GOC WEB -->
-  <link rel="stylesheet" href="../../style.css">
-  <link rel="stylesheet" href="../../frames.css">
+  <!-- Duong dan tuyet doi tu goc web -->
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/frames.css">
 
   <style>
     /* Nền XUNG QUANH khung bài viết: vàng hoa văn sen giống các khối vàng của about-us.html
-       (đường dẫn lùi 2 cấp vì bài nằm trong /chuyen-muc/ten-bai/) */
+       (đường dẫn tuyệt đối từ gốc web) */
     body {
-      background: var(--paper) url("../../patterns/tile-on-yellow-red.svg");
+      background: var(--paper) url("/patterns/tile-on-yellow-red.svg");
     }
     .article-page {
       position: relative;
       padding: 56px 0 80px;
-      background: var(--paper) url("../../patterns/tile-on-yellow-red.svg");
+      background: var(--paper) url("/patterns/tile-on-yellow-red.svg");
     }
     /* Dải viền thoi đỏ ở đầu khối, giống .section.yellow */
     .article-page::before {
@@ -290,7 +337,7 @@ articles.forEach(art => {
       position: absolute;
       left: 0; right: 0; top: 0;
       height: 14px;
-      background: url("../../patterns/band-red.svg") repeat-x center;
+      background: url("/patterns/band-red.svg") repeat-x center;
     }
 
     /* Khung nội dung: nền kem nhạt vani TRƠN (không hoa văn), viền đôi đỏ sẫm như .light-panel */
@@ -434,7 +481,7 @@ ${ldJson(breadcrumb)}
 </head>
 <body>
 <!--SITE-HEADER:START-->
-${withRoot(headerTpl, '../../')}
+${withRoot(headerTpl, '')}
 <!--SITE-HEADER:END-->
 
   <main class="article-page">
@@ -465,12 +512,12 @@ ${withRoot(headerTpl, '../../')}
   </main>
 
 <!--SITE-FOOTER:START-->
-${withRoot(footerTpl, '../../')}
+${withRoot(footerTpl, '')}
 <!--SITE-FOOTER:END-->
 
-  <!-- LUI 2 CAP THU MUC: gan menu mobile (header/footer da duoc nhung san) -->
-  <script src="../../js/header.js"></script>
-  <script src="../../js/footer.js"></script>
+  <!-- Gan menu mobile (header/footer da duoc nhung san) -->
+  <script src="/js/header.js"></script>
+  <script src="/js/footer.js"></script>
 
 </body>
 </html>`;
@@ -551,7 +598,7 @@ const sitemapEntries = [
   { loc: `${SITE}/blog/`, priority: '0.7' },
   { loc: `${SITE}/contact/`, priority: '0.7' }
 ].filter(e => {
-  const rel = e.loc.replace(`${SITE}/`, '');           // '' hoac 'blog/'
+  const rel = e.loc.replace(`${SITE}/`, '');   // '' hoac 'blog/' ...
   return fs.existsSync(rel + 'index.html');
 });
 
@@ -580,3 +627,15 @@ if (!fs.existsSync('robots.txt')) {
 }
 
 console.log('=> Build hoan tat!');
+
+// Che do tu dong: node build.js --watch  -> sua partials/*.html la tu cap nhat tat ca trang
+if (WATCH) {
+  console.log('[Watch] Dang theo doi thu muc partials/ ... (Ctrl+C de dung)');
+  let timer = null;
+  fs.watch('partials', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      require('child_process').spawnSync(process.execPath, [__filename], { stdio: 'inherit' });
+    }, 400);
+  });
+}

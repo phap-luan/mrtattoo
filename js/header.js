@@ -1,8 +1,7 @@
 // js/header.js — TU DONG SINH boi build.js tu partials/header.html. Khong sua tay.
 document.addEventListener('DOMContentLoaded', function () {
   var p = window.location.pathname;
-  var isSub = p.indexOf('/tattoo-meanings/') !== -1 || p.indexOf('/hanoi-travel-corner/') !== -1 || p.indexOf('/knowledge/') !== -1;
-  var root = isSub ? '../../' : '';
+  var root = '';
   var TEMPLATE = "<header class=\"site-header\">\n  <a href=\"/\" class=\"logo\">MR TATTOO HANOI<span>.</span></a>\n\n  <!-- Desktop menu -->\n  <nav class=\"desktop-nav\" aria-label=\"Main Navigation\">\n    <a href=\"/\">Home</a>\n    <a href=\"/info-mr-tattoo/\">About Us</a>\n    <a href=\"/tattoo-gallery/\">Portfolio</a>\n    <a href=\"/designs/\">Design</a>\n    <a href=\"/#dich-vu\">Services</a>\n    <a href=\"/blog/\">Blog</a>\n    <a href=\"/contact/\">Contact</a>\n    <a href=\"/#lien-he\" class=\"btn btn-small\">Book Now</a>\n  </nav>\n\n  <!-- Mobile hamburger button -->\n  <button class=\"mobile-menu-btn\" aria-label=\"Toggle Menu\" id=\"mobileMenuBtn\">\n    <span></span>\n    <span></span>\n    <span></span>\n  </button>\n</header>\n\n<!-- Mobile slide-out menu -->\n<div class=\"mobile-nav-overlay\" id=\"mobileNavOverlay\"></div>\n<nav class=\"mobile-nav\" id=\"mobileNav\" aria-label=\"Mobile Navigation\">\n  <button class=\"mobile-close-btn\" id=\"mobileCloseBtn\" aria-label=\"Close Menu\">&times;</button>\n  <a href=\"/\">Home</a>\n  <a href=\"/info-mr-tattoo/\">About Us</a>\n  <a href=\"/tattoo-gallery/\">Portfolio</a>\n  <a href=\"/designs/\">Design</a>\n  <a href=\"/#dich-vu\">Services</a>\n  <a href=\"/blog/\">Blog</a>\n  <a href=\"/contact/\">Contact</a>\n  <a href=\"/#lien-he\" class=\"btn\" style=\"text-align: center; margin-top: 15px;\">Book Now</a>\n</nav>\n";
 
   // Du phong: neu trang chua duoc build san header thi chen bang JS
@@ -20,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // blog.html#meanings | #travel | #knowledge -> mo dung tab chuyen de
+  // /blog/#meanings | #travel | #knowledge -> mo dung tab chuyen de
   // (dung cho cac link "chuyen de" tu khoi Travel Corner & Blog o trang chu)
   function openBlogTabFromHash() {
     if (here !== '/blog/') return;
