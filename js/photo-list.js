@@ -12,18 +12,18 @@
 // ví dụ "images/thumbs/tac-pham-1.webp" và "images/full/tac-pham-1.webp", chỉ cần sửa đường dẫn.
 
 const PHOTO_LIST = [
-  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_018.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_018.webp" },
-  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_002.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_002.webp" },
-  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_074.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_074.webp" },
-  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_008.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_008.webp" },
-  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_061.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_061.webp" },
-  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_093.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_093.webp" },
-  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_058.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_058.webp" },
-  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_042.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_042.webp" },
-  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_046.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_046.webp" },
-  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_051.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_051.webp" },
-  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_039.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_039.webp" },
-  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_028.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_028.webp" },
-  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_016.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_016.webp" },
-  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_055.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_055.webp" }
+  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_18.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_18.webp" },
+  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_2.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_2.webp" },
+  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_74.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_74.webp" },
+  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_8.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_8.webp" },
+  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_61.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_61.webp" },
+  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_93.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_93.webp" },
+  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_58.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_58.webp" },
+  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_42.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_42.webp" },
+  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_46.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_46.webp" },
+  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_51.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_51.webp" },
+  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_39.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_39.webp" },
+  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_28.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_28.webp" },
+  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_16.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_16.webp" },
+  { thumb: "gallery/medium-large-custom-pieces/thumbs/medium-large-tattoo_55.webp",  full: "gallery/medium-large-custom-pieces/full/medium-large-tattoo_55.webp" }
 ];
