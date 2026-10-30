@@ -241,8 +241,9 @@
 
     <section class="section dark" style="padding-top: 60px;">
       <div class="wrap" style="max-width: 1400px;">
-        <!-- Các nút mục được tạo tự động từ list.js; mục đầu tiên là mặc định -->
-        <div class="filter-bar" id="filterBar"></div>
+        <div class="filter-bar" id="filterBar">
+          <button class="filter-btn active" data-filter="all">All Tattoos</button>
+        </div>
 
         <div class="justified-grid" id="galleryGrid" aria-live="polite"></div>
         <p class="gallery-status" id="galleryStatus" hidden>Loading gallery…</p>
@@ -281,38 +282,35 @@
       const lightboxClose = document.getElementById('lightboxClose');
 
       let allImagesData = [];
-      // Mục mặc định = mục đầu tiên trong list.js
-      let currentFilter = GALLERY_CONFIG.length ? GALLERY_CONFIG[0].category : '';
+      let currentFilter = 'all';
       let currentPage = 1;
 
       GALLERY_CONFIG.forEach(group => {
         const btn = document.createElement('button');
-        btn.className = 'filter-btn' + (filterBar.children.length === 0 ? ' active' : '');
+        btn.className = 'filter-btn';
         btn.setAttribute('data-filter', group.category);
         btn.textContent = group.category;
         filterBar.appendChild(btn);
 
         // Ảnh số lớn nhất (mới nhất) ở đầu, ảnh số nhỏ nhất ở cuối
         for (let i = group.total; i >= 1; i--) {
-          let indexStr = String(i); // tên file không đệm số 0: _1, _2, _3...
-          let filename = `${group.prefix}${indexStr}.webp`;
-          let seoAlt = `${group.category} custom tattoo artwork #${i} by Mr Tattoo Hanoi Studio at 106 Hang Buom Old Quarter`;
+  let filename = `${group.prefix}${i}.webp`;
+  let seoAlt = `${group.category} custom tattoo artwork #${i} by Mr Tattoo Hanoi Studio at 106 Hang Buom Old Quarter`;
 
-          allImagesData.push({
-            category: group.category,
-            filename: filename,
-            alt: seoAlt,
-            thumbSrc: `/gallery/${group.folder}/thumbs/${filename}`,
-            fullSrc: `/gallery/${group.folder}/full/${filename}`,
-            w: 0,
-            h: 0,
-            state: 'pending' // pending | ok | failed
-          });
-        }
+  allImagesData.push({
+    category: group.category,
+    filename: filename,
+    alt: seoAlt,
+    thumbSrc: `/gallery/${group.folder}/thumbs/${filename}`,
+    fullSrc: `/gallery/${group.folder}/full/${filename}`,
+    w: 0,
+    h: 0,
+    state: 'pending' // pending | ok | failed
+  });
+}
       });
 
-      // Tải ảnh nhỏ để biết kích thước thật (tỉ lệ) của ảnh.
-      // CHỈ được gọi cho các ảnh của trang đang xem (tối đa PAGE_SIZE ảnh).
+      // Tải trước ảnh nhỏ để biết kích thước thật (tỉ lệ) của từng ảnh
       function measure(item) {
         if (item.state !== 'pending') return Promise.resolve(item);
         return new Promise(resolve => {
@@ -323,11 +321,7 @@
             item.state = (item.w && item.h) ? 'ok' : 'failed';
             resolve(item);
           };
-          probe.onerror = () => {
-            item.state = 'failed';
-            console.warn('Gallery: không tải được ảnh (sai tên file?)', item.thumbSrc);
-            resolve(item);
-          };
+          probe.onerror = () => { item.state = 'failed'; resolve(item); };
           probe.src = item.thumbSrc;
         });
       }
@@ -395,37 +389,27 @@
 
       let renderToken = 0;
 
-      async function renderGallery(filter = currentFilter, page = 1) {
+      async function renderGallery(filter = 'all', page = 1) {
         const token = ++renderToken;
         currentFilter = filter;
-        const wanted = allImagesData.filter(it => it.category === filter);
-
-        // Số trang tính theo TỔNG số ảnh khai báo trong list.js
-        const totalPages = Math.max(1, Math.ceil(wanted.length / PAGE_SIZE));
-        currentPage = Math.min(Math.max(1, page), totalPages);
-
-        const start = (currentPage - 1) * PAGE_SIZE;
-        const slice = wanted.slice(start, start + PAGE_SIZE);
-
-        // Số trang tính theo TỔNG số ảnh khai báo trong list.js
-        const totalPages = Math.max(1, Math.ceil(wanted.length / PAGE_SIZE));
-        currentPage = Math.min(Math.max(1, page), totalPages);
-
-        const start = (currentPage - 1) * PAGE_SIZE;
-        const slice = wanted.slice(start, start + PAGE_SIZE);
+        const wanted = allImagesData.filter(it => filter === 'all' || it.category === filter);
 
         galleryGrid.innerHTML = '';
         pagination.hidden = true;
         galleryStatus.hidden = false;
 
-        // Chỉ đo các ảnh của TRANG HIỆN TẠI (tối đa 50) thay vì toàn bộ thư viện
-        await Promise.all(slice.map(measure));
+        await Promise.all(wanted.map(measure));
         if (token !== renderToken) return; // người dùng đã bấm bộ lọc/trang khác
 
         galleryStatus.hidden = true;
 
-        // Chỉ hiển thị ảnh tải được
-        const pageItems = slice.filter(it => it.state === 'ok');
+        // Chỉ giữ ảnh tải được, rồi cắt theo trang
+        const valid = wanted.filter(it => it.state === 'ok');
+        const totalPages = Math.max(1, Math.ceil(valid.length / PAGE_SIZE));
+        currentPage = Math.min(Math.max(1, page), totalPages);
+
+        const start = (currentPage - 1) * PAGE_SIZE;
+        const pageItems = valid.slice(start, start + PAGE_SIZE);
 
         const frag = document.createDocumentFragment();
 
@@ -468,7 +452,7 @@
         });
       }
 
-      renderGallery(currentFilter, 1);
+      renderGallery('all', 1);
 
       const filterBtns = document.querySelectorAll('.filter-btn');
       filterBtns.forEach(btn => {
