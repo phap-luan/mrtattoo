@@ -186,8 +186,6 @@
   </style>
 
   <script src="/gallery/list.js"></script>
-  <!-- Danh sách ảnh thật, sinh bằng: node gen-gallery-files.js (nếu thiếu file này, trang dùng total trong list.js) -->
-  <script src="/gallery/files.js" onerror="console.warn('Chưa có gallery/files.js: đang dùng total trong list.js')"></script>
 </head>
 <body>
 <!--SITE-HEADER:START-->
@@ -295,20 +293,10 @@
         filterBar.appendChild(btn);
 
         // Ảnh số lớn nhất (mới nhất) ở đầu, ảnh số nhỏ nhất ở cuối
-        // Ưu tiên danh sách file THẬT (gallery/files.js, sinh bởi gen-gallery-files.js).
-        // Nếu chưa có thì dùng cách cũ: prefix + số từ total xuống 1 (tên không đệm số 0).
-        let names;
-        if (typeof GALLERY_FILES !== 'undefined' && Array.isArray(GALLERY_FILES[group.folder])) {
-          names = GALLERY_FILES[group.folder];
-        } else {
-          names = [];
-          for (let i = group.total; i >= 1; i--) names.push(`${group.prefix}${i}.webp`);
-        }
-
-        names.forEach(filename => {
-          const m = filename.match(/(\d+)\.webp$/i);
-          const num = m ? m[1] : filename;
-          const seoAlt = `${group.category} custom tattoo artwork #${num} by Mr Tattoo Hanoi Studio at 106 Hang Buom Old Quarter`;
+        for (let i = group.total; i >= 1; i--) {
+          let indexStr = String(i); // tên file không đệm số 0: _1, _2, _3...
+          let filename = `${group.prefix}${indexStr}.webp`;
+          let seoAlt = `${group.category} custom tattoo artwork #${i} by Mr Tattoo Hanoi Studio at 106 Hang Buom Old Quarter`;
 
           allImagesData.push({
             category: group.category,
@@ -320,7 +308,7 @@
             h: 0,
             state: 'pending' // pending | ok | failed
           });
-        });
+        }
       });
 
       // Tải ảnh nhỏ để biết kích thước thật (tỉ lệ) của ảnh.
