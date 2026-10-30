@@ -294,23 +294,25 @@
 
         // Ảnh số lớn nhất (mới nhất) ở đầu, ảnh số nhỏ nhất ở cuối
         for (let i = group.total; i >= 1; i--) {
-  let filename = `${group.prefix}${i}.webp`;
-  let seoAlt = `${group.category} custom tattoo artwork #${i} by Mr Tattoo Hanoi Studio at 106 Hang Buom Old Quarter`;
+          let indexStr = String(i); // tên file thật không đệm số 0: _1, _2, ... _379
+          let filename = `${group.prefix}${indexStr}.webp`;
+          let seoAlt = `${group.category} custom tattoo artwork #${i} by Mr Tattoo Hanoi Studio at 106 Hang Buom Old Quarter`;
 
-  allImagesData.push({
-    category: group.category,
-    filename: filename,
-    alt: seoAlt,
-    thumbSrc: `/gallery/${group.folder}/thumbs/${filename}`,
-    fullSrc: `/gallery/${group.folder}/full/${filename}`,
-    w: 0,
-    h: 0,
-    state: 'pending' // pending | ok | failed
-  });
-}
+          allImagesData.push({
+            category: group.category,
+            filename: filename,
+            alt: seoAlt,
+            thumbSrc: `/gallery/${group.folder}/thumbs/${filename}`,
+            fullSrc: `/gallery/${group.folder}/full/${filename}`,
+            w: 0,
+            h: 0,
+            state: 'pending' // pending | ok | failed
+          });
+        }
       });
 
-      // Tải trước ảnh nhỏ để biết kích thước thật (tỉ lệ) của từng ảnh
+      // Tải ảnh nhỏ để biết kích thước thật (tỉ lệ) của ảnh.
+      // CHỈ được gọi cho các ảnh của trang đang xem (tối đa PAGE_SIZE ảnh).
       function measure(item) {
         if (item.state !== 'pending') return Promise.resolve(item);
         return new Promise(resolve => {
@@ -321,7 +323,11 @@
             item.state = (item.w && item.h) ? 'ok' : 'failed';
             resolve(item);
           };
-          probe.onerror = () => { item.state = 'failed'; resolve(item); };
+          probe.onerror = () => {
+            item.state = 'failed';
+            console.warn('Gallery: không tải được ảnh (sai tên file?)', item.thumbSrc);
+            resolve(item);
+          };
           probe.src = item.thumbSrc;
         });
       }
@@ -394,22 +400,25 @@
         currentFilter = filter;
         const wanted = allImagesData.filter(it => filter === 'all' || it.category === filter);
 
+        // Số trang tính theo TỔNG số ảnh khai báo trong list.js
+        const totalPages = Math.max(1, Math.ceil(wanted.length / PAGE_SIZE));
+        currentPage = Math.min(Math.max(1, page), totalPages);
+
+        const start = (currentPage - 1) * PAGE_SIZE;
+        const slice = wanted.slice(start, start + PAGE_SIZE);
+
         galleryGrid.innerHTML = '';
         pagination.hidden = true;
         galleryStatus.hidden = false;
 
-        await Promise.all(wanted.map(measure));
+        // Chỉ đo các ảnh của TRANG HIỆN TẠI (tối đa 50) thay vì toàn bộ thư viện
+        await Promise.all(slice.map(measure));
         if (token !== renderToken) return; // người dùng đã bấm bộ lọc/trang khác
 
         galleryStatus.hidden = true;
 
-        // Chỉ giữ ảnh tải được, rồi cắt theo trang
-        const valid = wanted.filter(it => it.state === 'ok');
-        const totalPages = Math.max(1, Math.ceil(valid.length / PAGE_SIZE));
-        currentPage = Math.min(Math.max(1, page), totalPages);
-
-        const start = (currentPage - 1) * PAGE_SIZE;
-        const pageItems = valid.slice(start, start + PAGE_SIZE);
+        // Chỉ hiển thị ảnh tải được
+        const pageItems = slice.filter(it => it.state === 'ok');
 
         const frag = document.createDocumentFragment();
 
