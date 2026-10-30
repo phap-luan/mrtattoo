@@ -407,6 +407,13 @@
         const start = (currentPage - 1) * PAGE_SIZE;
         const slice = wanted.slice(start, start + PAGE_SIZE);
 
+        // Số trang tính theo TỔNG số ảnh khai báo trong list.js
+        const totalPages = Math.max(1, Math.ceil(wanted.length / PAGE_SIZE));
+        currentPage = Math.min(Math.max(1, page), totalPages);
+
+        const start = (currentPage - 1) * PAGE_SIZE;
+        const slice = wanted.slice(start, start + PAGE_SIZE);
+
         galleryGrid.innerHTML = '';
         pagination.hidden = true;
         galleryStatus.hidden = false;
