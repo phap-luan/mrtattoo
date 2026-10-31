@@ -15,5 +15,13 @@ const travelData = [
     "time": "October 26, 2026",
     "date": "2026-10-26",
     "desc": "Discover the top 10 places to visit in Hanoi, from Hoan Kiem Lake to Bat Trang. Then turn your trip into a small tattoo at Mr Tattoo Hanoi Studio, from $10."
+  },
+  {
+    "title": "TOP 16 Best Pho in Hanoi: A Bowl-by-Bowl Journey Through the Old Quarter",
+    "slug": "hanoi-travel-corner/top-16-best-pho-in-hanoi-a-bowl-by-bowl-journey-through-the-old-quarter/",
+    "thumb": "https://mia.vn/media/uploads/blog-du-lich/top-19-quan-pho-ha-noi-ngon-nuc-tieng-an-la-ghien-phan-2-08-1639125425.jpg",
+    "time": "October 31, 2026",
+    "date": "2026-10-31",
+    "desc": "Discover the top 16 pho restaurants in Hanoi, from century-old Old Quarter classics to Michelin-recognized bowls. Then keep the memory with a small travel tattoo from $10."
   }
 ];
