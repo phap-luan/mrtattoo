@@ -96,14 +96,58 @@
       padding: 40px 0;
     }
 
+    /* ---------------------------------------------------------
+       PHÂN TRANG (50 ảnh / trang)
+       --------------------------------------------------------- */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 40px 0 0;
+    }
+    .pagination[hidden] { display: none; }
+    .page-btn {
+      min-width: 42px;
+      height: 42px;
+      padding: 0 14px;
+      background: var(--k2);
+      color: var(--w);
+      border: 1px solid rgba(255, 196, 0, 0.3);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+    }
+    .page-btn:hover:not(:disabled),
+    .page-btn.active {
+      background: var(--y);
+      color: var(--k);
+      border-color: var(--y);
+    }
+    .page-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .page-btn:focus-visible { outline: 2px solid var(--y); outline-offset: 2px; }
+    .page-ellipsis {
+      color: #ecdcb8;
+      padding: 0 4px;
+      user-select: none;
+    }
+
     @media (max-width: 1024px) {
       .justified-grid { --row-h: 190px; }
     }
     @media (max-width: 768px) {
       .justified-grid { --row-h: 140px; --gap: 4px; }
+      .page-btn { min-width: 38px; height: 38px; padding: 0 10px; font-size: 0.9rem; }
     }
     @media (max-width: 480px) {
       .justified-grid { --row-h: 110px; }
+      .pagination { gap: 6px; }
     }
 
     .lightbox {
@@ -142,6 +186,7 @@
   </style>
 
   <script src="/design/design-list.js"></script>
+  <script src="/design/design-sizes.js"></script>
 </head>
 <body>
 <!--SITE-HEADER:START-->
@@ -197,12 +242,12 @@
 
     <section class="section dark" style="padding-top: 60px;">
       <div class="wrap" style="max-width: 1400px;">
-        <div class="filter-bar" id="filterBar">
-          <button class="filter-btn active" data-filter="all">All Designs</button>
-        </div>
+        <div class="filter-bar" id="filterBar"></div>
 
         <div class="justified-grid" id="galleryGrid" aria-live="polite"></div>
-        <p class="gallery-status" id="galleryStatus" hidden>Loading designs…</p>
+
+        <!-- Số trang -->
+        <nav class="pagination" id="pagination" aria-label="Design pages" hidden></nav>
       </div>
     </section>
   </main>
@@ -219,79 +264,135 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      if (typeof DESIGN_CONFIG === 'undefined') {
-        console.error("Không tìm thấy file design/design-list.js hoặc cấu hình DESIGN_CONFIG!");
+      if (typeof DESIGN_CONFIG === 'undefined' || typeof DESIGN_RATIOS === 'undefined') {
+        console.error("Thiếu design-list.js hoặc design-sizes.js (chạy: node build-design.js)");
         return;
       }
 
+      const PAGE_SIZE = 50; // số ảnh mỗi trang
+      // Số phiên bản thumbnail (do build-design.js sinh). Đổi số -> trình duyệt và Cloudflare coi là ảnh mới
+      const THUMB_V = (typeof DESIGN_VERSION !== 'undefined') ? '?v=' + DESIGN_VERSION : '';
+
       const filterBar = document.getElementById('filterBar');
       const galleryGrid = document.getElementById('galleryGrid');
-      const galleryStatus = document.getElementById('galleryStatus');
+      const pagination = document.getElementById('pagination');
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightboxImg');
       const lightboxClose = document.getElementById('lightboxClose');
 
-      let allImagesData = [];
-
-      DESIGN_CONFIG.forEach(group => {
-        const btn = document.createElement('button');
-        btn.className = 'filter-btn';
-        btn.setAttribute('data-filter', group.category);
-        btn.textContent = group.category;
-        filterBar.appendChild(btn);
-
-        for (let i = 1; i <= group.total; i++) {
-  let filename = `${group.prefix}${i}.webp`;
-  let seoAlt = `${group.category} tattoo design drawing #${i} by Mr Tattoo Hanoi Studio at 106 Hang Buom Old Quarter`;
-
-  allImagesData.push({
-    category: group.category,
-    filename: filename,
-    alt: seoAlt,
-    thumbSrc: `/design/${group.folder}/thumbs/${filename}`,
-    fullSrc: `/design/${group.folder}/full/${filename}`,
-    w: 0,
-    h: 0,
-    state: 'pending' // pending | ok | failed
-  });
-}
+      // Mỗi mục (category) có danh sách ảnh RIÊNG, số lớn nhất ở đầu.
+      // Ảnh bị xóa (tỉ lệ = 0 trong sizes.js) được bỏ qua, nên mỗi trang vẫn đủ 50 ảnh.
+      const groups = DESIGN_CONFIG.map(group => {
+        const ratios = DESIGN_RATIOS[group.folder] || [];
+        const items = [];
+        for (let i = group.total; i >= 1; i--) {
+          const ratio = ratios[i - 1];
+          if (!ratio) continue; // ảnh không tồn tại
+          const filename = `${group.prefix}${i}.webp`;
+          items.push({
+            alt: `${group.category} tattoo design drawing #${i} by Mr Tattoo Hanoi Studio at 106 Hang Buom Old Quarter`,
+            thumbSrc: `/design/${group.folder}/thumbs/${filename}${THUMB_V}`,
+            fullSrc: `/design/${group.folder}/full/${filename}`,
+            ratio: ratio
+          });
+        }
+        return { category: group.category, items: items };
       });
 
-      // Tải trước ảnh nhỏ để biết kích thước thật (tỉ lệ) của từng ảnh
-      function measure(item) {
-        if (item.state !== 'pending') return Promise.resolve(item);
-        return new Promise(resolve => {
-          const probe = new Image();
-          probe.onload = () => {
-            item.w = probe.naturalWidth;
-            item.h = probe.naturalHeight;
-            item.state = (item.w && item.h) ? 'ok' : 'failed';
-            resolve(item);
-          };
-          probe.onerror = () => { item.state = 'failed'; resolve(item); };
-          probe.src = item.thumbSrc;
+      let currentGroup = 0;
+      let currentPage = 1;
+
+      // Nút bộ lọc: chỉ các mục sinh ra từ list.js
+      groups.forEach((g, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'filter-btn' + (idx === 0 ? ' active' : '');
+        btn.textContent = g.category;
+        btn.addEventListener('click', () => {
+          filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderGallery(idx, 1); // đổi mục -> về trang 1
         });
+        filterBar.appendChild(btn);
+      });
+
+      // Tạo danh sách số trang: 1 … 4 5 [6] 7 8 … 20
+      function pageList(current, total) {
+        const pages = [];
+        const add = p => { if (!pages.includes(p)) pages.push(p); };
+        add(1);
+        for (let p = current - 2; p <= current + 2; p++) {
+          if (p > 1 && p < total) add(p);
+        }
+        if (total > 1) add(total);
+        pages.sort((a, b) => a - b);
+
+        const out = [];
+        pages.forEach((p, idx) => {
+          if (idx > 0 && p - pages[idx - 1] > 1) out.push('…');
+          out.push(p);
+        });
+        return out;
       }
 
-      let renderToken = 0;
+      function renderPagination(totalPages) {
+        pagination.innerHTML = '';
+        if (totalPages <= 1) {
+          pagination.hidden = true;
+          return;
+        }
+        pagination.hidden = false;
 
-      async function renderGallery(filter = 'all') {
-        const token = ++renderToken;
-        const wanted = allImagesData.filter(it => filter === 'all' || it.category === filter);
+        const makeBtn = (label, page, opts = {}) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'page-btn' + (opts.active ? ' active' : '');
+          b.textContent = label;
+          if (opts.aria) b.setAttribute('aria-label', opts.aria);
+          if (opts.active) b.setAttribute('aria-current', 'page');
+          if (opts.disabled) b.disabled = true;
+          else b.addEventListener('click', () => goToPage(page));
+          return b;
+        };
+
+        pagination.appendChild(makeBtn('‹', currentPage - 1, {
+          disabled: currentPage === 1, aria: 'Previous page'
+        }));
+
+        pageList(currentPage, totalPages).forEach(p => {
+          if (p === '…') {
+            const s = document.createElement('span');
+            s.className = 'page-ellipsis';
+            s.textContent = '…';
+            pagination.appendChild(s);
+          } else {
+            pagination.appendChild(makeBtn(String(p), p, {
+              active: p === currentPage, aria: 'Page ' + p
+            }));
+          }
+        });
+
+        pagination.appendChild(makeBtn('›', currentPage + 1, {
+          disabled: currentPage === totalPages, aria: 'Next page'
+        }));
+      }
+
+      // Không còn phải tải trước ảnh để đo: tỉ lệ đã có sẵn trong sizes.js
+      function renderGallery(groupIndex, page) {
+        currentGroup = groupIndex;
+        const items = groups[groupIndex] ? groups[groupIndex].items : [];
+
+        const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+        currentPage = Math.min(Math.max(1, page), totalPages);
+
+        const start = (currentPage - 1) * PAGE_SIZE;
+        const pageItems = items.slice(start, start + PAGE_SIZE);
 
         galleryGrid.innerHTML = '';
-        galleryStatus.hidden = false;
-
-        await Promise.all(wanted.map(measure));
-        if (token !== renderToken) return; // người dùng đã bấm bộ lọc khác
-
-        galleryStatus.hidden = true;
         const frag = document.createDocumentFragment();
 
-        wanted.forEach(item => {
-          if (item.state !== 'ok') return; // bỏ qua ảnh lỗi/không tồn tại
-
-          const ratio = item.w / item.h;
+        pageItems.forEach((item, idx) => {
+          const ratio = item.ratio;
           const cell = document.createElement('button');
           cell.type = 'button';
           cell.className = 'jg-item';
@@ -303,12 +404,18 @@
           const img = document.createElement('img');
           img.src = item.thumbSrc;
           img.alt = item.alt;
-          img.width = item.w;
-          img.height = item.h;
-          img.loading = 'lazy';
+          img.width = Math.round(ratio * 460);
+          img.height = 460;
+          // Ảnh đầu trang tải ngay, phần còn lại tải dần khi cuộn
+          img.loading = idx < 8 ? 'eager' : 'lazy';
+          if (idx < 4) img.fetchPriority = 'high';
           img.decoding = 'async';
 
           cell.append(spacer, img);
+
+          // Tải trước ảnh lớn khi rê chuột / chạm vào, để mở lightbox gần như tức thì
+          cell.addEventListener('pointerenter', () => { new Image().src = item.fullSrc; }, { once: true });
+
           cell.addEventListener('click', () => {
             lightboxImg.src = item.fullSrc;
             lightboxImg.alt = item.alt;
@@ -319,18 +426,16 @@
         });
 
         galleryGrid.appendChild(frag);
+        renderPagination(totalPages);
       }
 
-      renderGallery('all');
+      function goToPage(page) {
+        renderGallery(currentGroup, page);
+        // Cuộn về đầu bộ sưu tập khi đổi trang
+        filterBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
 
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          renderGallery(btn.getAttribute('data-filter'));
-        });
-      });
+      renderGallery(0, 1);
 
       function closeLightbox() {
         lightbox.classList.remove('active');
