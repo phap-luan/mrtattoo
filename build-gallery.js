@@ -63,9 +63,21 @@ vm.runInContext(
     }
   }
 
+  // Số phiên bản thumbnail: chỉ đổi khi tạo lại toàn bộ (--force), để ảnh cũ không bị cache giữ lại.
+  // Các lần chạy thường giữ nguyên số cũ để cache của ảnh đã có vẫn dùng được.
+  const sizesFile = path.join(root, 'sizes.js');
+  let version = null;
+  if (!force && fs.existsSync(sizesFile)) {
+    const mm = fs.readFileSync(sizesFile, 'utf8').match(/GALLERY_VERSION="([^"]+)"/);
+    if (mm) version = mm[1];
+  }
+  if (!version) version = Date.now().toString(36);
+
   fs.writeFileSync(
-    path.join(root, 'sizes.js'),
-    '// File do build-gallery.js tự sinh, không sửa tay.\nconst GALLERY_RATIOS=' + JSON.stringify(out) + ';\n'
+    sizesFile,
+    '// File do build-gallery.js tự sinh, không sửa tay.\n' +
+    'const GALLERY_VERSION="' + version + '";\n' +
+    'const GALLERY_RATIOS=' + JSON.stringify(out) + ';\n'
   );
   console.log(`Xong: tạo ${made} thumbnail, ${missing} số không có ảnh. Đã ghi ${path.join(root, 'sizes.js')}`);
 })().catch(err => { console.error(err); process.exit(1); });

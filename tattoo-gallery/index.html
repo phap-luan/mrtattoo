@@ -270,6 +270,8 @@
       }
 
       const PAGE_SIZE = 50; // số ảnh mỗi trang
+      // Số phiên bản thumbnail (do build-gallery.js sinh). Đổi số -> trình duyệt và Cloudflare coi là ảnh mới
+      const THUMB_V = (typeof GALLERY_VERSION !== 'undefined') ? '?v=' + GALLERY_VERSION : '';
 
       const filterBar = document.getElementById('filterBar');
       const galleryGrid = document.getElementById('galleryGrid');
@@ -289,7 +291,7 @@
           const filename = `${group.prefix}${i}.webp`;
           items.push({
             alt: `${group.category} custom tattoo artwork #${i} by Mr Tattoo Hanoi Studio at 106 Hang Buom Old Quarter`,
-            thumbSrc: `/gallery/${group.folder}/thumbs/${filename}`,
+            thumbSrc: `/gallery/${group.folder}/thumbs/${filename}${THUMB_V}`,
             fullSrc: `/gallery/${group.folder}/full/${filename}`,
             ratio: ratio
           });
