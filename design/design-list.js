@@ -3,21 +3,15 @@
 // Khi thêm bản vẽ mới, chỉ cần tăng "total" lên.
 const DESIGN_CONFIG = [
   {
+    folder: "vietnamese-tattoo-designs",
+    category: "Vietnamese designs",
+    prefix: "vn-tattoo-design_",
+    total: 100
+  },
+  {
     folder: "fine-line-designs",
     category: "Fine Line Designs",
     prefix: "fl-design_",
     total: 30
-  },
-  {
-    folder: "blackwork-designs",
-    category: "Blackwork Designs",
-    prefix: "bw-design_",
-    total: 30
-  },
-  {
-    folder: "vietnamese-tattoo-designs",
-    category: "Vietnamese Motifs",
-    prefix: "vn-tattoo-design_",
-    total: 100
   }
 ];
