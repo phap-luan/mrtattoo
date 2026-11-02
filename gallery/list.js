@@ -11,6 +11,6 @@ const GALLERY_CONFIG = [
     folder: "mini-fine-line", 
     category: "Mini & Fine Line", 
     prefix: "mini-tattoo_", 
-    total: 22  // <-- Khi thêm ảnh mới, bạn chỉ cần đổi số 150 thành 151, 152... ở đây!
+    total: 50  // <-- Khi thêm ảnh mới, bạn chỉ cần đổi số 150 thành 151, 152... ở đây!
   }
 ];
