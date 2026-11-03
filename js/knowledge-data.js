@@ -15,5 +15,13 @@ const knowledgeData = [
     "time": "October 31, 2026",
     "date": "2026-10-31",
     "desc": "Discover everything about fine line tattoos: their origins, needle techniques, how they age, and expert aftercare tips. Book a custom fine line design at Mr Tattoo Hanoi Studio in Hanoi’s Old Quarter."
+  },
+  {
+    "title": "Dotwork Tattoo: The Art of Stippling, Sacred Geometry, and Timeless Black Ink",
+    "slug": "knowledge/dotwork-tattoo-the-art-of-stippling-sacred-geometry-and-timeless-black-ink/",
+    "thumb": "images/blog-images/dotwork-tattoo.webp",
+    "time": "November 3, 2026",
+    "date": "2026-11-03",
+    "desc": "Explore dotwork tattoos: their history, stippling techniques, needle choices, how they age, and aftercare essentials. Book a custom dotwork design at Mr Tattoo Hanoi Studio in Hanoi’s Old Quarter."
   }
 ];
