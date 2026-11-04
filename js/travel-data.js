@@ -23,5 +23,13 @@ const travelData = [
     "time": "October 31, 2026",
     "date": "2026-10-31",
     "desc": "Discover the top 16 pho restaurants in Hanoi, from century-old Old Quarter classics to Michelin-recognized bowls. Then keep the memory with a small travel tattoo from $10."
+  },
+  {
+    "title": "TOP 14 Best Bun Cha in Hanoi: Where to Find Smoky, Sweet-and-Sour Perfection in the Old Quarter",
+    "slug": "hanoi-travel-corner/top-14-best-bun-cha-in-hanoi-where-to-find-smoky-sweet-and-sour-perfection-in-the-old-quarter/",
+    "thumb": "https://mia.vn/media/uploads/blog-du-lich/review-bun-cha-ha-noi-mon-ngon-ghi-danh-cong-thuc-am-thuc-the-gioi-03-1661303812.jpeg",
+    "time": "November 3, 2026",
+    "date": "2026-11-03",
+    "desc": "Meta description: Explore the top 14 bun cha spots in Hanoi, from Obama’s favorite to Michelin-recognized bowls. Then keep the memory with a small travel tattoo from $10."
   }
 ];

@@ -23,5 +23,13 @@ const meaningsData = [
     "time": "October 31, 2026",
     "date": "2026-10-31",
     "desc": "Discover the meaning of the Ly Dynasty dragon tattoo, a Vietnamese symbol of wisdom, protection and renewal born in Thang Long. Custom designs at Mr Tattoo Hanoi Studio."
+  },
+  {
+    "title": "Vietnamese Bamboo Tattoo Meaning: Resilience, Grace and the Soul of a Nation in Ink",
+    "slug": "tattoo-meanings/vietnamese-bamboo-tattoo-meaning-resilience-grace-and-the-soul-of-a-nation-in-ink/",
+    "thumb": "images/blog-images/bamboo-tattoo.webp",
+    "time": "November 3, 2026",
+    "date": "2026-11-03",
+    "desc": "Explore the meaning of the Vietnamese bamboo tattoo: resilience, humility, integrity and renewal. Discover placements, styles and custom designs at Mr Tattoo Hanoi Studio."
   }
 ];
