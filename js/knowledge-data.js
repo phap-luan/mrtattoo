@@ -23,5 +23,13 @@ const knowledgeData = [
     "time": "November 3, 2026",
     "date": "2026-11-03",
     "desc": "Explore dotwork tattoos: their history, stippling techniques, needle choices, how they age, and aftercare essentials. Book a custom dotwork design at Mr Tattoo Hanoi Studio in Hanoi’s Old Quarter."
+  },
+  {
+    "title": "Old School Tattoo: History, Bold Lines, and the Enduring Appeal of American Traditional Ink",
+    "slug": "knowledge/old-school-tattoo-history-bold-lines-and-the-enduring-appeal-of-american-traditional-ink/",
+    "thumb": "images/blog-images/old-school-tattoo.webp",
+    "time": "November 5, 2026",
+    "date": "2026-11-05",
+    "desc": "Discover the story of old school tattoos: sailor roots, iconic flash, bold linework, classic colour palettes, and aftercare essentials. Book a custom old school design at Mr Tattoo Hanoi Studio in Hanoi’s Old Quarter."
   }
 ];

@@ -31,5 +31,13 @@ const meaningsData = [
     "time": "November 3, 2026",
     "date": "2026-11-03",
     "desc": "Explore the meaning of the Vietnamese bamboo tattoo: resilience, humility, integrity and renewal. Discover placements, styles and custom designs at Mr Tattoo Hanoi Studio."
+  },
+  {
+    "title": "Vietnamese Postage Stamp Tattoo Meaning: A Small Square of Memory, Journey and Connection",
+    "slug": "tattoo-meanings/vietnamese-postage-stamp-tattoo-meaning-a-small-square-of-memory-journey-and-connection/",
+    "thumb": "images/blog-images/vietnam-stamp-tattoo.webp",
+    "time": "November 5, 2026",
+    "date": "2026-11-05",
+    "desc": "Discover the meaning of the Vietnamese postage stamp tattoo: memory, travel, connection and nostalgia. Explore placements, styles and custom designs at Mr Tattoo Hanoi Studio."
   }
 ];
