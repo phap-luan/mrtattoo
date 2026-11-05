@@ -1,0 +1,14 @@
+Hãy chỉnh sửa và nâng cấp các ảnh này theo các tiêu chuẩn studio chuyên nghiệp sau:
+1. GIỮ NGUYÊN BỐ CỤC & TƯ THẾ GỐC (STRICT COMPOSITION):
+   - GIỮ NGUYÊN khung hình, tỷ lệ khung ảnh (dọc/ngang) và góc chụp của ảnh gốc. Không xoay, xoay nghiêng hay cắt cúp (crop) làm đổi bố cục.
+   - GIỮ NGUYÊN tư thế, hướng đứng/ngồi và góc nghiêng của cơ thể/người mẫu. Không tự ý thay đổi dáng người hay vị trí hình xăm.
+
+2. ÁNH SÁNG HẮT NGƯỢC VÀ NỀN KHÓI MỜ (DRAMATIC RIM LIGHT & SUBTLE FOG):
+   - Phông nền: Nền xám đen studio tối màu (Dark Studio Backdrop).
+   - Ánh sáng hắt ngược (Rim Light / Edge Light / Backlight): Tăng cường độ ánh sáng hắt từ phía sau chủ thể thật rõ nét (màu vàng ấm/cam nhạt hoặc trắng sáng studio) giúp tách biệt rõ ràng chủ thể khỏi phông nền.
+   - Lớp khói/mù (Subtle Fog / Light Atmospheric Smoke): Thêm một lớp khói mỏng, rất nhẹ bao quanh vùng sáng phía sau để tạo hiệu ứng khối 3D sống động (KHÔNG dùng khói quá dày, mịt mù, chỉ giữ lại độ mờ ảo tinh tế).
+
+3. ÁNH SÁNG CHÍNH & TÔN MÀU DA (KEY LIGHT & SKIN TONE):
+   - Nâng cấp ánh sáng phía trước thành ánh sáng studio mềm (Softbox diffusion) sáng, loại bỏ bóng gắt và hiện tượng nhạt màu.
+   - Chỉnh lại tone màu da tự nhiên sáng rõ ràng, mịn màng, khỏe khoắn, loại bỏ hiện tượng da bị ám vàng, ám xanh hoặc đỏ rực do đèn phòng.
+   - Tăng độ tương phản (Contrast) nhẹ cho mực xăm: Mực đen/xám sâu hơn, mực màu tươi tắn và rõ nét nhưng giữ nguyên hạt xăm và tính chân thực.

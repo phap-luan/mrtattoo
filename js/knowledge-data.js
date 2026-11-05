@@ -31,5 +31,13 @@ const knowledgeData = [
     "time": "November 5, 2026",
     "date": "2026-11-05",
     "desc": "Discover the story of old school tattoos: sailor roots, iconic flash, bold linework, classic colour palettes, and aftercare essentials. Book a custom old school design at Mr Tattoo Hanoi Studio in Hanoi’s Old Quarter."
+  },
+  {
+    "title": "Best Custom Tattoo Studio Near Me in Hanoi Old Quarter | Mr. Tattoo Hanoi Studio",
+    "slug": "knowledge/best-custom-tattoo-studio-near-me-in-hanoi-old-quarter-mr-tattoo-hanoi-studio/",
+    "thumb": "images/blog-images/anhbaiviet-1.webp",
+    "time": "November 5, 2026",
+    "date": "2026-11-05",
+    "desc": "​Are you exploring the historic streets of Hanoi and searching for a top-rated tattoo near me or a reliable tattoo near us to capture your travel memories? Finding a clean, reputable, and artistically skilled studio in a foreign city can feel overwhelming. Fortunately, right in the heart of Hanoi’s Old Quarter, Mr. Tattoo Hanoi offers a world-class tattooing experience tailored for international travelers and local enthusiasts alike."
   }
 ];
