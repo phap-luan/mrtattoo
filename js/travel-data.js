@@ -31,5 +31,13 @@ const travelData = [
     "time": "November 3, 2026",
     "date": "2026-11-03",
     "desc": "Meta description: Explore the top 14 bun cha spots in Hanoi, from Obama’s favorite to Michelin-recognized bowls. Then keep the memory with a small travel tattoo from $10."
+  },
+  {
+    "title": "TOP 4 Bun Dau Mam Tom Spots in Hanoi’s Old Quarter: A Bold, Delicious Street Food Adventure",
+    "slug": "hanoi-travel-corner/top-4-bun-dau-mam-tom-spots-in-hanois-old-quarter-a-bold-delicious-street-food-adventure/",
+    "thumb": "https://static.vinwonders.com/production/bun-dau-mam-tom-ha-noi-2.jpg",
+    "time": "November 5, 2026",
+    "date": "2026-11-05",
+    "desc": "Try bun dau mam tom, Hanoi’s famous tofu, noodle and shrimp paste platter, at 4 Old Quarter favorites. Then keep the memory with a small travel tattoo from $10."
   }
 ];
