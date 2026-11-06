@@ -39,5 +39,13 @@ const knowledgeData = [
     "time": "November 5, 2026",
     "date": "2026-11-05",
     "desc": "​Are you exploring the historic streets of Hanoi and searching for a top-rated tattoo near me or a reliable tattoo near us to capture your travel memories? Finding a clean, reputable, and artistically skilled studio in a foreign city can feel overwhelming. Fortunately, right in the heart of Hanoi’s Old Quarter, Mr. Tattoo Hanoi offers a world-class tattooing experience tailored for international travelers and local enthusiasts alike."
+  },
+  {
+    "title": "Māori Tattoo (Tā Moko): History, Meaning, and How to Approach It with Respect",
+    "slug": "knowledge/maori-tattoo-ta-moko-history-meaning-and-how-to-approach-it-with-respect/",
+    "thumb": "images/blog-images/maori-tattoo.webp",
+    "time": "November 6, 2026",
+    "date": "2026-11-06",
+    "desc": "Learn the history of Māori tattoo (tā moko): its sacred meaning, traditional uhi chisel technique, modern methods, aftercare, and how to honour the culture respectfully. Custom design consultations at Mr Tattoo Hanoi Studio."
   }
 ];
