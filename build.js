@@ -5,6 +5,15 @@ const SITE = 'https://mrtattoo.vn';
 const STUDIO = 'Mr Tattoo Hanoi Studio';
 const LOGO_URL = `${SITE}/images/og-cover.jpg`;
 
+// Thẻ Google (GTM-NM3RMVXB): tự chèn ngay sau <head> của MỌI trang HTML
+const GOOGLE_TAG = `<!-- Google tag (GTM-NM3RMVXB) -->
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NM3RMVXB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>`;
+
 // Các trang tĩnh ở thư mục gốc sẽ được nhúng sẵn header/footer
 // Bỏ qua các thư mục này khi quét tìm trang HTML
 const SKIP_DIRS = new Set(['node_modules', 'partials', 'js', 'images', 'gallery', 'design', 'patterns', 'fonts', 'css', '.git']);
@@ -88,6 +97,7 @@ function upsertBlock(html, name, content, place) {
   return place(html, wrapped);
 }
 const placeHeader = (html, block) => html.replace(/<body[^>]*>/, m => `${m}\n${block}`);
+const placeHead = (html, block) => html.replace(/<head[^>]*>/, m => `${m}\n${block}`);
 const placeFooter = (html, block) => {
   const i = html.lastIndexOf('</body>');
   return i === -1 ? html + '\n' + block : `${html.slice(0, i)}${block}\n${html.slice(i)}`;
@@ -221,6 +231,7 @@ function syncPages() {
     if (!hasMarkers && path.basename(file) !== 'index.html') return; // chỉ tự chèn mới cho index.html
     html = upsertBlock(html, 'SITE-HEADER', withRoot(headerTpl, ''), placeHeader);
     html = upsertBlock(html, 'SITE-FOOTER', withRoot(footerTpl, ''), placeFooter);
+    if (/<head[^>]*>/.test(html)) html = upsertBlock(html, 'GOOGLE-TAG', GOOGLE_TAG, placeHead);
     if (!hasMarkers) warn.push(file);
     LEGACY_LINKS.forEach(([re, to]) => { html = html.replace(re, to); });
     if (html !== before) {
@@ -292,6 +303,9 @@ articles.forEach(art => {
   const htmlTemplate = `<!DOCTYPE html>
 <html lang="en">
 <head>
+<!--GOOGLE-TAG:START-->
+${GOOGLE_TAG}
+<!--GOOGLE-TAG:END-->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#7E1015">
