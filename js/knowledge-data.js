@@ -47,5 +47,21 @@ const knowledgeData = [
     "time": "November 6, 2026",
     "date": "2026-11-06",
     "desc": "Learn the history of Māori tattoo (tā moko): its sacred meaning, traditional uhi chisel technique, modern methods, aftercare, and how to honour the culture respectfully. Custom design consultations at Mr Tattoo Hanoi Studio."
+  },
+  {
+    "title": "Best Tattoo Shop in Hanoi Old Quarter: How to Choose the Right Studio?",
+    "slug": "knowledge/best-tattoo-shop-in-hanoi-old-quarter-how-to-choose-the-right-studio/",
+    "thumb": "images/blog-images/best-tattoo-studio.webp",
+    "time": "November 8, 2026",
+    "date": "2026-11-08",
+    "desc": "Looking for the best tattoo shop in Hanoi Old Quarter? Learn how to judge hygiene, artistry, custom design process, and aftercare before you book your tattoo."
+  },
+  {
+    "title": "How Much Does a Tattoo Cost in Hanoi?",
+    "slug": "knowledge/how-much-does-a-tattoo-cost-in-hanoi/",
+    "thumb": "images/blog-images/tattoo-cost.webp",
+    "time": "November 8, 2026",
+    "date": "2026-11-08",
+    "desc": "How much does a tattoo cost in Hanoi? Explore price ranges by size, style, and artist experience, plus tips for budgeting a safe, high-quality custom tattoo."
   }
 ];
