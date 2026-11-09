@@ -71,5 +71,13 @@ const knowledgeData = [
     "time": "November 9, 2026",
     "date": "2026-11-09",
     "desc": "Thinking of getting a cheap tattoo in Hanoi? Learn what low prices really mean, which hygiene and quality checks matter, and how tourists can get affordable, safe custom ink."
+  },
+  {
+    "title": "Where to Get a Fine Line Tattoo in Hanoi? How to Find the Right Artist",
+    "slug": "knowledge/where-to-get-a-fine-line-tattoo-in-hanoi-how-to-find-the-right-artist/",
+    "thumb": "images/blog-images/fine-line-tattoo-2.webp",
+    "time": "November 9, 2026",
+    "date": "2026-11-09",
+    "desc": "Wondering where to get a fine line tattoo in Hanoi? Learn what separates true fine-line artistry from risky shortcuts, how to vet portfolios, and how to plan a design that ages beautifully."
   }
 ];
