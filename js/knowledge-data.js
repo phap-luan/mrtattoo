@@ -63,5 +63,13 @@ const knowledgeData = [
     "time": "November 8, 2026",
     "date": "2026-11-08",
     "desc": "How much does a tattoo cost in Hanoi? Explore price ranges by size, style, and artist experience, plus tips for budgeting a safe, high-quality custom tattoo."
+  },
+  {
+    "title": "Cheap Tattoo in Hanoi: What Should Tourists Know Before Booking?",
+    "slug": "knowledge/cheap-tattoo-in-hanoi-what-should-tourists-know-before-booking/",
+    "thumb": "images/blog-images/cheap-tattoo-in-hanoi.webp",
+    "time": "November 9, 2026",
+    "date": "2026-11-09",
+    "desc": "Thinking of getting a cheap tattoo in Hanoi? Learn what low prices really mean, which hygiene and quality checks matter, and how tourists can get affordable, safe custom ink."
   }
 ];
