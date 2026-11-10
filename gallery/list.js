@@ -5,13 +5,13 @@ const GALLERY_CONFIG = [
     folder: "medium-large-custom-pieces", 
     category: "Medium & Large Custom Pieces", 
     prefix: "medium-large-tattoo_", 
-    total: 170 
+    total: 195
   },
   { 
     folder: "mini-fine-line", 
     category: "Mini & Fine Line", 
     prefix: "mini-tattoo_", 
-    total: 269 // <-- Khi thêm ảnh mới, bạn chỉ cần đổi số 150 thành 151, 152... ở đây!
+    total: 362 // <-- Khi thêm ảnh mới, bạn chỉ cần đổi số 150 thành 151, 152... ở đây!
   },
   { 
     folder: "our-clients", 
