@@ -79,5 +79,13 @@ const knowledgeData = [
     "time": "November 9, 2026",
     "date": "2026-11-09",
     "desc": "Wondering where to get a fine line tattoo in Hanoi? Learn what separates true fine-line artistry from risky shortcuts, how to vet portfolios, and how to plan a design that ages beautifully."
+  },
+  {
+    "title": "Is It Safe to Get a Tattoo in Vietnam? A Traveler’s Guide to Hygiene and Standards",
+    "slug": "knowledge/is-it-safe-to-get-a-tattoo-in-vietnam-a-travelers-guide-to-hygiene-and-standards/",
+    "thumb": "images/blog-images/safe-tattoo-vietnam.webp",
+    "time": "November 12, 2026",
+    "date": "2026-11-12",
+    "desc": "Is it safe to get a tattoo in Vietnam? Learn the hygiene standards to demand, red flags to avoid, and aftercare tips for hot, humid climates before you book."
   }
 ];
