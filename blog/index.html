@@ -384,6 +384,18 @@
         catLabel = 'Tattoo Knowledge';
       }
 
+      // Sắp xếp: bài mới nhất lên đầu, bài cũ xuống dưới.
+      // Ưu tiên item.date (YYYY-MM-DD), nếu thiếu thì đọc từ item.time ("October 22, 2026").
+      // Nếu cùng ngày: bài được thêm sau (nằm cuối mảng) sẽ hiển thị trước.
+      const ts = it => {
+        const t = Date.parse(it.date || '') || Date.parse(it.time || '');
+        return isNaN(t) ? 0 : t;
+      };
+      data = data
+        .map((it, i) => ({ it, i }))
+        .sort((a, b) => (ts(b.it) - ts(a.it)) || (b.i - a.i))
+        .map(o => o.it);
+
       const start = (page - 1) * itemsPerPage;
       const end = start + itemsPerPage;
       const paginatedItems = data.slice(start, end);
