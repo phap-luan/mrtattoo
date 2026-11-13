@@ -87,5 +87,29 @@ const knowledgeData = [
     "time": "November 12, 2026",
     "date": "2026-11-12",
     "desc": "Is it safe to get a tattoo in Vietnam? Learn the hygiene standards to demand, red flags to avoid, and aftercare tips for hot, humid climates before you book."
+  },
+  {
+    "title": "CHEAP TATTOO IN HANOI – STARTING FROM JUST $10, $20 & $30!",
+    "slug": "knowledge/cheap-tattoo-in-hanoi-starting-from-just-10-20-30/",
+    "thumb": "images/blog-images/cheap-tattoo-in-hanoi-2.webp",
+    "time": "November 13, 2026",
+    "date": "2026-11-13",
+    "desc": "Looking for a cheap tattoo in Hanoi? At Mr.Tattoo, you can get a beautiful tattoo at an affordable price in the heart of Hanoi Old Quarter."
+  },
+  {
+    "title": "GETTING A TATTOO IN HANOI? VISIT MR.TATTOO IN THE OLD QUARTER",
+    "slug": "knowledge/getting-a-tattoo-in-hanoi-visit-mrtattoo-in-the-old-quarter/",
+    "thumb": "images/blog-images/hanoi-old-quarter-tattoo.webp",
+    "time": "November 13, 2026",
+    "date": "2026-11-13",
+    "desc": "Visiting Hanoi and thinking about getting a tattoo during your trip to Vietnam?"
+  },
+  {
+    "title": "Where to Get a Fine Line Tattoo in Hanoi Old Quarter?",
+    "slug": "knowledge/where-to-get-a-fine-line-tattoo-in-hanoi-old-quarter/",
+    "thumb": "images/blog-images/get-a-fine-line-tattoo.webp",
+    "time": "November 13, 2026",
+    "date": "2026-11-13",
+    "desc": "Looking for a professional fine line tattoo studio in Hanoi? Fine line tattoos may look simple, but creating clean, delicate and consistent lines requires years of experience, a steady hand and great attention to detail."
   }
 ];
