@@ -111,5 +111,13 @@ const knowledgeData = [
     "time": "November 13, 2026",
     "date": "2026-11-13",
     "desc": "Looking for a professional fine line tattoo studio in Hanoi? Fine line tattoos may look simple, but creating clean, delicate and consistent lines requires years of experience, a steady hand and great attention to detail."
+  },
+  {
+    "title": "MR.TATTOO – BEST CHINESE CHARACTER & ASIAN STYLE TATTOO IN HANOI",
+    "slug": "knowledge/mrtattoo-best-chinese-character-asian-style-tattoo-in-hanoi/",
+    "thumb": "images/blog-images/chinese-characters-tattoo.webp",
+    "time": "November 13, 2026",
+    "date": "2026-11-13",
+    "desc": "Looking for a beautiful Chinese character tattoo in Hanoi?"
   }
 ];
