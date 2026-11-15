@@ -119,5 +119,13 @@ const knowledgeData = [
     "time": "November 13, 2026",
     "date": "2026-11-13",
     "desc": "Looking for a beautiful Chinese character tattoo in Hanoi?"
+  },
+  {
+    "title": "MR.TATTOO – VIETNAMESE BRONZE DRUM TATTOO IN HANOI | DONG SON CULTURAL TATTOO",
+    "slug": "knowledge/mrtattoo-vietnamese-bronze-drum-tattoo-in-hanoi-dong-son-cultural-tattoo/",
+    "thumb": "gallery/mini-fine-line/full/mini-tattoo_144.webp",
+    "time": "November 15, 2026",
+    "date": "2026-11-15",
+    "desc": "Looking for a meaningful Vietnamese tattoo in Hanoi? Discover the beauty of the Dong Son Bronze Drum, one of the most iconic symbols of Vietnam's ancient civilization and cultural heritage."
   }
 ];
