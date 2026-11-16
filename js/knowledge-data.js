@@ -127,5 +127,29 @@ const knowledgeData = [
     "time": "November 15, 2026",
     "date": "2026-11-15",
     "desc": "Looking for a meaningful Vietnamese tattoo in Hanoi? Discover the beauty of the Dong Son Bronze Drum, one of the most iconic symbols of Vietnam's ancient civilization and cultural heritage."
+  },
+  {
+    "title": "Tattoo Near Me in Hanoi – Mr. Tattoo Hanoi Studio in Hanoi Old Quarter",
+    "slug": "knowledge/tattoo-near-me-in-hanoi-mr-tattoo-hanoi-studio-in-hanoi-old-quarter/",
+    "thumb": "images/blog-images/tattoo-near-me.webp",
+    "time": "November 16, 2026",
+    "date": "2026-11-16",
+    "desc": "​Are you searching for a professional, hygienic, and affordable tattoo shop near you in Hanoi, Vietnam? "
+  },
+  {
+    "title": "Best Old School Tattoo in Hanoi Old Quarter: Bold Lines That Last a Lifetime",
+    "slug": "knowledge/best-old-school-tattoo-in-hanoi-old-quarter-bold-lines-that-last-a-lifetime/",
+    "thumb": "images/blog-images/old-school-tattoo-vietnam.webp",
+    "time": "November 16, 2026",
+    "date": "2026-11-16",
+    "desc": "​If you are searching for the best Old School tattoo in Hanoi Old Quarter, understanding what makes this style special—and choosing a trusted, hygienic studio—is key to getting ink you will love forever."
+  },
+  {
+    "title": "Best Asian Style Tattoo Shop in Hanoi Old Quarter – Mr. Tattoo Hanoi Studio",
+    "slug": "knowledge/best-asian-style-tattoo-shop-in-hanoi-old-quarter-mr-tattoo-hanoi-studio/",
+    "thumb": "images/blog-images/asian-style-tattoo.webp",
+    "time": "November 16, 2026",
+    "date": "2026-11-16",
+    "desc": "​If you are traveling through Vietnam and looking for the best Asian style tattoo shop in Hanoi Old Quarter, you want an artist who truly understands the soul, symbolism, and flow of Oriental art. "
   }
 ];
