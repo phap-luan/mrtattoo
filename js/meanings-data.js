@@ -47,5 +47,13 @@ const meaningsData = [
     "time": "November 6, 2026",
     "date": "2026-11-06",
     "desc": "Explore the meaning of a Vietnamese street culture tattoo: community, resilience, flavor and everyday poetry. Discover styles, placements and custom designs at Mr Tattoo Hanoi Studio."
+  },
+  {
+    "title": "Vietnamese Conical Hat Tattoo in Hanoi – Traditional Non La Tattoo",
+    "slug": "tattoo-meanings/vietnamese-conical-hat-tattoo-in-hanoi-traditional-non-la-tattoo/",
+    "thumb": "gallery/mini-fine-line/full/mini-tattoo_119.webp",
+    "time": "November 15, 2026",
+    "date": "2026-11-15",
+    "desc": "Looking for a unique Vietnamese Conical Hat Tattoo in Hanoi? Discover the timeless beauty of the traditional Vietnamese Non La at MR.TATTOO, a professional tattoo studio located in the heart of Hanoi Old Quarter."
   }
 ];
