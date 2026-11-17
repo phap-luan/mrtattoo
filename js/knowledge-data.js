@@ -151,5 +151,21 @@ const knowledgeData = [
     "time": "November 16, 2026",
     "date": "2026-11-16",
     "desc": "​If you are traveling through Vietnam and looking for the best Asian style tattoo shop in Hanoi Old Quarter, you want an artist who truly understands the soul, symbolism, and flow of Oriental art. "
+  },
+  {
+    "title": "Best Tattoo Shop in Hanoi – Experienced Tattoo Artists at MR.TATTOO Old Quarter",
+    "slug": "knowledge/best-tattoo-shop-in-hanoi-experienced-tattoo-artists-at-mrtattoo-old-quarter/",
+    "thumb": "images/blog-images/best-tattoo-artist.webp",
+    "time": "November 17, 2026",
+    "date": "2026-11-17",
+    "desc": "Are you looking for the best tattoo shop in Hanoi, Vietnam? Choosing the right tattoo studio is important, especially when you are traveling and want a high quality tattoo that you can be proud of for years to come."
+  },
+  {
+    "title": "Tattoo Experience in Hanoi Old Quarter – Take a Piece of Vietnam Home",
+    "slug": "knowledge/tattoo-experience-in-hanoi-old-quarter-take-a-piece-of-vietnam-home/",
+    "thumb": "images/blog-images/hanoi-old-quarter-tattoo-2.webp",
+    "time": "November 17, 2026",
+    "date": "2026-11-17",
+    "desc": "Traveling to Hanoi, Vietnam? Looking for a unique souvenir that will remind you of your journey for years to come? Getting a tattoo in Hanoi can be a meaningful way to preserve your travel memories."
   }
 ];
