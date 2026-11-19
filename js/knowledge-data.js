@@ -167,5 +167,13 @@ const knowledgeData = [
     "time": "November 17, 2026",
     "date": "2026-11-17",
     "desc": "Traveling to Hanoi, Vietnam? Looking for a unique souvenir that will remind you of your journey for years to come? Getting a tattoo in Hanoi can be a meaningful way to preserve your travel memories."
+  },
+  {
+    "title": "Maori Tattoo Hanoi – Custom Polynesian & Tribal Tattoo Designs at MR.TATTOO",
+    "slug": "knowledge/maori-tattoo-hanoi-custom-polynesian-tribal-tattoo-designs-at-mrtattoo/",
+    "thumb": "images/blog-images/maori-tattoo-2.webp",
+    "time": "November 19, 2026",
+    "date": "2026-11-19",
+    "desc": "Are you looking for a Maori tattoo in Hanoi, Vietnam? Maori and Polynesian tattoos are famous for their distinctive tribal patterns, bold black lines and geometric compositions. These traditional tattoo arts are admired around the world for their visual beauty and cultural significance."
   }
 ];
