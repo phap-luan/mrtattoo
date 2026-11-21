@@ -175,5 +175,13 @@ const knowledgeData = [
     "time": "November 19, 2026",
     "date": "2026-11-19",
     "desc": "Are you looking for a Maori tattoo in Hanoi, Vietnam? Maori and Polynesian tattoos are famous for their distinctive tribal patterns, bold black lines and geometric compositions. These traditional tattoo arts are admired around the world for their visual beauty and cultural significance."
+  },
+  {
+    "title": "Finger Tattoo & Small Tattoo in Hanoi – Professional Tattoo Studio in Hanoi Old Quarter",
+    "slug": "knowledge/finger-tattoo-small-tattoo-in-hanoi-professional-tattoo-studio-in-hanoi-old-quarter/",
+    "thumb": "gallery/mini-fine-line/full/mini-tattoo_148.webp",
+    "time": "November 21, 2026",
+    "date": "2026-11-21",
+    "desc": "Are you looking for a professional finger tattoo in Hanoi or a high-quality small tattoo studio in Hanoi Old Quarter? Welcome to MR.TATTOO, a professional tattoo studio located at 106 Hang Buom Street, in the heart of Hanoi's historic Old Quarter."
   }
 ];
