@@ -443,6 +443,49 @@
       border-top: 1px dotted rgba(226, 169, 45, .35);
     }
   }
+
+  /* ===== Floating social buttons (logo only) =====
+     Desktop: 3 buttons stacked vertically, bottom-right corner.
+     Mobile: 3 buttons in a horizontal row, bottom-right corner. */
+  .social-float {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .social-float a {
+    display: block;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .35);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .social-float a:hover {
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .45);
+  }
+  .social-float img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 800px) {
+    .social-float {
+      right: 12px;
+      bottom: 12px;
+      flex-direction: row;
+      gap: 10px;
+    }
+    .social-float a { width: 46px; height: 46px; border-radius: 10px; }
+  }
 </style>
 
 <footer class="site-footer">
@@ -484,10 +527,17 @@
   </div>
 </footer>
 
-<!-- Floating buttons on mobile -->
-<div class="float-cta">
-  <a href="https://wa.me/84377616886" target="_blank" rel="noopener">WhatsApp</a>
-  <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener">Instagram</a>
+<!-- Floating buttons (mobile + desktop): logo only -->
+<div class="social-float">
+  <a href="https://wa.me/84377616886" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <img src="/images/whatsapp_logo.webp" alt="WhatsApp" width="52" height="52" loading="lazy">
+  </a>
+  <a href="https://www.instagram.com/mrtattoo.hanoi/" target="_blank" rel="noopener" aria-label="Instagram">
+    <img src="/images/instagram_logo.webp" alt="Instagram" width="52" height="52" loading="lazy">
+  </a>
+  <a href="https://www.google.com/maps?cid=6222529882335831777" target="_blank" rel="noopener" aria-label="Google Maps">
+    <img src="/images/googlemap_logo.webp" alt="Google Maps" width="52" height="52" loading="lazy">
+  </a>
 </div>
 
 <!--SITE-FOOTER:END-->
