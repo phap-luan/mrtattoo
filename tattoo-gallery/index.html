@@ -513,15 +513,18 @@
     flex-direction: column;
     gap: 12px;
   }
-  .social-float a {
-    display: block;
-    width: 52px;
-    height: 52px;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, .35);
-    transition: transform .2s ease, box-shadow .2s ease;
+ .social-float a {
+  display: block;
+  box-sizing: border-box;   /* viền nằm trong 52px, nút không bị to lên */
+  width: 52px;
+  height: 52px;
+  border: 3px solid #fff;   /* viền trắng */
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .35);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
   }
   .social-float a:hover {
     transform: translateY(-3px) scale(1.06);
@@ -541,7 +544,7 @@
       flex-direction: row;
       gap: 10px;
     }
-    .social-float a { width: 46px; height: 46px; border-radius: 10px; }
+    .social-float a { width: 46px; height: 46px; border-width: 2px; border-radius: 12px; }
   }
 </style>
 
