@@ -183,5 +183,13 @@ const knowledgeData = [
     "time": "November 21, 2026",
     "date": "2026-11-21",
     "desc": "Are you looking for a professional finger tattoo in Hanoi or a high-quality small tattoo studio in Hanoi Old Quarter? Welcome to MR.TATTOO, a professional tattoo studio located at 106 Hang Buom Street, in the heart of Hanoi's historic Old Quarter."
+  },
+  {
+    "title": "Realistic Tattoo Hanoi – The Art of Black and Grey Realism at Mr.Tattoo",
+    "slug": "knowledge/realistic-tattoo-hanoi-the-art-of-black-and-grey-realism-at-mrtattoo/",
+    "thumb": "gallery/medium-large-custom-pieces/full/medium-large-tattoo_65.webp",
+    "time": "November 26, 2026",
+    "date": "2026-11-26",
+    "desc": "Realistic tattooing is one of the most detailed and challenging styles in modern tattoo art. Unlike traditional tattoos that rely on bold outlines and simplified shapes, realistic tattoos focus on creating depth, dimension, texture, and lifelike details on the skin."
   }
 ];
